@@ -45719,7 +45719,7 @@
       "name": "Akuma Eternal Hand",
       "category": "sub_modes",
       "type": "permission",
-      "rank": "S",
+      "rank": "A",
       "price": 2200000,
       "price_x3": 6600000,
       "requirements": [
@@ -45783,7 +45783,7 @@
       "source_values": {
         "group": "Modes de subjutsu Transformaciones",
         "name": "Akuma Eternal Hand",
-        "rank": "S",
+        "rank": "A",
         "base_rank": "Jounin Sensei / Subkage",
         "level": "Nivel 850–1000",
         "stats": "3.000 CHI / TAI",
