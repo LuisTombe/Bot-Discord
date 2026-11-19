@@ -32,9 +32,7 @@ class RouletteView(SafeView):
     @discord.ui.button(label='Mis recompensas',emoji='🎁',custom_id='wxr:daily:v1')
     async def daily(self,i,b):await self.s.board(i)
     @discord.ui.button(label='Premios y probabilidades',emoji='📊',custom_id='wxr:odds:v1')
-    async def odds(self,i,b):
-        self.s.guild(i)
-        await i.response.send_message(embed=self.s.odds(),ephemeral=True)
+    async def odds(self,i,b):await self.s.show_odds(i)
 
 class ResetModal(discord.ui.Modal,title='Borrar todas las fichas del servidor'):
     confirmation=discord.ui.TextInput(label='Escribe BORRAR seguido del ID del servidor',max_length=60)
@@ -85,7 +83,7 @@ class RewardsSystem:
             if r['public_message']:messages.append([ctx['PUBLIC'],r['public_message']])
             return {'user':r['user'],'messages':messages,'roles':list(ctx['assigned_roles'](r))}
         self.store=Rewards(self.market.store,ctx['ASSIGNMENTS'].store,ctx['GUILD'],lambda:ctx['BOT_OWNER'],ctx['BASE'],cleanup)
-        self.view=RouletteView(self)
+        self._listener_added=False
         self.db=self.store.db
         self.db.executescript('CREATE TABLE IF NOT EXISTS reward_icons(item TEXT PRIMARY KEY,url TEXT,checked INTEGER NOT NULL);')
         self.install()
@@ -95,19 +93,44 @@ class RewardsSystem:
     async def reply(self,i,text):
         if i.response.is_done():return await i.followup.send(text,ephemeral=True)
         return await i.response.send_message(text,ephemeral=True)
+    async def show_odds(self,i):
+        self.guild(i)
+        await i.response.send_message(embed=self.odds(),ephemeral=True)
+    async def _fallback_interaction(self,i:discord.Interaction):
+        if i.type!=discord.InteractionType.component:return
+        cid=str((i.data or {}).get('custom_id') or '')
+        low=cid.lower()
+        if not (cid.startswith('wxr:') or 'roulette' in low or 'ruleta' in low):return
+        await asyncio.sleep(0.05)
+        if i.response.is_done():return
+        log.warning('Botón de ruleta atendido por fallback: custom_id=%r message=%s',cid,getattr(i.message,'id',None))
+        try:
+            if 'spin' in low or 'girar' in low:await self.spin(i)
+            elif 'daily' in low or 'reward' in low or 'recompensa' in low:await self.board(i)
+            elif 'odds' in low or 'prob' in low or 'premio' in low:await self.show_odds(i)
+        except Exception as error:
+            log.exception('Error en fallback de botón de recompensas',exc_info=error)
+            text=str(error) if isinstance(error,ValueError) else 'No se pudo procesar la interacción de la ruleta.'
+            if i.response.is_done():await i.followup.send(text,ephemeral=True)
+            else:await i.response.send_message(text,ephemeral=True)
     def restore(self):
         self.bot.add_view(RouletteView(self))
         for cid,cb in [
             ('worldx:roulette:spin',self.spin),
             ('worldx:roulette:daily',self.board),
+            ('worldx:roulette:odds',self.show_odds),
             ('wx:roulette:spin',self.spin),
             ('wx:roulette:daily',self.board),
+            ('wx:roulette:odds',self.show_odds),
         ]:
             v=SafeView(timeout=None)
             b=discord.ui.Button(label='Ruleta',custom_id=cid)
             async def _run(i,fn=cb):await fn(i)
             b.callback=_run;v.add_item(b)
             self.bot.add_view(v)
+        if not self._listener_added:
+            self.bot.add_listener(self._fallback_interaction,'on_interaction')
+            self._listener_added=True
         if not self.task:self.task=asyncio.create_task(self.worker())
     async def worker(self):
         await self.bot.wait_until_ready()
