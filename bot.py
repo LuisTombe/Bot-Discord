@@ -375,6 +375,9 @@ class WorldX(discord.Client):
         await self.tree.sync(guild=discord.Object(id=GUILD))
         self.deliver.start()
 
+    async def on_interaction(self, interaction):
+        await REWARDS._fallback_interaction(interaction)
+
     async def on_message(self,message):
         if message.author.bot or not message.guild or message.guild.id!=GUILD:return
         if message.content.strip().lower()=='!help':

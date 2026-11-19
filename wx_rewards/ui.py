@@ -128,9 +128,6 @@ class RewardsSystem:
             async def _run(i,fn=cb):await fn(i)
             b.callback=_run;v.add_item(b)
             self.bot.add_view(v)
-        if not self._listener_added:
-            self.bot.add_listener(self._fallback_interaction,'on_interaction')
-            self._listener_added=True
         if not self.task:self.task=asyncio.create_task(self.worker())
     async def worker(self):
         await self.bot.wait_until_ready()
