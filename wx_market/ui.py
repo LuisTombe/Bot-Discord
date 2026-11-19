@@ -277,6 +277,13 @@ class MarketSystem:
         em=discord.Embed(title=short(title,250),description='\n\n'.join(texts)[:3900] or 'Sin registros.',color=0xC4A76B);em.set_footer(text=f'Página {page}')
         if kind=='inventory' and 'REWARDS' in self.ctx:
             em.add_field(name='Rerolls completos',value=str(self.ctx['REWARDS'].store.credits(u))+' · /recompensas reroll')
+        if kind=='history' and 'MISSIONS' in self.ctx:
+            totals=self.ctx['MISSIONS'].store.totals(g,u)
+            em.add_field(
+                name='📚 Misiones aprobadas por rango',
+                value=' · '.join(f'**{r}:** {int(totals.get(r,0))}' for r in ('D','C','B','A','S'))+f' · **Total:** {sum(int(totals.get(r,0)) for r in ("D","C","B","A","S"))}',
+                inline=False
+            )
         v=SafeView(timeout=300)
         for label,delta in [('◀',-1),('▶',1)]:
             b=discord.ui.Button(label=label,disabled=(page==1 and delta<0) or (len(rows)<8 and delta>0))

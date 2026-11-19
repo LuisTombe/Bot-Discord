@@ -143,8 +143,8 @@ class FlowTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.m.profile(1,1)
     def test_single_execution_capture_accepted_under_new_rule(self):
         self.policy.config['missions']['ejecutar']['min_images']=1
-        r=self.mission('ejecutar');self.pay(r,25000)
-        self.assertEqual(self.ms.totals(1,1)['B'],1)
+        r=self.mission('ejecutar');self.pay(r,15000)
+        self.assertEqual(self.ms.totals(1,1)['C'],1)
     def test_session_boundary_blocks_late_mission(self):
         self.now=day_end(self.now)+120
         with self.assertRaises(ValueError):self.mission()

@@ -6,7 +6,7 @@
   "clock_tolerance_minutes": 5,
   "missions": {
     "recuperar_scroll": {
-      "label": "Recuperar un pergamino",
+      "label": "Entregar / recuperar un pergamino",
       "base_rank": "D",
       "worlds": [
         "open_world",
@@ -18,7 +18,7 @@
     },
     "robar_scroll": {
       "label": "Robar un pergamino",
-      "base_rank": "C",
+      "base_rank": "D",
       "worlds": [
         "open_world",
         "world_x"
@@ -50,14 +50,14 @@
       "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
     },
     "ejecutar": {
-      "label": "Ejecutar un objetivo",
-      "base_rank": "B",
+      "label": "Ejecutar o asesinar a una persona",
+      "base_rank": "C",
       "worlds": [
         "open_world",
         "world_x"
       ],
-      "min_images": 2,
-      "evidence": "Una captura con enemigo abatido en el suelo y jugador a punto de ejecutarlo; segunda captura del desenlace. La secuencia completa debe demostrar la ejecución.",
+      "min_images": 1,
+      "evidence": "Captura de la persona que están ejecutando al instante, con fecha y hora y panel de jugadores.",
       "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
     },
     "proteger_persona": {
@@ -72,7 +72,7 @@
       "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
     },
     "entregar": {
-      "label": "Recoger y entregar un paquete/cargamento",
+      "label": "Entregar un cargamento",
       "base_rank": "D",
       "worlds": [
         "open_world",
@@ -84,7 +84,7 @@
     },
     "robar_carga": {
       "label": "Robar un cargamento",
-      "base_rank": "C",
+      "base_rank": "D",
       "worlds": [
         "open_world",
         "world_x"
@@ -94,7 +94,7 @@
       "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
     },
     "capturar": {
-      "label": "Capturar a un objetivo",
+      "label": "Capturar o secuestrar a un objetivo",
       "base_rank": "B",
       "worlds": [
         "open_world",

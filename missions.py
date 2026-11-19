@@ -139,12 +139,31 @@ class MissionSystem:
                             result=await self.file_send(existing_thread,payload,view)
                             channel_id=existing_thread.id
                         else:
-                            class ForumDestination:
-                                async def send(inner,**kwargs):
-                                    post=await channel.create_thread(name=thread_name,**kwargs)
-                                    return post.message
-                            result=await self.file_send(ForumDestination(),payload,view)
-                            channel_id=result.channel.id
+                            logo_path=self.ctx['BASE']/'assets'/'pergaminos-misiones.jpg'
+                            intro_embed=discord.Embed(
+                                title=f'📜 Expediente de Misiones · {uname}',
+                                description=(
+                                    f'Publicación oficial de reportes de misiones de <@{row["owner"]}>.\n\n'
+                                    '**Reglas de reporte:**\n'
+                                    '• Subir tandas de **mínimo 5 misiones** + captura del **menú (M)** con stats, bloodlines, elementos y nivel.\n'
+                                    '• Cada captura debe tomarse faltando **5 a 7 segundos** para completar (o ejecutando al objetivo al instante).\n'
+                                    '• Debe verse la **fecha y hora del equipo**, el **panel de jugadores a la derecha** y el **código privado del servidor abajo a la derecha**.\n'
+                                    '• El Staff revisará las capturas y procesará el pago según el rango y los enemigos enfrentados.'
+                                ),
+                                color=0x348F79
+                            )
+                            logo_file=None
+                            try:
+                                if logo_path.is_file():
+                                    logo_file=discord.File(logo_path,filename='pergaminos-misiones.jpg')
+                                    intro_embed.set_image(url='attachment://pergaminos-misiones.jpg')
+                                    post=await channel.create_thread(name=thread_name,embed=intro_embed,file=logo_file)
+                                else:
+                                    post=await channel.create_thread(name=thread_name,embed=intro_embed)
+                            finally:
+                                if logo_file:logo_file.close()
+                            result=await self.file_send(post.thread,payload,view)
+                            channel_id=post.thread.id
                     else:
                         result=await self.file_send(channel,payload,view,message)
                     self.store.delivered(row['id'],channel_id,result.id,row['revision'])

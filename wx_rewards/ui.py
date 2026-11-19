@@ -97,6 +97,17 @@ class RewardsSystem:
         return await i.response.send_message(text,ephemeral=True)
     def restore(self):
         self.bot.add_view(RouletteView(self))
+        for cid,cb in [
+            ('worldx:roulette:spin',self.spin),
+            ('worldx:roulette:daily',self.board),
+            ('wx:roulette:spin',self.spin),
+            ('wx:roulette:daily',self.board),
+        ]:
+            v=SafeView(timeout=None)
+            b=discord.ui.Button(label='Ruleta',custom_id=cid)
+            async def _run(i,fn=cb):await fn(i)
+            b.callback=_run;v.add_item(b)
+            self.bot.add_view(v)
         if not self.task:self.task=asyncio.create_task(self.worker())
     async def worker(self):
         await self.bot.wait_until_ready()
@@ -114,7 +125,9 @@ class RewardsSystem:
         return e
     async def spin(self,i):
         self.guild(i)
-        if i.channel_id!=self.store.channel():raise ValueError('Gira en el canal configurado para la ruleta.')
+        if i.channel_id!=self.store.channel():
+            if i.type!=discord.InteractionType.component:
+                raise ValueError('Gira en el canal configurado para la ruleta.')
         await i.response.defer(ephemeral=True)
         await self.market.refresh(i.guild_id,i.user.id)
         if self.render_lock.locked():raise ValueError('La ruleta está terminando otra animación. Reintenta en unos segundos; no se cobró.')

@@ -11,7 +11,7 @@ from discord import app_commands
 from evidence import MAX_BYTES, safe_path
 from missions_domain import EDITABLE, BOGOTA, formatted
 from mission_evidence_policy import validate_screenshot
-from simple_flow_domain import SimpleFlow, NORMAL
+from simple_flow_domain import SimpleFlow, NORMAL, MISSION_PAY_RANGES, MISSION_TYPE_BASE_RANK, SHINOBI_RANKS
 from simple_transactions import atomic
 from worldx_v7 import split_reward
 from wx_market.ui import SafeView, ryo
@@ -63,40 +63,63 @@ class AuthorizationModal(SafeModal,title='Comenzar misiones'):
             raise
         await i.followup.send('Solicitud enviada. Espera la autorización; puedes consultar su estado en Mis reportes.',ephemeral=True)
 
+BATCH_OBJECTIVES = [
+    ('rpg_azul', 'RPG · Estrella Azul (Rango D: 500–1.000 Ryo)', 'Misión civil de estrella azul en modo RPG.'),
+    ('rpg_roja', 'RPG · Estrella Roja (Rango D: 1.001–2.500 Ryo)', 'Misión de estrella roja en modo RPG.'),
+    ('rpg_verde', 'RPG · Pergamino Verde / Bandidos (Rango D: 2.501–4.999 Ryo)', 'Derrotar bandidos o NPCs de pergamino verde en RPG.'),
+    ('D', 'Open World · Rango D Base (5.000–9.999 Ryo)', 'Entregar/robar pergamino o entregar/robar cargamento.'),
+    ('C', 'Open World · Rango C Base (10.000–24.999 Ryo)', 'Proteger/destruir cargamento, escoltar o ejecutar persona.'),
+    ('B', 'Open World · Rango B Base (25.000–49.999 Ryo)', 'Capturar/secuestrar objetivo o enfrentar Chunin/Medical/Police.'),
+    ('A', 'Open World · Rango A (50.000–99.999 Ryo)', 'Oposición de nivel Jounin, ANBU o Jounin Sensei.'),
+    ('S', 'Open World · Rango S (100.000–500.000 Ryo)', 'Oposición de nivel Subkage, Sannin, Kage o Akatsuki.'),
+]
+
 class BatchMissionModal(SafeModal,title='Reportar tanda de misiones (5+)'):
-    def __init__(self,ui,members=None):
-        super().__init__();self.ui=ui;self.members=members
+    def __init__(self,ui,members=None,enemies=None,base_key='D'):
+        super().__init__();self.ui=ui;self.members=members;self.enemies=enemies or [];self.base_key=base_key
         self.proofs=discord.ui.FileUpload(min_values=5,max_values=10,required=True)
         self.add_item(discord.ui.Label(
             text='Sube mínimo 5 capturas (misiones + menú M)',
-            description='Faltando 5-7s (o ejecutando), fecha/hora, panel de jugadores a la derecha y código privado abajo.',
+            description='Faltando 5-7s (o ejecutando), fecha/hora, panel de jugadores y código privado abajo a la derecha.',
             component=self.proofs
         ))
-        self.notes=discord.ui.TextInput(label='Observaciones o compañeros (opcional)',max_length=400,required=False,style=discord.TextStyle.short)
+        self.count_input=discord.ui.TextInput(label='Cantidad de misiones en esta tanda (mínimo 5)',default='5',max_length=3,required=True)
+        self.notes=discord.ui.TextInput(label='Detalle / tipos de misión u observaciones',max_length=400,required=False,style=discord.TextStyle.short)
+        self.add_item(self.count_input)
         self.add_item(self.notes)
     async def on_submit(self,i):
         ui=self.ui;ui.system.player(i);await i.response.defer(ephemeral=True)
         if len(self.proofs.values)<5:
             raise ValueError('Debes subir obligatorio un mínimo de 5 capturas por tanda.')
+        try:
+            batch_count=int(str(self.count_input).strip())
+        except ValueError:
+            batch_count=max(5,len(self.proofs.values)-1) if len(self.proofs.values)>5 else 5
+        if batch_count<5:
+            raise ValueError('La tanda mínima obligatoria es de 5 misiones.')
         await ui.eco.sync(i.guild_id,i.user.id);ui.eco.store.player(i.guild_id,i.user.id)
         session=ui.flow.daily_session(i.guild_id,i.user.id)
         proofs=await upload_files(ui,self.proofs.values)
         members=sorted({i.user.id,*(self.members or [])})
+        calc=ui.flow.calculate_difficulty(i.guild_id,self.base_key,self.enemies)
+        final_rank=calc['final_rank']
+        enemy_summary=', '.join(f'<@{uid}> ({SHINOBI_RANKS.get(sr,(sr,1))[0]})' for uid,sr in calc['enemies']) or 'Sin enemigos jugadores'
         now_str=datetime.now(BOGOTA).strftime('%d/%m/%Y %H:%M')
-        batch_count=max(5,len(proofs)-1) if len(proofs)>5 else 5
         d={
             'simple_flow':True,
             'batch_flow':True,
             'batch_count':batch_count,
-            'world':'open_world',
+            'pay_key':calc['pay_key'],
+            'world':'rpg' if calc['pay_key'].startswith('rpg_') else 'open_world',
             'type':'tanda_misiones',
             'enemy':'none',
-            'mission_rank':'C',
+            'mission_rank':final_rank,
             'members':members,
+            'enemies':[{'user':uid,'rank':sr} for uid,sr in calc['enemies']],
             'start':now_str,
             'end':now_str,
-            'notes':str(self.notes).strip() or f'Tanda de {len(proofs)} capturas ({batch_count} misiones)',
-            'opponents':str(self.notes).strip() or 'Tanda de misiones Open World',
+            'notes':(str(self.notes).strip() or f'Tanda de {batch_count} misiones ({calc["label"]})') + f' | Rango calculado: {final_rank} (Paga sugerida: {calc["min_pay"]:,}–{calc["max_pay"]:,} Ryo c/u)',
+            'opponents':enemy_summary,
             'proofs':proofs,
         }
         with ui.ms.db:
@@ -106,26 +129,61 @@ class BatchMissionModal(SafeModal,title='Reportar tanda de misiones (5+)'):
             )
             rid=c.lastrowid
         row=ui.ms.submit(rid,1,i.user.id)
-        await i.followup.send(f'✅ Tanda #{row["id"]} enviada con **{len(proofs)} capturas** a tu publicación en el foro de misiones. El staff revisará las capturas y aprobará el pago.',ephemeral=True)
+        await i.followup.send(
+            f'✅ **Tanda #{row["id"]} enviada** con **{len(proofs)} capturas** ({batch_count} misiones) a tu publicación en el foro.\n'
+            f'• **Clasificación:** {calc["label"]} → **Rango {final_rank}**\n'
+            f'• **Enemigos detectados:** {enemy_summary}\n'
+            f'• **Rango de paga por misión:** {ryo(calc["min_pay"])} – {ryo(calc["max_pay"])}\n'
+            f'El Staff validará tus capturas y acreditará el pago.',
+            ephemeral=True,
+            allowed_mentions=discord.AllowedMentions.none()
+        )
 
 class BatchSquadView(SafeView):
     def __init__(self,ui,owner):
-        super().__init__(timeout=600);self.ui=ui;self.owner=owner;self.selected_members=[owner]
-        users=discord.ui.UserSelect(placeholder='Compañeros si hicieron las misiones en conjunto (opcional)',min_values=0,max_values=max(1,ui.ms.config['max_squad']-1),row=0)
+        super().__init__(timeout=600);self.ui=ui;self.owner=owner
+        self.selected_members=[owner]
+        self.selected_enemies=[]
+        self.base_key='D'
+        obj_select=discord.ui.Select(
+            placeholder='1. Clasifica el tipo / rango base de las misiones',
+            row=0,
+            options=[discord.SelectOption(label=label,value=key,description=desc[:100],default=key=='D') for key,label,desc in BATCH_OBJECTIVES]
+        )
+        async def on_obj(i):
+            self.base_key=obj_select.values[0]
+            calc=ui.flow.calculate_difficulty(i.guild_id,self.base_key,self.selected_enemies)
+            await i.response.send_message(f'📌 Clasificación base: **{calc["label"]}** → Rango calculado actual: **{calc["final_rank"]}** ({ryo(calc["min_pay"])}–{ryo(calc["max_pay"])} por misión).',ephemeral=True)
+        obj_select.callback=on_obj;self.add_item(obj_select)
+
+        users=discord.ui.UserSelect(placeholder='2. Compañeros de misión (opcional, reparto equitativo)',min_values=0,max_values=max(1,ui.ms.config['max_squad']-1),row=1)
         async def on_users(i):
             ids=sorted({owner,*(u.id for u in users.values)})
             for u in users.values:
                 ui.system.review_ui.shinobi(u)
             self.selected_members=ids
-            await i.response.send_modal(BatchMissionModal(ui,self.selected_members))
+            await i.response.send_message(f'👥 Compañeros seleccionados: ' + ', '.join(f'<@{u}>' for u in ids),ephemeral=True,allowed_mentions=discord.AllowedMentions.none())
         users.callback=on_users;self.add_item(users)
+
+        enemies=discord.ui.UserSelect(placeholder='3. Shinobis enemigos enfrentados (opcional, lee sus roles)',min_values=0,max_values=5,row=2)
+        async def on_enemies(i):
+            self.selected_enemies=list(enemies.values)
+            calc=ui.flow.calculate_difficulty(i.guild_id,self.base_key,self.selected_enemies)
+            enemy_txt=', '.join(f'<@{uid}> ({SHINOBI_RANKS.get(sr,(sr,1))[0]})' for uid,sr in calc['enemies']) or 'Ninguno'
+            await i.response.send_message(
+                f'⚔️ **Enemigos registrados:** {enemy_txt}\n'
+                f'📈 **Dificultad calculada por roles enemigos:** Rango **{calc["final_rank"]}** ({ryo(calc["min_pay"])}–{ryo(calc["max_pay"])} por misión).',
+                ephemeral=True,
+                allowed_mentions=discord.AllowedMentions.none()
+            )
+        enemies.callback=on_enemies;self.add_item(enemies)
     async def interaction_check(self,i):
         self.ui.system.player(i)
         if i.user.id!=self.owner:raise ValueError('Abre tu propio reporte.')
         return True
-    @discord.ui.button(label='Subir tanda de 5+ capturas (Solitario / Continuar)',emoji='📷',style=discord.ButtonStyle.success,row=1)
+    @discord.ui.button(label='4. Subir tanda de 5+ capturas y enviar',emoji='📷',style=discord.ButtonStyle.success,row=3)
     async def upload_now(self,i,b):
-        await i.response.send_modal(BatchMissionModal(self.ui,self.selected_members))
+        await i.response.send_modal(BatchMissionModal(self.ui,self.selected_members,self.selected_enemies,self.base_key))
 
 class MissionModal(SafeModal,title='Enviar evidencia de misión'):
     start=discord.ui.TextInput(label='Inicio (Colombia): DD/MM/AAAA HH:MM',max_length=16)
@@ -195,9 +253,19 @@ class Home(SafeView):
     async def inventory(self,i,b):await self.ui.market.listing(i,'inventory')
     @discord.ui.button(label='Saldo / Cartera',emoji='💰',custom_id='wx:simple:balance',row=1)
     async def balance(self,i,b):await self.ui.market.listing(i,'history')
-    @discord.ui.button(label='Comenzar misiones',style=discord.ButtonStyle.secondary,custom_id='wx:simple:start',row=2)
+    @discord.ui.button(label='Tarjeta Ninja',emoji='🪪',style=discord.ButtonStyle.secondary,custom_id='wx:simple:ninjacard',row=2)
+    async def ninjacard(self,i,b):
+        from ninja_card import show
+        await show(self.ui.eco,i)
+    @discord.ui.button(label='Guía y Pagos de Misiones',emoji='📖',style=discord.ButtonStyle.secondary,custom_id='wx:simple:guide',row=2)
+    async def guide(self,i,b):
+        await i.response.send_message(embed=self.ui.mission_guide_embed(),ephemeral=True)
+    @discord.ui.button(label='Mi Ficha Registro',emoji='📜',style=discord.ButtonStyle.secondary,custom_id='wx:simple:regcard',row=2)
+    async def regcard(self,i,b):
+        await self.ui.ctx['show_mine'](i)
+    @discord.ui.button(label='Comenzar misiones',style=discord.ButtonStyle.secondary,custom_id='wx:simple:start',row=3)
     async def start(self,i,b):await self.ui.begin(i)
-    @discord.ui.button(label='Terminar misiones',style=discord.ButtonStyle.secondary,custom_id='wx:simple:end',row=2)
+    @discord.ui.button(label='Terminar misiones',style=discord.ButtonStyle.secondary,custom_id='wx:simple:end',row=3)
     async def end(self,i,b):
         self.ui.system.player(i)
         try:
@@ -380,16 +448,25 @@ class SimpleUI:
     async def confirm_review(self,i,row):
         self.access(i,row)
         ui=self
-        class Confirm(SafeModal,title='Confirmar revisión humana'):
+        class Confirm(SafeModal,title='Confirmar revisión y pago'):
             confirmation=discord.ui.TextInput(label='Revisé todas las pruebas: CONFIRMO',default='CONFIRMO',max_length=8)
             def __init__(self):
                 super().__init__()
                 self.amount=None
+                self.rank_input=None
+                self.count_input=None
                 self.reason=discord.ui.TextInput(label='Comentario / razón de aprobación',default='Misiones verificadas',max_length=250,required=False)
                 if row['kind']=='mission':
+                    d=row['data']
+                    cur_rank=d.get('mission_rank','C')
+                    cur_cnt=max(1,int(d.get('batch_count',1)))
                     lo,hi=ui.flow.limits(row)
-                    default_pay=25000 if row['data'].get('batch_flow') else lo
-                    self.amount=discord.ui.TextInput(label=f'Pago total Ryo ({lo} a {hi})',default=str(default_pay),max_length=12)
+                    default_pay=MISSION_PAY_RANGES.get(d.get('pay_key',cur_rank),(None,cur_rank,10000,24999,''))[2]*cur_cnt if d.get('batch_flow') else lo
+                    self.rank_input=discord.ui.TextInput(label='Rango a acreditar (D, C, B, A o S)',default=cur_rank,max_length=2,required=True)
+                    self.count_input=discord.ui.TextInput(label='Número de misiones a pagar (ej: 5)',default=str(cur_cnt),max_length=3,required=True)
+                    self.amount=discord.ui.TextInput(label='Pago total en Ryo (a repartir equitativo)',default=str(default_pay),max_length=12,required=True)
+                    self.add_item(self.rank_input)
+                    self.add_item(self.count_input)
                     self.add_item(self.amount)
                 self.add_item(self.reason)
             async def on_submit(modal,inter):
@@ -406,11 +483,18 @@ class SimpleUI:
                             ui.ms.decision(row['id'],row['revision'],inter.user.id,'approve',str(modal.reason).strip() or 'Capturas completas, fecha/hora, nivel, stats y username verificados.')
                             text='Autorización aceptada. El jugador ya puede reportar misiones.'
                         else:
-                            try:n=int(str(modal.amount))
-                            except ValueError:raise ValueError('Escribe el importe sin puntos ni comas.')
+                            try:
+                                n=int(str(modal.amount).strip())
+                                cnt=max(1,int(str(modal.count_input).strip()))
+                            except ValueError:raise ValueError('Escribe el importe y la cantidad de misiones solo con números.')
+                            chosen_rank=str(modal.rank_input).strip().upper()
+                            if chosen_rank not in ('D','C','B','A','S'):
+                                raise ValueError('El rango debe ser D, C, B, A o S.')
+                            if row['data'].get('batch_flow'):
+                                d_upd=dict(row['data'],mission_rank=chosen_rank,batch_count=cnt)
+                                ui.ms.db.execute('UPDATE mission_reports SET data=? WHERE id=?',(json.dumps(d_upd),row['id']))
                             tx,recipients=ui.flow.approve_pay(inter.guild_id,inter.user.id,row['id'],row['revision'],n)
-                            cnt=max(1,int(row['data'].get('batch_count',1)))
-                            text=f'Misión aprobada y pagada · comprobante #{tx}.\n'+'\n'.join(f'<@{u}>: {ryo(v)} · +{cnt} misión(es)' for u,v in recipients.items())
+                            text=f'✅ **Misiones aprobadas y pagadas** · Comprobante #{tx} · Rango **{chosen_rank}**.\n'+'\n'.join(f'• <@{u}>: **{ryo(v)}** · **+{cnt} misión(es) Rango {chosen_rank}**' for u,v in recipients.items())
                 await inter.followup.send(text,ephemeral=True,allowed_mentions=discord.AllowedMentions.none())
         # En tandas (batch_flow) o autorizaciones, abre el modal directamente con un clic.
         if row['kind']=='mission' and not row['data'].get('batch_flow'):
@@ -444,21 +528,141 @@ class SimpleUI:
                 except discord.HTTPException:continue
                 with self.ms.db:self.ms.db.execute("INSERT OR IGNORE INTO simple_notifications VALUES('market',?,0,?)",(r['id'],uid))
 
+    def mission_guide_embed(self):
+        e=discord.Embed(
+            title='📜 World X · Clasificación y Pagos de Misiones',
+            description=(
+                'El rango final de la misión se define primero por el **tipo de misión** y se eleva automáticamente según el **rango de los Shinobis enemigos enfrentados** (visibles en el panel de jugadores de la captura).\n\n'
+                '🔹 **Misiones RPG (Modo Normal - Rango D):**\n'
+                '• **Misiones de estrella (Azules):** Rango D — Paga: **500 – 1.000 Ryo**\n'
+                '• **Misiones de estrella (Rojas):** Rango D — Paga: **1.001 – 2.500 Ryo**\n'
+                '• **Misiones de pergamino (Verdes / Bandidos o NPCs):** Rango D — Paga: **2.501 – 4.999 Ryo**\n\n'
+                '🔸 **Misiones Open World:**\n'
+                '• **Rango D — Dificultad Baja (5.000 – 9.999 Ryo):**\n'
+                '  ◦ Entregar pergamino / Robar pergamino\n'
+                '  ◦ Entregar un cargamento / Robar cargamento\n'
+                '• **Rango C — Dificultad Moderada (10.000 – 24.999 Ryo):**\n'
+                '  ◦ Proteger cargamento / Destruir un cargamento\n'
+                '  ◦ Proteger o escoltar a una persona / Ejecutar o asesinar a una persona\n'
+                '• **Rango B — Dificultad Alta (25.000 – 49.999 Ryo):**\n'
+                '  ◦ Capturar o secuestrar a un objetivo\n'
+                '  ◦ Completar encargos anteriores (D, C, B) enfrentando enemigos **Chunin, Medical Corps o Police Corps**\n'
+                '• **Rango A — Dificultad Muy Alta (50.000 – 99.999 Ryo):**\n'
+                '  ◦ Completar cualquiera de los objetivos anteriores con oposición **Jounin, ANBU o Jounin Sensei**\n'
+                '• **Rango S — Dificultad Extrema (100.000 – 500.000 Ryo):**\n'
+                '  ◦ Completar cualquiera de los objetivos anteriores con oposición **Subkage, Sannin, Kage o Akatsuki**\n\n'
+                '📌 *El rango y la recompensa requieren validación del Staff. En misiones grupales el pago total se reparte en partes equitativas y suma las misiones completadas del rango correspondiente en tu Tarjeta Ninja y Cartera.*'
+            ),
+            color=0x348F79
+        )
+        return e
+
+    def general_panel_embed(self):
+        return discord.Embed(
+            title='🌐 WORLD X · PANEL GENERAL DE JUGADORES',
+            description=(
+                'Bienvenido al centro de control de **World X (Open World & RPG)**. Usa los botones inferiores para acceder a todas las funciones sin escribir comandos:\n\n'
+                '📂 **Reportar misiones (5+ capturas):** Sube tus tandas de mínimo 5 misiones + captura del menú (M) directamente a tu publicación única en `╰・📂・report-missions`.\n'
+                '📋 **Mis reportes:** Consulta el estado de tus reportes y tu conteo de misiones por rango.\n'
+                '🥷 **Ver mi perfil:** Autoriza o actualiza tu perfil de compras subiendo únicamente la captura de tu menú (M) y roles de Discord.\n'
+                '🏪 **Tienda:** Explora y compra jutsus, armas, modos y permisos según tu Rango Shinobi de Discord.\n'
+                '🧾 **Mis compras:** Revisa tus solicitudes de compra, corrige evidencias o cancela reservas.\n'
+                '🎒 **Inventario:** Consulta todos tus permisos, técnicas y objetos adquiridos.\n'
+                '💰 **Saldo / Cartera:** Revisa tus Ryo disponibles, reservas y movimientos contables.\n'
+                '🪪 **Tarjeta Ninja:** Visualiza tu ficha oficial con tu cartera y misiones aprobadas por rango (D, C, B, A, S).\n'
+                '📖 **Guía y Pagos de Misiones:** Tabla oficial de rangos de dificultad, enemigos y pagos de misiones.'
+            ),
+            color=0xC4A76B
+        )
+
     def install(self):
         bot=self.bot;ui=self
         # Sustituye el acceso anterior, manteniendo el comando conocido.
         bot.tree.remove_command('reporte')
-        @bot.tree.command(name='reporte',description='Reportar una misión con capturas y revisión del staff')
+        @bot.tree.command(name='reporte',description='Reportar una tanda de misiones (5+ capturas) con revisión del staff')
         async def report(i:discord.Interaction):await ui.report(i)
-        group=app_commands.Group(name='panel',description='Flujo sencillo de misiones y compras',guild_only=True)
-        @group.command(name='abrir',description='Abrir tu panel personal')
+
+        async def _parse_members(guild,text):
+            import re
+            ids=[]
+            for raw_id in re.findall(r'\d{15,21}',str(text or '')):
+                uid=int(raw_id)
+                if uid not in ids:ids.append(uid)
+            members=[]
+            for uid in ids:
+                m=guild.get_member(uid)
+                if m is None:
+                    try:m=await guild.fetch_member(uid)
+                    except discord.HTTPException:m=uid
+                members.append(m)
+            return members
+
+        pagar_group=app_commands.Group(name='pagar',description='Staff: pagar misiones por rango, jugadores, enemigos y cantidad',guild_only=True)
+        @pagar_group.command(name='misiones',description='Staff: pagar N misiones calculando dificultad por rango base y roles de enemigos')
+        @app_commands.choices(rango=[
+            app_commands.Choice(name='RPG · Estrella Azul (Rango D: 500–1.000 Ryo)',value='rpg_azul'),
+            app_commands.Choice(name='RPG · Estrella Roja (Rango D: 1.001–2.500 Ryo)',value='rpg_roja'),
+            app_commands.Choice(name='RPG · Pergamino Verde / Bandidos (Rango D: 2.501–4.999 Ryo)',value='rpg_verde'),
+            app_commands.Choice(name='Open World · Rango D (Baja: 5.000–9.999 Ryo)',value='D'),
+            app_commands.Choice(name='Open World · Rango C (Moderada: 10.000–24.999 Ryo)',value='C'),
+            app_commands.Choice(name='Open World · Rango B (Alta: 25.000–49.999 Ryo)',value='B'),
+            app_commands.Choice(name='Open World · Rango A (Muy Alta: 50.000–99.999 Ryo)',value='A'),
+            app_commands.Choice(name='Open World · Rango S (Extrema: 100.000–500.000 Ryo)',value='S'),
+        ])
+        async def pagar_misiones(
+            i:discord.Interaction,
+            rango:app_commands.Choice[str],
+            jugadores:str,
+            dinero:app_commands.Range[int,500,100000000],
+            numero_misiones:app_commands.Range[int,1,100]=5,
+            enemigos:str='',
+            motivo:str='Pago de misiones verificado por Staff'
+        ):
+            ui.system.staff(i)
+            await i.response.defer(ephemeral=True)
+            player_members=await _parse_members(i.guild,jugadores)
+            if not player_members:
+                raise ValueError('Menciona al menos un jugador en `jugadores` (ejemplo: `@gabo @kabuto`).')
+            enemy_members=await _parse_members(i.guild,enemigos) if enemigos.strip() else []
+            for pm in player_members:
+                uid=pm.id if hasattr(pm,'id') else int(pm)
+                await ui.eco.sync(i.guild_id,uid)
+            for em in enemy_members:
+                if hasattr(em,'id'):
+                    await ui.eco.sync(i.guild_id,em.id)
+            async with ui.eco.lock:
+                res=ui.flow.pay_missions_command(
+                    i.guild_id,i.user.id,player_members,rango.value,dinero,
+                    count=numero_misiones,enemies=enemy_members,reason=motivo
+                )
+            calc=res['calc']
+            enemy_txt=', '.join(f'<@{uid}> ({SHINOBI_RANKS.get(sr,(sr,1))[0]})' for uid,sr in calc['enemies']) or 'Sin oposición registrada'
+            dist_txt='\n'.join(f'• <@{u}>: **{ryo(v)}** (+{res["count"]} misiones Rango **{res["final_rank"]}**)' for u,v in res['recipients'].items())
+            embed=discord.Embed(
+                title=f'💰 Pago de Misiones Acreditado · Comprobante #{res["tx"]}',
+                description=(
+                    f'**Clasificación base:** {calc["label"]}\n'
+                    f'**Enemigos enfrentados:** {enemy_txt}\n'
+                    f'**Dificultad / Rango Final:** **Rango {res["final_rank"]}** (Escala: {ryo(calc["min_pay"])}–{ryo(calc["max_pay"])} c/u)\n'
+                    f'**Misiones pagadas:** **{res["count"]} misión(es)**\n'
+                    f'**Paga total repartida equitativamente:** **{ryo(res["total_pay"])}**\n\n'
+                    f'**Jugadores acreditados:**\n{dist_txt}\n\n'
+                    f'*Se actualizaron automáticamente los saldos, la Cartera y la Tarjeta Ninja de cada participante.*'
+                ),
+                color=0x388E63
+            )
+            await i.followup.send(embed=embed,ephemeral=True,allowed_mentions=discord.AllowedMentions.none())
+        bot.tree.add_command(pagar_group)
+
+        group=app_commands.Group(name='panel',description='Panel general de misiones, perfil, tienda y cartera',guild_only=True)
+        @group.command(name='abrir',description='Abrir el panel general en privado')
         async def home(i:discord.Interaction):
-            ui.system.guild(i);await i.response.send_message('World X · Tu actividad, compras e inventario',view=Home(ui),ephemeral=True)
-        @group.command(name='publicar',description='Staff: publicar panel permanente en este canal')
+            ui.system.guild(i);await i.response.send_message(embed=ui.general_panel_embed(),view=Home(ui),ephemeral=True)
+        @group.command(name='publicar',description='Staff: publicar el panel general permanente en este canal')
         async def publish(i:discord.Interaction):
             ui.system.staff(i,True);await i.response.defer(ephemeral=True)
-            await i.channel.send('**WORLD X · MISIONES Y ECONOMÍA**\nComienza tu sesión y espera autorización. Después reporta cada misión con capturas completas y fecha/hora del dispositivo.\nCompra permisos desde Tienda; el staff revisará tu evidencia.',view=Home(ui))
-            await i.followup.send('Panel publicado.',ephemeral=True)
+            await i.channel.send(embed=ui.general_panel_embed(),view=Home(ui))
+            await i.followup.send('Panel general publicado.',ephemeral=True)
         @group.command(name='configurar',description='Staff: elegir canal de autorizaciones y foro de misiones')
         async def configure(i:discord.Interaction,autorizaciones:discord.TextChannel,foro:discord.ForumChannel):
             ui.system.staff(i,True);ui.system.review_ui.validate_channel(autorizaciones)

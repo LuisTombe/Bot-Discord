@@ -57,6 +57,6 @@ def install(system,eco,ctx):
         if not last:return totals(g,u,session)
         result={r:0 for r in 'DCBAS'}
         for row in ms.all(g):
-            if row['state']=='approved' and row['kind']=='mission' and row['created']>last and (session is None or row['session']==session) and u in [p['user'] for p in row['participants']]:result[row['data']['mission_rank']]+=1
+            if row['state']=='approved' and row['kind']=='mission' and row['created']>last and (session is None or row['session']==session) and u in [p['user'] for p in row['participants']]:result[row['data']['mission_rank']]+=max(1,int(row['data'].get('batch_count',1)))
         return result
     ms.validate_auth=validate_auth;ms.validate_mission=validate;ms.submit=submit_new;ms.decision=decide;ms.totals=current_totals

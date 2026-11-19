@@ -75,8 +75,9 @@ class EvidenceTests(unittest.TestCase):
         r=self.pending('ejecutar',2);self.check(r,0)
         with self.assertRaises(ValueError):self.ms.decision(r['id'],r['revision'],99,'approve','Incompleta')
         self.check(r,1);self.ms.decision(r['id'],r['revision'],99,'approve','Dos capturas verificadas')
-        self.assertEqual(self.ms.totals(1,1)['B'],1)
+        self.assertEqual(self.ms.totals(1,1)['C'],1)
     def test_execution_one_image_blocked(self):
+        self.rules['missions']['ejecutar']['min_images']=2
         r=self.draft('ejecutar',1)
         with self.assertRaises(ValueError):self.ms.submit(r['id'],r['revision'],1)
     def test_other_reviewer_must_verify_independently(self):

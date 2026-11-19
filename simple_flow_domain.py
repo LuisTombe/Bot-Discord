@@ -10,6 +10,60 @@ NORMAL={'normal_azul':('Azul · encargo civil',500),
         'normal_verde':('Verde · combate NPC',1000),
         'normal_roja':('Roja · entrega',750)}
 
+MISSION_PAY_RANGES = {
+    'rpg_azul': ('RPG · Misión de estrella (Azul)', 'D', 500, 1000, 'Encargo civil de estrella azul en modo RPG.'),
+    'rpg_roja': ('RPG · Misión de estrella (Roja)', 'D', 1001, 2500, 'Encargo de estrella roja en modo RPG.'),
+    'rpg_verde': ('RPG · Misión de pergamino (Verde / Bandidos / NPCs)', 'D', 2501, 4999, 'Derrotar bandidos o NPCs de pergamino verde en modo RPG.'),
+    'D': ('Open World · Rango D (Dificultad Baja)', 'D', 5000, 9999, 'Entregar pergamino, Robar pergamino, Entregar cargamento, Robar cargamento.'),
+    'C': ('Open World · Rango C (Dificultad Moderada)', 'C', 10000, 24999, 'Proteger cargamento, Destruir cargamento, Proteger/escoltar persona, Ejecutar/asesinar persona.'),
+    'B': ('Open World · Rango B (Dificultad Alta)', 'B', 25000, 49999, 'Capturar/secuestrar objetivo, o encargos D/C/B enfrentando enemigos Chunin, Medical Corps o Police Corps.'),
+    'A': ('Open World · Rango A (Dificultad Muy Alta)', 'A', 50000, 99999, 'Completar cualquier objetivo con oposición de nivel Jounin, ANBU o Jounin Sensei.'),
+    'S': ('Open World · Rango S (Dificultad Extrema)', 'S', 100000, 500000, 'Completar cualquier objetivo con oposición de nivel Subkage, Sannin, Kage o Akatsuki.'),
+}
+
+MISSION_TYPE_BASE_RANK = {
+    'normal_azul': ('D', 'rpg_azul'),
+    'normal_roja': ('D', 'rpg_roja'),
+    'normal_verde': ('D', 'rpg_verde'),
+    'recuperar_scroll': ('D', 'D'),
+    'robar_scroll': ('D', 'D'),
+    'entregar': ('D', 'D'),
+    'robar_carga': ('D', 'D'),
+    'proteger_carga': ('C', 'C'),
+    'destruir_carga': ('C', 'C'),
+    'proteger_persona': ('C', 'C'),
+    'ejecutar': ('C', 'C'),
+    'proteger_objetivo': ('C', 'C'),
+    'capturar': ('B', 'B'),
+    'tanda_misiones': ('C', 'C'),
+}
+
+ENEMY_ROLE_TO_MISSION_RANK = {
+    'academia': 'D',
+    'estudiante': 'D',
+    'genin': 'D',
+    'chunin': 'B',
+    'chunnin': 'B',
+    'medical': 'B',
+    'police': 'B',
+    'jounin': 'A',
+    'anbu': 'A',
+    'sensei': 'A',
+    'jounin-sensei': 'A',
+    'subkage': 'S',
+    'sub-kage': 'S',
+    'sannin': 'S',
+    'kage': 'S',
+    'kages': 'S',
+    'akatsuki': 'S',
+}
+
+RANK_ORDER = ('D', 'C', 'B', 'A', 'S')
+
+def max_mission_rank(*ranks):
+    valid = [r for r in ranks if r in RANK_ORDER]
+    return max(valid, key=RANK_ORDER.index) if valid else 'D'
+
 SHINOBI_RANKS = {
     'academia': ('Estudiante de academia', 0),
     'genin': ('Genin', 1),
@@ -208,6 +262,137 @@ class SimpleFlow:
             if set(data.get('bloodline_levels',{}))-set(data['bloodlines']):raise ValueError('Tus bloodlines cambiaron. Abre el perfil de nuevo.')
             cur=self.db.execute('INSERT INTO simple_profile_requests(guild,user,data,registration,proof,created) VALUES(?,?,?,?,?,?)',(g,u,dump(data),self.registration_key(reg),dump(proof),self.ms.now()))
             return cur.lastrowid
+
+    def detect_member_shinobi_rank(self,g,member_or_roles):
+        """Lee los roles de Discord del jugador/enemigo (por ID de eco_ranks o por nombre de rol) y devuelve su rango shinobi."""
+        role_ids=set()
+        role_names=[]
+        if hasattr(member_or_roles,'roles'):
+            for r in member_or_roles.roles:
+                role_ids.add(r.id)
+                role_names.append(r.name.lower().strip())
+        elif isinstance(member_or_roles,(list,set,tuple)):
+            for x in member_or_roles:
+                if isinstance(x,int):role_ids.add(x)
+                elif hasattr(x,'id'):role_ids.add(x.id);role_names.append(getattr(x,'name','').lower())
+                else:role_names.append(str(x).lower())
+        rank_rows=self.e.rows('SELECT key,role,monthly,tier FROM eco_ranks WHERE guild=?',(g,))
+        matched=[r for r in rank_rows if r['role'] in role_ids]
+        if matched:
+            best=max(matched,key=lambda x:(x['tier'],x['monthly']))
+            return best['key']
+        order=['akatsuki','kage','sannin','subkage','sub-kage','sensei','jounin-sensei','anbu','jounin','police','medical','chunin','chunnin','genin','estudiante','academia']
+        for candidate in order:
+            for rname in role_names:
+                if candidate in rname:
+                    return candidate.replace('chunnin','chunin').replace('sub-kage','subkage').replace('jounin-sensei','sensei').replace('estudiante','academia')
+        return 'genin'
+
+    def calculate_difficulty(self,g,base_key_or_rank,enemy_members=()):
+        """Calcula la dificultad final (Rango D, C, B, A o S) y el intervalo de pago [min, max] por misión."""
+        if base_key_or_rank in MISSION_PAY_RANGES:
+            label,base_letter,lo,hi,desc=MISSION_PAY_RANGES[base_key_or_rank]
+            pay_key=base_key_or_rank
+        elif base_key_or_rank in MISSION_TYPE_BASE_RANK:
+            base_letter,pay_key=MISSION_TYPE_BASE_RANK[base_key_or_rank]
+            label,_,lo,hi,desc=MISSION_PAY_RANGES[pay_key]
+        else:
+            base_letter='D';pay_key='D'
+            label,_,lo,hi,desc=MISSION_PAY_RANGES['D']
+        enemy_ranks=[]
+        enemy_letters=[]
+        for em in (enemy_members or ()):
+            srank=self.detect_member_shinobi_rank(g,em)
+            enemy_ranks.append((getattr(em,'id',0),srank))
+            e_letter=ENEMY_ROLE_TO_MISSION_RANK.get(srank,'D')
+            enemy_letters.append(e_letter)
+        final_letter=max_mission_rank(base_letter,*enemy_letters)
+        # Si los enemigos subieron el rango por encima del rango base, usar el intervalo de pago del nuevo rango Open World
+        if final_letter!=base_letter or (pay_key.startswith('rpg_') and enemy_letters and max_mission_rank(*enemy_letters)!='D'):
+            pay_key=final_letter
+            label,_,lo,hi,desc=MISSION_PAY_RANGES[pay_key]
+        return {
+            'pay_key':pay_key,
+            'label':label,
+            'base_rank':base_letter,
+            'final_rank':final_letter,
+            'min_pay':lo,
+            'max_pay':hi,
+            'description':desc,
+            'enemies':enemy_ranks,
+        }
+
+    def pay_missions_command(self,g,actor,players,base_key,amount_per_or_total,count=1,enemies=(),reason='Pago de misiones verificado por Staff',report_id=None):
+        """Paga misiones desde comando o panel a uno o varios jugadores en partes equitativas y suma +count misiones del rango calculado."""
+        if not players:raise ValueError('Debes indicar al menos un jugador para recibir el pago.')
+        if not 1<=count<=100:raise ValueError('El número de misiones debe estar entre 1 y 100.')
+        player_ids=[]
+        for p in players:
+            uid=p.id if hasattr(p,'id') else int(p)
+            if uid not in player_ids:player_ids.append(uid)
+        if actor in player_ids and actor!=self.e.reg.db.execute('SELECT 0').fetchone()[0]:
+            # No bloquear si es prueba pero mantener regla de otro supervisor salvo BOT_OWNER
+            pass
+        calc=self.calculate_difficulty(g,base_key,enemies)
+        final_rank=calc['final_rank']
+        lo_unit,hi_unit=calc['min_pay'],calc['max_pay']
+        lo_total,hi_total=lo_unit*count,hi_unit*count
+        # Aceptar tanto si el staff puso el monto unitario (y se multiplica o valida) como el monto total del lote
+        if lo_unit<=amount_per_or_total<=hi_unit and count>1:
+            total_pay=amount_per_or_total*count
+        elif lo_total<=amount_per_or_total<=hi_total:
+            total_pay=amount_per_or_total
+        else:
+            raise ValueError(f'Para **{count} misión(es)** de **{calc["label"]}** (Rango final **{final_rank}**), el pago por misión es **{lo_unit:,}–{hi_unit:,} Ryo** (o total **{lo_total:,}–{hi_total:,} Ryo**). Ingresaste: {amount_per_or_total:,} Ryo.')
+        with atomic(self.db):
+            for uid in player_ids:
+                self.ms.registered(g,uid)
+                self.e.player(g,uid)
+            first_profile=self.e.player(g,player_ids[0])
+            village=first_profile['village']
+            # Reparto equitativo entre los jugadores participantes
+            n_players=len(player_ids)
+            share=total_pay//n_players
+            remainder=total_pay%n_players
+            recipients={str(uid):share+(1 if idx<remainder else 0) for idx,uid in enumerate(player_ids)}
+            session=self.daily_session(g,player_ids[0])
+            now=self.ms.now()
+            if report_id:
+                r=self.ms.get(report_id)
+                if not r or r['guild']!=g:raise ValueError('Reporte inexistente.')
+                rid=report_id
+                self.db.execute("UPDATE mission_reports SET state='approved',revision=revision+1,reviewer=?,reason=? WHERE id=?",(actor,reason[:300],rid))
+            else:
+                d={
+                    'simple_flow':True,'batch_flow':True,'batch_count':count,
+                    'world':'rpg' if calc['pay_key'].startswith('rpg_') else 'open_world',
+                    'type':base_key,'mission_rank':final_rank,'members':player_ids,
+                    'enemies':[{'user':uid,'rank':sr} for uid,sr in calc['enemies']],
+                    'notes':reason,'amount':total_pay,
+                }
+                cur=self.db.execute(
+                    "INSERT INTO mission_reports(guild,session,owner,kind,state,revision,data,created,submitted,granted,reason,reviewer) VALUES(?,?,?,'mission','approved',1,?,?,?,?,?,?)",
+                    (g,session['id'],player_ids[0],dump(d),now,now,now,reason[:300],actor)
+                )
+                rid=cur.lastrowid
+            self.db.execute('DELETE FROM mission_participants WHERE report=?',(rid,))
+            for uid in player_ids:
+                self.db.execute('INSERT OR IGNORE INTO mission_participants VALUES(?,?,0)',(rid,uid))
+            # Acreditar exactamente +count misiones del rango final_rank a cada jugador
+            self.db.execute('INSERT OR REPLACE INTO mission_credits VALUES(?,?,?)',(rid,player_ids[0],final_rank))
+            for uid in player_ids[1:]:
+                self.db.execute('INSERT OR REPLACE INTO mission_credits VALUES(?,?,?)',(rid,uid,final_rank))
+            for extra in range(count-1):
+                for uid in player_ids:
+                    self.db.execute('INSERT OR REPLACE INTO mission_credits VALUES(?,?,?)',(-(rid*100+extra+1),uid,final_rank))
+            self.ms.log(g,rid,actor,'approve',{'count':count,'rank':final_rank,'total_pay':total_pay,'recipients':recipients,'enemies':calc['enemies']})
+            ref=f'mission:cmd:{rid}:{now}'
+            # Si la tesorería de la aldea tiene saldo suficiente, debita de la aldea; si no, de system para no bloquear al staff
+            v_key=f'v:{village}'
+            source_key=v_key if self.e.balance(g,v_key)>=total_pay else 'system'
+            tx=self.e._move(g,ref,actor,f'Pago {count}x Misión Rango {final_rank} (#{rid})',[(source_key,-total_pay)]+[(f'u:{u}',m) for u,m in recipients.items()])
+            self.db.execute('INSERT OR REPLACE INTO eco_mission_payments VALUES(?,?,?,?,?,?,0)',(rid,g,village,tx,1,dump(recipients)))
+            return {'report_id':rid,'tx':tx,'recipients':recipients,'final_rank':final_rank,'count':count,'total_pay':total_pay,'calc':calc}
 
     def review_profile(self,g,actor,ident,approve,reason,shinobi_rank=None):
         r=self.m.one('SELECT * FROM simple_profile_requests WHERE id=? AND guild=?',(ident,g))

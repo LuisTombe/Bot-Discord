@@ -53,7 +53,7 @@ class Policies:
             d=json.loads(r[0])
             try:t=timestamp(d['end'])
             except (KeyError,ValueError):continue
-            if start<=t<end:counts[d.get('mission_rank','D')]+=1
+            if start<=t<end:counts[d.get('mission_rank','D')]+=max(1,int(d.get('batch_count',1)))
         return dict(counts)
     def activity(self,g,u,month):
         d=datetime.strptime(month,'%Y-%m').replace(tzinfo=TZ);end=(d.replace(day=28)+timedelta(days=4)).replace(day=1)
