@@ -239,11 +239,11 @@ class MissionWizard(SafeView):
 
 class Home(SafeView):
     def __init__(self,ui):super().__init__(timeout=None);self.ui=ui
-    @discord.ui.button(label='Reportar misiones (5+ capturas)',emoji='📂',style=discord.ButtonStyle.success,custom_id='wx:simple:report',row=0)
+    @discord.ui.button(label='Reportar misiones',emoji='📂',style=discord.ButtonStyle.success,custom_id='wx:simple:report',row=0)
     async def report(self,i,b):await self.ui.report(i)
     @discord.ui.button(label='Mis reportes',emoji='📋',custom_id='wx:simple:reports',row=0)
     async def reports(self,i,b):await self.ui.reports(i)
-    @discord.ui.button(label='Ver mi perfil',emoji='🥷',style=discord.ButtonStyle.primary,custom_id='wx:simple:profile',row=0)
+    @discord.ui.button(label='Mi perfil',emoji='🥷',style=discord.ButtonStyle.primary,custom_id='wx:simple:profile',row=0)
     async def profile(self,i,b):await self.ui.profiles.show(i)
     @discord.ui.button(label='Tienda',emoji='🏪',custom_id='wx:simple:shop',row=1)
     async def shop(self,i,b):await self.ui.market.shop(i)
@@ -263,17 +263,6 @@ class Home(SafeView):
     @discord.ui.button(label='Mi Ficha Registro',emoji='📜',style=discord.ButtonStyle.secondary,custom_id='wx:simple:regcard',row=2)
     async def regcard(self,i,b):
         await self.ui.ctx['show_mine'](i)
-    @discord.ui.button(label='Comenzar misiones',style=discord.ButtonStyle.secondary,custom_id='wx:simple:start',row=3)
-    async def start(self,i,b):await self.ui.begin(i)
-    @discord.ui.button(label='Terminar misiones',style=discord.ButtonStyle.secondary,custom_id='wx:simple:end',row=3)
-    async def end(self,i,b):
-        self.ui.system.player(i)
-        try:
-            a=self.ui.flow.active(i.guild_id,i.user.id)
-            self.ui.ms.end_authorization(i.guild_id,i.user.id,a['session'])
-            await i.response.send_message('Actividad cerrada.',ephemeral=True)
-        except ValueError:
-            await i.response.send_message('No necesitas abrir ni cerrar sesión: usa directamente **Reportar misiones (5+ capturas)**.',ephemeral=True)
 
 class Review(SafeView):
     def __init__(self,ui,row):
@@ -334,12 +323,18 @@ class SimpleUI:
         old_restore=self.system.restore
         def restore():
             old_restore();bot.add_view(self.home);self.profiles.restore()
+            legacy_removed=SafeView(timeout=None)
+            for cid in ('wx:simple:start','wx:simple:end'):
+                btn=discord.ui.Button(label='Misiones',custom_id=cid)
+                async def _redir(i):
+                    await self.report(i)
+                btn.callback=_redir;legacy_removed.add_item(btn)
+            bot.add_view(legacy_removed)
             for kind in ('authorization','mission'):
                 legacy=SafeView(timeout=None)
                 b=discord.ui.Button(label='Abrir',custom_id='worldx:missions:panel:'+kind)
                 async def callback(i,kind=kind):
-                    if kind=='authorization':await self.begin(i)
-                    else:await self.report(i)
+                    await self.report(i)
                 b.callback=callback;legacy.add_item(b);bot.add_view(legacy)
         self.system.restore=restore
         # Los paneles antiguos también llevan al flujo nuevo.
@@ -370,57 +365,86 @@ class SimpleUI:
             await i.response.send_message('Tu autorización está '+row['state']+'. Consulta Mis reportes.',ephemeral=True);return
         await i.response.send_modal(AuthorizationModal(self,row))
 
+    def _forum_id(self,guild_id):
+        fid=self.ms.settings(guild_id).get('simple_forum')
+        if fid:return int(fid)
+        try:return int(self.system.channel_id('mission'))
+        except Exception:return 0
+
+    async def _find_user_thread(self,guild,forum_id,user):
+        if not forum_id:return None
+        row=self.ms.db.execute(
+            "SELECT review_channel FROM mission_reports WHERE guild=? AND owner=? AND review_channel IS NOT NULL AND review_channel!=0 ORDER BY id DESC LIMIT 1",
+            (guild.id,user.id)
+        ).fetchone()
+        if row and row[0]:
+            ch=guild.get_thread(int(row[0]))
+            if ch and getattr(ch,'parent_id',None)==forum_id:return ch
+        forum=guild.get_channel(forum_id)
+        if not forum:
+            try:forum=await self.bot.fetch_channel(forum_id)
+            except discord.HTTPException:return None
+        if not isinstance(forum,discord.ForumChannel):return None
+        uname=getattr(user,'display_name',getattr(user,'name','')).lower()
+        raw_name=getattr(user,'name','').lower()
+        for th in getattr(forum,'threads',()):
+            if th.owner_id==user.id:return th
+            tlow=th.name.lower()
+            if uname and (tlow.startswith(uname) or f'{uname} - misiones' in tlow):return th
+            if raw_name and (tlow.startswith(raw_name) or f'{raw_name} - misiones' in tlow):return th
+        return None
+
     async def report(self,i,row=None):
-        self.system.player(i)
-        if row is not None:
-            if row['owner']!=i.user.id or row['state'] not in EDITABLE:raise ValueError('Reporte ajeno o ya enviado.')
-            if row['session']==0:
-                a=self.flow.active(i.guild_id,i.user.id)
-                with self.ms.db:self.ms.db.execute('UPDATE mission_reports SET session=?,revision=revision+1 WHERE id=?',(a['session'],row['id']))
-                row=self.ms.get(row['id'])
-            if not row['data'].get('simple_flow'):
-                row=self.ms.edit(row['id'],row['revision'],i.user.id,{**row['data'],'simple_flow':True,'world':'world_x','enemy':'none'})
-            await i.response.send_message('Selecciona mundo, misión y compañeros. Las capturas deben mostrar fecha y hora del dispositivo.',view=MissionWizard(self,row),ephemeral=True)
+        self.system.guild(i)
+        await i.response.defer(ephemeral=True)
+        fid=self._forum_id(i.guild_id)
+        if not fid:
+            await i.followup.send('El foro `#report-missions` aún no está configurado por el Staff.',ephemeral=True)
             return
-        guide=(
-            '📂 **REPORTAR TANDA DE MISIONES (Mínimo 5 capturas)**\n'
-            '• Tu reporte se publicará en tu hilo único del foro **`TuNombre - misiones`**.\n'
-            '• Sube **5 o más capturas** a punto de completar la misión (faltando **5 a 7 segundos**, o ejecutando al objetivo al instante).\n'
-            '• Incluye la captura de tu **menú (M)** donde se vean stats, slots, bloodlines, elementos y nivel.\n'
-            '• En las capturas debe verse: **fecha y hora de tu equipo**, **panel de jugadores a la derecha** (para pagos en conjunto) y **código privado del servidor abajo a la derecha**.\n'
-            '• Si la hicieron en conjunto, elige a tus compañeros abajo; si fue en solitario, pulsa directamente el botón verde.'
+        v=SafeView(timeout=300)
+        v.add_item(discord.ui.Button(label='Ir a #report-missions',emoji='📂',style=discord.ButtonStyle.link,url=f'https://discord.com/channels/{i.guild_id}/{fid}'))
+        await i.followup.send(
+            f'📂 **Reportar misiones**\n'
+            f'Dirígete al foro <#{fid}> y sube allí tus capturas en **tu única publicación**.\n'
+            f'• No necesitas abrir/cerrar sesión ni llenar formularios.\n'
+            f'• El Staff revisará tus capturas directamente en el foro y te acreditará las misiones y Ryo con `/pagar misiones`.',
+            view=v,ephemeral=True
         )
-        await i.response.send_message(guide,view=BatchSquadView(self,i.user.id),ephemeral=True)
 
     async def reports(self,i,page=0,staff=False):
         self.system.guild(i)
-        if staff:self.system.staff(i)
-        where="guild=? AND state!='deleted'";args=[i.guild_id]
-        if staff:where+=" AND state='pending'"
-        else:where+=' AND (owner=? OR id IN (SELECT report FROM mission_participants WHERE user=?))';args +=[i.user.id,i.user.id]
+        if not staff:
+            await i.response.defer(ephemeral=True)
+            fid=self._forum_id(i.guild_id)
+            th=await self._find_user_thread(i.guild,fid,i.user) if fid else None
+            totals=self.ms.totals(i.guild_id,i.user.id)
+            counts_txt=' · '.join(f'**{r}:** {int(totals.get(r,0))}' for r in ('D','C','B','A','S'))
+            total_sum=sum(int(totals.get(r,0)) for r in ('D','C','B','A','S'))
+            em=discord.Embed(
+                title='📋 Mis reportes de misiones',
+                description=(
+                    (f'Tu publicación en el foro: <#{th.id}>\n' if th else f'Aún no encontramos una publicación tuya en <#{fid}>. Créala una sola vez y sube allí tus capturas.\n' if fid else 'Foro de misiones no configurado.\n')
+                    +f'\n**Misiones acreditadas por rango:**\n{counts_txt} · **Total:** {total_sum}'
+                ),
+                color=0x348F79
+            )
+            v=SafeView(timeout=300)
+            if th:
+                v.add_item(discord.ui.Button(label='Ir a mi publicación',emoji='📋',style=discord.ButtonStyle.link,url=f'https://discord.com/channels/{i.guild_id}/{th.id}'))
+            elif fid:
+                v.add_item(discord.ui.Button(label='Ir a #report-missions',emoji='📂',style=discord.ButtonStyle.link,url=f'https://discord.com/channels/{i.guild_id}/{fid}'))
+            await i.followup.send(embed=em,view=v,ephemeral=True)
+            return
+        self.system.staff(i)
+        where="guild=? AND state='pending'";args=[i.guild_id]
         rows=[self.ms.get(r[0]) for r in self.ms.db.execute('SELECT id FROM mission_reports WHERE '+where+' ORDER BY id DESC LIMIT 8 OFFSET ?',(*args,page*8))]
         v=SafeView(timeout=600)
         if rows:
-            select=discord.ui.Select(placeholder='Abrir reporte / autorización',options=[discord.SelectOption(label=f'#{r["id"]} · {r["kind"]} · {r["state"]}',value=str(r['id'])) for r in rows])
+            select=discord.ui.Select(placeholder='Abrir reporte pendiente',options=[discord.SelectOption(label=f'#{r["id"]} · {r["kind"]} · {r["state"]}',value=str(r['id'])) for r in rows])
             async def selected(inter):
                 if inter.user.id!=i.user.id:raise ValueError('Abre tu lista.')
                 r=self.system.get(inter,int(select.values[0]))
-                if staff:await self.proofs(inter,r)
-                elif r['owner']==inter.user.id and r['state'] in EDITABLE:
-                    if r['kind']=='authorization':await inter.response.send_modal(AuthorizationModal(self,r))
-                    else:await self.report(inter,r)
-                else:
-                    await inter.response.defer(ephemeral=True)
-                    detail_view=SafeView(timeout=600)
-                    if r['kind']=='authorization' and r['state']=='approved' and r['owner']==inter.user.id:
-                        b=discord.ui.Button(label='Reportar misión de esta sesión')
-                        async def late(ii):
-                            self.system.player(ii)
-                            if ii.user.id!=r['owner']:raise ValueError('Autorización ajena.')
-                            draft=self.ms.start(ii.guild_id,ii.user.id,'mission',r['session'])
-                            await self.report(ii,draft)
-                        b.callback=late;detail_view.add_item(b)
-                    await inter.followup.send(embed=self.system.card(r),view=detail_view,ephemeral=True)
+                await self.proofs(inter,r)
             select.callback=selected;v.add_item(select)
         for label,delta in [('Anterior',-1),('Siguiente',1)]:
             b=discord.ui.Button(label=label,disabled=page==0 and delta<0 or len(rows)<8 and delta>0)
@@ -561,10 +585,10 @@ class SimpleUI:
         return discord.Embed(
             title='🌐 WORLD X · PANEL GENERAL DE JUGADORES',
             description=(
-                'Bienvenido al centro de control de **World X (Open World & RPG)**. Usa los botones inferiores para acceder a todas las funciones sin escribir comandos:\n\n'
-                '📂 **Reportar misiones (5+ capturas):** Sube tus tandas de mínimo 5 misiones + captura del menú (M) directamente a tu publicación única en `╰・📂・report-missions`.\n'
-                '📋 **Mis reportes:** Consulta el estado de tus reportes y tu conteo de misiones por rango.\n'
-                '🥷 **Ver mi perfil:** Autoriza o actualiza tu perfil de compras subiendo únicamente la captura de tu menú (M) y roles de Discord.\n'
+                'Bienvenido al centro de control de **World X (Open World & RPG)**. Usa los botones inferiores para acceder a todo:\n\n'
+                '📂 **Reportar misiones:** Te lleva directo al foro `#report-missions` para subir tus capturas en tu publicación única.\n'
+                '📋 **Mis reportes:** Te lleva directo a tu publicación en `#report-missions` y muestra tus misiones acreditadas por rango.\n'
+                '🥷 **Mi perfil:** Autoriza tu perfil subiendo solo **2 capturas** (roles de Discord y menú M de Shindo) para poder comprar en la tienda.\n'
                 '🏪 **Tienda:** Explora y compra jutsus, armas, modos y permisos según tu Rango Shinobi de Discord.\n'
                 '🧾 **Mis compras:** Revisa tus solicitudes de compra, corrige evidencias o cancela reservas.\n'
                 '🎒 **Inventario:** Consulta todos tus permisos, técnicas y objetos adquiridos.\n'
@@ -579,7 +603,7 @@ class SimpleUI:
         bot=self.bot;ui=self
         # Sustituye el acceso anterior, manteniendo el comando conocido.
         bot.tree.remove_command('reporte')
-        @bot.tree.command(name='reporte',description='Reportar una tanda de misiones (5+ capturas) con revisión del staff')
+        @bot.tree.command(name='reporte',description='Ir al foro #report-missions para reportar tus misiones')
         async def report(i:discord.Interaction):await ui.report(i)
 
         async def _parse_members(guild,text):
@@ -597,56 +621,46 @@ class SimpleUI:
                 members.append(m)
             return members
 
-        pagar_group=app_commands.Group(name='pagar',description='Staff: pagar misiones por rango, jugadores, enemigos y cantidad',guild_only=True)
-        @pagar_group.command(name='misiones',description='Staff: pagar N misiones calculando dificultad por rango base y roles de enemigos')
+        pagar_group=app_commands.Group(name='pagar',description='Staff: pagar misiones por rango, cantidad, integrantes y paga',guild_only=True)
+        @pagar_group.command(name='misiones',description='Staff: pagar misiones completas a cada integrante de la squad (máx. 4)')
         @app_commands.choices(rango=[
-            app_commands.Choice(name='RPG · Estrella Azul (Rango D: 500–1.000 Ryo)',value='rpg_azul'),
-            app_commands.Choice(name='RPG · Estrella Roja (Rango D: 1.001–2.500 Ryo)',value='rpg_roja'),
-            app_commands.Choice(name='RPG · Pergamino Verde / Bandidos (Rango D: 2.501–4.999 Ryo)',value='rpg_verde'),
-            app_commands.Choice(name='Open World · Rango D (Baja: 5.000–9.999 Ryo)',value='D'),
-            app_commands.Choice(name='Open World · Rango C (Moderada: 10.000–24.999 Ryo)',value='C'),
-            app_commands.Choice(name='Open World · Rango B (Alta: 25.000–49.999 Ryo)',value='B'),
-            app_commands.Choice(name='Open World · Rango A (Muy Alta: 50.000–99.999 Ryo)',value='A'),
-            app_commands.Choice(name='Open World · Rango S (Extrema: 100.000–500.000 Ryo)',value='S'),
+            app_commands.Choice(name='Rango D · RPG Estrella Azul (500–1.000 Ryo)',value='rpg_azul'),
+            app_commands.Choice(name='Rango D · RPG Estrella Roja (1.001–2.500 Ryo)',value='rpg_roja'),
+            app_commands.Choice(name='Rango D · RPG Pergamino Verde / Bandidos (2.501–4.999 Ryo)',value='rpg_verde'),
+            app_commands.Choice(name='Rango D · Open World Baja (5.000–9.999 Ryo)',value='D'),
+            app_commands.Choice(name='Rango C · Moderada (10.000–24.999 Ryo)',value='C'),
+            app_commands.Choice(name='Rango B · Alta (25.000–49.999 Ryo)',value='B'),
+            app_commands.Choice(name='Rango A · Muy Alta (50.000–99.999 Ryo)',value='A'),
+            app_commands.Choice(name='Rango S · Extrema (100.000–500.000 Ryo)',value='S'),
         ])
         async def pagar_misiones(
             i:discord.Interaction,
             rango:app_commands.Choice[str],
-            jugadores:str,
-            dinero:app_commands.Range[int,500,100000000],
-            numero_misiones:app_commands.Range[int,1,100]=5,
-            enemigos:str='',
+            numero_misiones:app_commands.Range[int,1,100],
+            integrantes:str,
+            paga:app_commands.Range[int,500,500000],
             motivo:str='Pago de misiones verificado por Staff'
         ):
             ui.system.staff(i)
             await i.response.defer(ephemeral=True)
-            player_members=await _parse_members(i.guild,jugadores)
+            player_members=await _parse_members(i.guild,integrantes)
             if not player_members:
-                raise ValueError('Menciona al menos un jugador en `jugadores` (ejemplo: `@gabo @kabuto`).')
-            enemy_members=await _parse_members(i.guild,enemigos) if enemigos.strip() else []
-            for pm in player_members:
-                uid=pm.id if hasattr(pm,'id') else int(pm)
-                await ui.eco.sync(i.guild_id,uid)
-            for em in enemy_members:
-                if hasattr(em,'id'):
-                    await ui.eco.sync(i.guild_id,em.id)
+                raise ValueError('Menciona al menos un integrante (ejemplo: `@gabo @shinobisiul`, máximo 4).')
             async with ui.eco.lock:
                 res=ui.flow.pay_missions_command(
-                    i.guild_id,i.user.id,player_members,rango.value,dinero,
-                    count=numero_misiones,enemies=enemy_members,reason=motivo
+                    i.guild_id,i.user.id,player_members,rango.value,paga,
+                    count=numero_misiones,reason=motivo
                 )
             calc=res['calc']
-            enemy_txt=', '.join(f'<@{uid}> ({SHINOBI_RANKS.get(sr,(sr,1))[0]})' for uid,sr in calc['enemies']) or 'Sin oposición registrada'
             dist_txt='\n'.join(f'• <@{u}>: **{ryo(v)}** (+{res["count"]} misiones Rango **{res["final_rank"]}**)' for u,v in res['recipients'].items())
             embed=discord.Embed(
                 title=f'💰 Pago de Misiones Acreditado · Comprobante #{res["tx"]}',
                 description=(
-                    f'**Clasificación base:** {calc["label"]}\n'
-                    f'**Enemigos enfrentados:** {enemy_txt}\n'
-                    f'**Dificultad / Rango Final:** **Rango {res["final_rank"]}** (Escala: {ryo(calc["min_pay"])}–{ryo(calc["max_pay"])} c/u)\n'
-                    f'**Misiones pagadas:** **{res["count"]} misión(es)**\n'
-                    f'**Paga total repartida equitativamente:** **{ryo(res["total_pay"])}**\n\n'
-                    f'**Jugadores acreditados:**\n{dist_txt}\n\n'
+                    f'**Clasificación:** {calc["label"]}\n'
+                    f'**Rango acreditado:** **Rango {res["final_rank"]}** (Escala por misión: {ryo(calc["min_pay"])}–{ryo(calc["max_pay"])})\n'
+                    f'**Misiones pagadas por integrante:** **{res["count"]} misión(es)**\n'
+                    f'**Paga por misión:** **{ryo(paga)}** → **{ryo(res["per_player"])} completo a cada integrante**\n\n'
+                    f'**Integrantes acreditados:**\n{dist_txt}\n\n'
                     f'*Se actualizaron automáticamente los saldos, la Cartera y la Tarjeta Ninja de cada participante.*'
                 ),
                 color=0x388E63

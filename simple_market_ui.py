@@ -23,6 +23,8 @@ class ProfileUI:
     async def show(self,i):
         self.market.guild(i);await i.response.defer(ephemeral=True);await self.market.refresh(i.guild_id,i.user.id)
         seed=self.ui.flow.seed_profile(i.guild_id,i.user.id)
+        detected=self.ui.flow.detect_member_shinobi_rank(i.guild_id,i.user)
+        if detected:seed['shinobi_rank']=detected
         pending=self.m.one("SELECT * FROM simple_profile_requests WHERE guild=? AND user=? ORDER BY id DESC LIMIT 1",(i.guild_id,i.user.id))
         try:
             p=self.m.profile(i.guild_id,i.user.id);status='✅ Perfil verificado y autorizado'
@@ -31,70 +33,58 @@ class ProfileUI:
         rlabel=SHINOBI_RANKS.get(rkey,(rkey.title(),1))[0]
         text=(f'**{status}**\n'
               f'Rango Shinobi: **{rlabel}** · Aldea: **{p.get("village","Por verificar")}**\n'
-              f'Raza: {p.get("race","humano")} · Nivel referencial: {p.get("level",200)}\n'
               f'Bloodlines (ficha): '+(', '.join(p.get('bloodlines',[])) or 'Ninguno')+'\n'
               f'Elementos (ficha): '+(', '.join(p.get('elements',[])) or 'Ninguno'))
-        if pending:text+=f'\nÚltima solicitud: **{pending["state"]}**. {pending["reason"]}'
+        if pending:text+=f'\nÚltima solicitud: **{pending["state"]}**.'
         view=SafeView(timeout=600)
-        current_race=[p.get('race','humano')]
-        btn=discord.ui.Button(label='Actualizar mi perfil (subir capturas)',emoji='📷',style=discord.ButtonStyle.success,row=0)
+        btn=discord.ui.Button(label='Autorizar / Actualizar mi perfil (2 capturas)',emoji='📷',style=discord.ButtonStyle.success,row=0)
         async def open_update(inter):
             if inter.user.id!=i.user.id:raise ValueError('Abre tu propio perfil.')
             if pending and pending['state']=='pending':raise ValueError('Espera a que el staff revise tu solicitud pendiente.')
-            await inter.response.send_modal(ProfileModal(self,seed,current_race[0]))
+            await inter.response.send_modal(ProfileModal(self,seed))
         btn.callback=open_update;view.add_item(btn)
-        race=discord.ui.Select(placeholder='Raza opcional (por defecto: Humano)',row=1,options=[discord.SelectOption(label=k.title(),value=k,default=current_race[0]==k) for k in ('humano','shark','snake','puppet')])
-        async def selected(inter):
-            if inter.user.id!=i.user.id:raise ValueError('Abre tu propio perfil.')
-            if pending and pending['state']=='pending':raise ValueError('Espera a que el staff revise tu solicitud pendiente.')
-            current_race[0]=race.values[0]
-            await inter.response.send_modal(ProfileModal(self,seed,current_race[0]))
-        race.callback=selected;view.add_item(race)
-        await i.followup.send(text[:1900]+'\n\nPulsa **Actualizar mi perfil (subir capturas)** para adjuntar la captura de tu menú M de Shindo (stats, bloodlines, elementos y nivel) y la captura de tus roles en Discord. Los campos de texto son opcionales.',view=view,ephemeral=True)
+        await i.followup.send(text[:1900]+'\n\nPulsa el botón verde para subir **solo 2 capturas**:\n1. Tus **roles en Discord**.\n2. Tus **stats en Shindo Life 2 (menú M)**.',view=view,ephemeral=True)
 
     def profile_review(self,r):
         ui=self.ui;system=self;view=SafeView(timeout=None)
         p_data=json.loads(r['data']) if isinstance(r.get('data'),str) else {}
         selected_rank=[p_data.get('shinobi_rank','genin')]
         rank_select=discord.ui.Select(
-            placeholder='Confirmar / cambiar Rango Shinobi del usuario',
+            placeholder='Corregir Rango Shinobi (solo si está mal)',
             custom_id=f'wx:simple:profrank:{r["id"]}',
             row=0,
             options=[discord.SelectOption(label=label,value=key,default=key==selected_rank[0]) for key,(label,_) in SHINOBI_RANKS.items()]
         )
         async def on_rank(i):
             system.market.staff(i)
+            await i.response.defer(ephemeral=True)
             selected_rank[0]=rank_select.values[0]
             with ui.ms.db:
                 fresh_r=system.m.one('SELECT data FROM simple_profile_requests WHERE id=?',(r['id'],))
                 if fresh_r:
                     d=json.loads(fresh_r['data']);d['shinobi_rank']=selected_rank[0]
                     ui.ms.db.execute('UPDATE simple_profile_requests SET data=? WHERE id=?',(dump(d),r['id']))
-            await i.response.send_message(f'Rango Shinobi preseleccionado: **{SHINOBI_RANKS[selected_rank[0]][0]}**. Ahora pulsa **Aprobar perfil** o **Rechazar / Corregir**.',ephemeral=True)
+            await i.followup.send(f'Rango Shinobi actualizado a **{SHINOBI_RANKS[selected_rank[0]][0]}**. Ahora pulsa **Aprobar** o **Rechazar**.',ephemeral=True)
         rank_select.callback=on_rank;view.add_item(rank_select)
-        for label,approved in [('Aprobar perfil',True),('Rechazar / Pedir corrección',False)]:
-            b=discord.ui.Button(label=label,custom_id=f'wx:simple:profile:{r["id"]}:{int(approved)}',row=1,style=discord.ButtonStyle.success if approved else discord.ButtonStyle.danger)
+        for label,approved in [('Aprobar',True),('Rechazar',False)]:
+            b=discord.ui.Button(label=label,emoji='✅' if approved else '❌',custom_id=f'wx:simple:profile:{r["id"]}:{int(approved)}',row=1,style=discord.ButtonStyle.success if approved else discord.ButtonStyle.danger)
             async def cb(i,approved=approved):
                 system.market.staff(i)
                 if i.channel_id!=system.market.channel_id('purchase'):raise ValueError('Usa el canal de revisión de compras.')
+                await i.response.defer(ephemeral=True)
                 fresh_r=system.m.one('SELECT data FROM simple_profile_requests WHERE id=?',(r['id'],))
-                cur_rank=json.loads(fresh_r['data']).get('shinobi_rank',selected_rank[0]) if fresh_r else selected_rank[0]
-                class Reason(SafeModal,title='Autorización de perfil'):
-                    rank_input=discord.ui.TextInput(label='Rango Shinobi (ej: genin, chunin, jounin...)',default=cur_rank,max_length=20,required=True)
-                    note=discord.ui.TextInput(label='Razón de aprobación o denegación',max_length=300,style=discord.TextStyle.paragraph,required=True)
-                    async def on_submit(modal,inter):
-                        system.market.staff(inter)
-                        if inter.channel_id!=system.market.channel_id('purchase'):raise ValueError('Canal incorrecto.')
-                        chosen=str(modal.rank_input).strip().lower().replace('chunnin','chunin').replace('sub-kage','subkage').replace('jounin-sensei','sensei').replace('estudiante','academia')
-                        if chosen not in SHINOBI_RANKS:chosen=cur_rank
-                        await inter.response.defer(ephemeral=True);await system.market.refresh(inter.guild_id,r['user'])
-                        ui.flow.review_profile(inter.guild_id,inter.user.id,r['id'],approved,str(modal.note),shinobi_rank=chosen)
-                        rname=SHINOBI_RANKS.get(chosen,(chosen,1))[0]
-                        await inter.followup.send(f'Perfil aprobado con rango **{rname}**.' if approved else 'Perfil rechazado / corrección solicitada. El jugador fue notificado.',ephemeral=True)
-                        try:
-                            member=await ui.bot.fetch_user(r['user']);await member.send(f'World X · perfil: '+('aprobado ('+rname+')' if approved else 'rechazado / corregir')+'. Razón: '+str(modal.note))
-                        except discord.HTTPException:pass
-                await i.response.send_modal(Reason())
+                chosen=json.loads(fresh_r['data']).get('shinobi_rank',selected_rank[0]) if fresh_r else selected_rank[0]
+                await system.market.refresh(i.guild_id,r['user'])
+                note='Aprobado por Staff' if approved else 'Rechazado por Staff'
+                ui.flow.review_profile(i.guild_id,i.user.id,r['id'],approved,note,shinobi_rank=chosen,allow_self=(i.user.id==ui.ctx.get('BOT_OWNER')))
+                rname=SHINOBI_RANKS.get(chosen,(chosen,1))[0]
+                try:
+                    if i.message:await i.message.edit(view=None)
+                except discord.HTTPException:pass
+                await i.followup.send(f'✅ Perfil aprobado con rango **{rname}**.' if approved else '❌ Perfil rechazado. El jugador fue notificado.',ephemeral=True)
+                try:
+                    member=await ui.bot.fetch_user(r['user']);await member.send(f'World X · tu perfil fue **{"aprobado ("+rname+")" if approved else "rechazado"}**.')
+                except discord.HTTPException:pass
             b.callback=cb;view.add_item(b)
         return view
 
@@ -220,46 +210,23 @@ class ProfileUI:
             await i.response.send_modal(Correction())
         b.callback=correct;self.market.view.add_item(b)
 
-class ProfileModal(SafeModal,title='Actualizar perfil de tienda'):
-    level=discord.ui.TextInput(label='Nivel en Shindo (opcional)',max_length=4,required=False)
-    stats=discord.ui.TextInput(label='Stats CHI NIN TAI HP (opcional)',max_length=40,required=False)
-    levels=discord.ui.TextInput(label='Bloodlines / niveles (opcional)',max_length=500,required=False)
-    tags=discord.ui.TextInput(label='Elementos / notas adicionales (opcional)',max_length=1000,required=False)
-    def __init__(self,system,seed,race='humano'):
-        super().__init__();self.system=system;self.seed=seed or {};self.race=race or 'humano'
-        self.level.default=str(self.seed.get('level',''))
-        if all(k in self.seed for k in ('chi','nin','tai','hp')):
-            self.stats.default=' '.join(str(self.seed.get(k,0)) for k in ('chi','nin','tai','hp'))
-        self.levels.default=', '.join(k+'='+str(self.seed.get('bloodline_levels',{}).get(k,0)) for k in self.seed.get('bloodlines',[]))[:500]
-        self.tags.default=', '.join(self.seed.get('tags',[]))[:1000]
-        self.proofs=discord.ui.FileUpload(min_values=1,max_values=4,required=True)
-        self.add_item(discord.ui.Label(text='Captura menú M (stats/BL) y roles de Discord',description='Sube la captura de tu panel de stats en Shindo y la de tus roles en Discord.',component=self.proofs))
+class ProfileModal(SafeModal,title='Autorizar perfil (2 capturas)'):
+    def __init__(self,system,seed):
+        super().__init__();self.system=system;self.seed=seed or {}
+        self.proofs=discord.ui.FileUpload(min_values=2,max_values=4,required=True)
+        self.add_item(discord.ui.Label(text='2 capturas: Roles Discord + Stats Shindo',description='Sube 1) captura de tus roles en Discord y 2) captura de tus stats en Shindo Life 2 (menú M).',component=self.proofs))
     async def on_submit(self,i):
         system=self.system;system.market.guild(i);await i.response.defer(ephemeral=True)
         await system.market.refresh(i.guild_id,i.user.id)
         seed=system.ui.flow.seed_profile(i.guild_id,i.user.id)
-        from missions_domain import stats_values
-        raw_stats=str(self.stats).strip()
-        try:stats=stats_values(raw_stats) if raw_stats else [int(seed.get(k,900)) for k in ('chi','nin','tai','hp')]
-        except ValueError:stats=[int(seed.get(k,900)) for k in ('chi','nin','tai','hp')]
-        raw_level=str(self.level).strip()
-        try:level=max(1,min(1000,int(raw_level))) if raw_level else int(seed.get('level',200) or 200)
-        except ValueError:level=int(seed.get('level',200) or 200)
-        levels=dict(seed.get('bloodline_levels',{}))
-        for entry in str(self.levels).split(','):
-            if not entry.strip() or '=' not in entry:continue
-            try:
-                k,v=entry.strip().split('=',1);k=k.strip();v=int(v.strip())
-                if k in seed.get('bloodlines',[]) and 0<=v<=10000:levels[k]=v
-            except ValueError:continue
-        tags=[x.strip() for x in str(self.tags).split(',') if x.strip()]
-        data={**seed,'race':self.race,'level':level,'bloodline_levels':levels,'tags':tags,**dict(zip(('chi','nin','tai','hp'),stats))}
+        detected=system.ui.flow.detect_member_shinobi_rank(i.guild_id,i.user)
+        data={**seed,'shinobi_rank':detected or seed.get('shinobi_rank','genin')}
         proofs=await upload_files(system.ui,self.proofs.values)
         try:ident=system.ui.flow.propose_profile(i.guild_id,i.user.id,data,proofs)
         except BaseException:
             for p in proofs:safe_path(system.ui.ms.root,p['path']).unlink(missing_ok=True)
             raise
-        await i.followup.send(f'Perfil #{ident} enviado al staff con tus capturas. Cuando el staff lo autorice ya podrás comprar en la tienda según tu rango Shinobi.',ephemeral=True)
+        await i.followup.send(f'✅ Perfil #{ident} enviado a revisión con tus 2 capturas. Cuando el staff lo apruebe ya podrás comprar en la tienda.',ephemeral=True)
 
 class PurchaseModal(SafeModal,title='Evidencia de compra'):
     def __init__(self,system,ident,price,rid=None):

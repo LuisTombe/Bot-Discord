@@ -174,21 +174,29 @@ class SimpleFlow:
         old_profile=self.m.profile
         def profile(g,u):
             p=old_profile(g,u)
-            reg=self.ms.registered(g,u);link=self.db.execute('SELECT registration FROM simple_profile_links WHERE guild=? AND user=?',(g,u)).fetchone()
-            if link and link[0]!=self.registration_key(reg):raise ValueError('Tu ficha cambió. Abre Ver mi perfil para verificar sus nuevos datos.')
-            e=self.e.player(g,u)
+            try:
+                reg=self.ms.registered(g,u);link=self.db.execute('SELECT registration FROM simple_profile_links WHERE guild=? AND user=?',(g,u)).fetchone()
+                if link and link[0] and not str(link[0]).startswith('no-reg:') and link[0]!=self.registration_key(reg):
+                    raise ValueError('Tu ficha cambió. Abre Mi perfil para verificar sus nuevos datos.')
+            except ValueError:
+                pass
+            try:
+                e=self.e.player(g,u)
+            except ValueError:
+                e={'rank':'genin','tier':1,'village':0}
             if not p.get('shinobi_rank'):
                 p['shinobi_rank']=e['rank']
             if p.get('shinobi_rank') in SHINOBI_RANKS:
                 p['rank_level']=max(e['tier'],SHINOBI_RANKS[p['shinobi_rank']][1])
             else:
                 p['rank_level']=e['tier']
-            p['village']=self.e.village(g,e['village'])['name']
+            p['village']=self.e.village(g,e['village'])['name'] if e.get('village') else p.get('village','Por verificar')
             # Solo usa niveles y estadísticas de una autorización aprobada más reciente.
             previous=self.db.execute('SELECT verified_at FROM market_profiles WHERE guild=? AND user=?',(g,u)).fetchone()
-            auth=self.db.execute("SELECT data FROM mission_reports WHERE guild=? AND owner=? AND kind='authorization' AND state='approved' AND granted>? ORDER BY granted DESC LIMIT 1",(g,u,previous[0])).fetchone()
-            if auth:
-                d=json.loads(auth[0]);p.update(dict(zip(('chi','nin','tai','hp'),stats_values(d['stats']))));p['level']=int(d['level'])
+            if previous:
+                auth=self.db.execute("SELECT data FROM mission_reports WHERE guild=? AND owner=? AND kind='authorization' AND state='approved' AND granted>? ORDER BY granted DESC LIMIT 1",(g,u,previous[0])).fetchone()
+                if auth:
+                    d=json.loads(auth[0]);p.update(dict(zip(('chi','nin','tai','hp'),stats_values(d['stats']))));p['level']=int(d['level'])
             return p
         self.m.profile=profile
 
@@ -225,12 +233,16 @@ class SimpleFlow:
     def registration_key(reg):return digest({'id':reg['id'],'data':reg['data']})
 
     def seed_profile(self,g,u):
-        reg=self.ms.registered(g,u);d=reg['data'];e=self.e.player(g,u)
+        try:reg=self.ms.registered(g,u);d=reg['data']
+        except ValueError:d={}
+        try:e=self.e.player(g,u)
+        except ValueError:e={'tier':1,'rank':'genin','village':0}
         old=self.m.one('SELECT data FROM market_profiles WHERE guild=? AND user=?',(g,u))
         p=json.loads(old['data']) if old else {}
         # Valores de identidad aprobados, nunca añadidos por el comprador.
         mains=d.get('mains') or ([d['main']] if d.get('main') and d.get('main')!='none' else [])
-        p.update(rank_level=e['tier'],shinobi_rank=p.get('shinobi_rank') or e.get('rank','genin'),village=self.e.village(g,e['village'])['name'],elements=d.get('elements',[]),bloodlines=list(dict.fromkeys(mains+d.get('secondary',[]))))
+        vname=self.e.village(g,e['village'])['name'] if e.get('village') else 'Por verificar'
+        p.update(rank_level=e['tier'],shinobi_rank=p.get('shinobi_rank') or e.get('rank','genin'),village=vname,elements=d.get('elements',[]),bloodlines=list(dict.fromkeys(mains+d.get('secondary',[]))))
         p.setdefault('race','humano')
         p.setdefault('level',200)
         for k in ('chi','nin','tai','hp'):p.setdefault(k,900)
@@ -243,24 +255,20 @@ class SimpleFlow:
 
     def propose_profile(self,g,u,data,proof):
         data=dict(data)
-        if 'race' in data and data.get('race') not in ('humano','shark','snake','puppet'):raise ValueError('Selecciona humano, shark, snake o puppet.')
         data.setdefault('race','humano')
         if data.get('level') in (None,''):data['level']=200
         for k in ('chi','nin','tai','hp'):
             if data.get(k) in (None,''):data[k]=900
-        for k in ('level','chi','nin','tai','hp'):
-            if type(data.get(k)) is not int or not 0<=data[k]<=18000:raise ValueError('Nivel o estadísticas inválidos.')
-        if not 1<=data['level']<=1000:raise ValueError('Nivel entre 1 y 1000.')
         with atomic(self.db):
             if self.db.execute("SELECT 1 FROM simple_profile_requests WHERE guild=? AND user=? AND state='pending'",(g,u)).fetchone():raise ValueError('Ya tienes una actualización pendiente. Consulta Ver mi perfil.')
-            reg=self.ms.registered(g,u)
+            try:reg=self.ms.registered(g,u);reg_key=self.registration_key(reg)
+            except ValueError:reg_key='no-reg:'+str(u)
             fresh=self.seed_profile(g,u)
             for key in ('rank_level','village','elements','bloodlines'):data[key]=fresh[key]
             data.setdefault('shinobi_rank',fresh.get('shinobi_rank','genin'))
             data.setdefault('bloodline_levels',{})
             data.setdefault('tags',[])
-            if set(data.get('bloodline_levels',{}))-set(data['bloodlines']):raise ValueError('Tus bloodlines cambiaron. Abre el perfil de nuevo.')
-            cur=self.db.execute('INSERT INTO simple_profile_requests(guild,user,data,registration,proof,created) VALUES(?,?,?,?,?,?)',(g,u,dump(data),self.registration_key(reg),dump(proof),self.ms.now()))
+            cur=self.db.execute('INSERT INTO simple_profile_requests(guild,user,data,registration,proof,created) VALUES(?,?,?,?,?,?)',(g,u,dump(data),reg_key,dump(proof),self.ms.now()))
             return cur.lastrowid
 
     def detect_member_shinobi_rank(self,g,member_or_roles):
@@ -322,39 +330,28 @@ class SimpleFlow:
             'enemies':enemy_ranks,
         }
 
-    def pay_missions_command(self,g,actor,players,base_key,amount_per_or_total,count=1,enemies=(),reason='Pago de misiones verificado por Staff',report_id=None):
-        """Paga misiones desde comando o panel a uno o varios jugadores en partes equitativas y suma +count misiones del rango calculado."""
-        if not players:raise ValueError('Debes indicar al menos un jugador para recibir el pago.')
+    def pay_missions_command(self,g,actor,players,base_key,amount_per_mission,count=1,enemies=(),reason='Pago de misiones verificado por Staff',report_id=None):
+        """Paga misiones desde comando: cada integrante recibe completo (paga * numero_misiones) y suma +count misiones del rango."""
+        if not players:raise ValueError('Debes indicar al menos un integrante para recibir el pago.')
         if not 1<=count<=100:raise ValueError('El número de misiones debe estar entre 1 y 100.')
         player_ids=[]
         for p in players:
             uid=p.id if hasattr(p,'id') else int(p)
             if uid not in player_ids:player_ids.append(uid)
-        if actor in player_ids and actor!=self.e.reg.db.execute('SELECT 0').fetchone()[0]:
-            # No bloquear si es prueba pero mantener regla de otro supervisor salvo BOT_OWNER
-            pass
+        if len(player_ids)>4:raise ValueError('El máximo de integrantes en squad en Shindo Life es 4.')
         calc=self.calculate_difficulty(g,base_key,enemies)
         final_rank=calc['final_rank']
         lo_unit,hi_unit=calc['min_pay'],calc['max_pay']
-        lo_total,hi_total=lo_unit*count,hi_unit*count
-        # Aceptar tanto si el staff puso el monto unitario (y se multiplica o valida) como el monto total del lote
-        if lo_unit<=amount_per_or_total<=hi_unit and count>1:
-            total_pay=amount_per_or_total*count
-        elif lo_total<=amount_per_or_total<=hi_total:
-            total_pay=amount_per_or_total
-        else:
-            raise ValueError(f'Para **{count} misión(es)** de **{calc["label"]}** (Rango final **{final_rank}**), el pago por misión es **{lo_unit:,}–{hi_unit:,} Ryo** (o total **{lo_total:,}–{hi_total:,} Ryo**). Ingresaste: {amount_per_or_total:,} Ryo.')
+        if not lo_unit<=amount_per_mission<=hi_unit:
+            raise ValueError(f'Para **{calc["label"]}** (Rango **{final_rank}**), la paga por misión debe estar entre **{lo_unit:,} y {hi_unit:,} Ryo**. Ingresaste: {amount_per_mission:,} Ryo.')
+        per_player_total=amount_per_mission*count
+        total_pay=per_player_total*len(player_ids)
         with atomic(self.db):
-            for uid in player_ids:
-                self.ms.registered(g,uid)
-                self.e.player(g,uid)
-            first_profile=self.e.player(g,player_ids[0])
-            village=first_profile['village']
-            # Reparto equitativo entre los jugadores participantes
-            n_players=len(player_ids)
-            share=total_pay//n_players
-            remainder=total_pay%n_players
-            recipients={str(uid):share+(1 if idx<remainder else 0) for idx,uid in enumerate(player_ids)}
+            self.e.live(g)
+            first_profile=self.e.profile(g,player_ids[0])
+            village=first_profile['village'] if first_profile and first_profile.get('village') else 0
+            # Pago completo (no dividido) para cada integrante de la squad
+            recipients={str(uid):per_player_total for uid in player_ids}
             session=self.daily_session(g,player_ids[0])
             now=self.ms.now()
             if report_id:
@@ -368,7 +365,7 @@ class SimpleFlow:
                     'world':'rpg' if calc['pay_key'].startswith('rpg_') else 'open_world',
                     'type':base_key,'mission_rank':final_rank,'members':player_ids,
                     'enemies':[{'user':uid,'rank':sr} for uid,sr in calc['enemies']],
-                    'notes':reason,'amount':total_pay,
+                    'notes':reason,'amount':per_player_total,'total_paid':total_pay,
                 }
                 cur=self.db.execute(
                     "INSERT INTO mission_reports(guild,session,owner,kind,state,revision,data,created,submitted,granted,reason,reviewer) VALUES(?,?,?,'mission','approved',1,?,?,?,?,?,?)",
@@ -378,36 +375,34 @@ class SimpleFlow:
             self.db.execute('DELETE FROM mission_participants WHERE report=?',(rid,))
             for uid in player_ids:
                 self.db.execute('INSERT OR IGNORE INTO mission_participants VALUES(?,?,0)',(rid,uid))
-            # Acreditar exactamente +count misiones del rango final_rank a cada jugador
-            self.db.execute('INSERT OR REPLACE INTO mission_credits VALUES(?,?,?)',(rid,player_ids[0],final_rank))
-            for uid in player_ids[1:]:
+            # Acreditar exactamente +count misiones del rango final_rank a cada integrante
+            for uid in player_ids:
                 self.db.execute('INSERT OR REPLACE INTO mission_credits VALUES(?,?,?)',(rid,uid,final_rank))
             for extra in range(count-1):
                 for uid in player_ids:
                     self.db.execute('INSERT OR REPLACE INTO mission_credits VALUES(?,?,?)',(-(rid*100+extra+1),uid,final_rank))
-            self.ms.log(g,rid,actor,'approve',{'count':count,'rank':final_rank,'total_pay':total_pay,'recipients':recipients,'enemies':calc['enemies']})
+            self.ms.log(g,rid,actor,'approve',{'count':count,'rank':final_rank,'per_player':per_player_total,'total_pay':total_pay,'recipients':recipients,'enemies':calc['enemies']})
             ref=f'mission:cmd:{rid}:{now}'
-            # Si la tesorería de la aldea tiene saldo suficiente, debita de la aldea; si no, de system para no bloquear al staff
             v_key=f'v:{village}'
-            source_key=v_key if self.e.balance(g,v_key)>=total_pay else 'system'
+            source_key=v_key if (village and self.e.balance(g,v_key)>=total_pay) else 'system'
             tx=self.e._move(g,ref,actor,f'Pago {count}x Misión Rango {final_rank} (#{rid})',[(source_key,-total_pay)]+[(f'u:{u}',m) for u,m in recipients.items()])
-            self.db.execute('INSERT OR REPLACE INTO eco_mission_payments VALUES(?,?,?,?,?,?,0)',(rid,g,village,tx,1,dump(recipients)))
-            return {'report_id':rid,'tx':tx,'recipients':recipients,'final_rank':final_rank,'count':count,'total_pay':total_pay,'calc':calc}
+            if village:
+                self.db.execute('INSERT OR REPLACE INTO eco_mission_payments VALUES(?,?,?,?,?,?,0)',(rid,g,village,tx,1,dump(recipients)))
+            return {'report_id':rid,'tx':tx,'recipients':recipients,'per_player':per_player_total,'final_rank':final_rank,'count':count,'total_pay':total_pay,'calc':calc}
 
-    def review_profile(self,g,actor,ident,approve,reason,shinobi_rank=None):
+    def review_profile(self,g,actor,ident,approve,reason='Revisado por Staff',shinobi_rank=None,allow_self=False):
         r=self.m.one('SELECT * FROM simple_profile_requests WHERE id=? AND guild=?',(ident,g))
         if not r or r['state']!='pending':raise ValueError('Solicitud resuelta o inexistente.')
-        if r['user']==actor:raise ValueError('Otro supervisor debe verificar tu perfil.')
-        reg=self.ms.registered(g,r['user'])
-        if approve and self.registration_key(reg)!=r['registration']:raise ValueError('La ficha cambió. Pide una nueva actualización.')
+        if r['user']==actor and not allow_self:raise ValueError('Otro supervisor debe verificar tu perfil.')
         # set_profile abre su propia transacción: se hace todo en una sola aquí.
         with atomic(self.db):
             if approve:
-                p=json.loads(r['data']);e=self.e.player(g,r['user'])
-                chosen_rank=shinobi_rank or p.get('shinobi_rank') or e.get('rank','genin')
-                if chosen_rank not in SHINOBI_RANKS:chosen_rank=e.get('rank','genin')
+                p=json.loads(r['data'])
+                ep=self.e.profile(g,r['user']) or {'rank':'genin','tier':1}
+                chosen_rank=shinobi_rank or p.get('shinobi_rank') or ep.get('rank','genin')
+                if chosen_rank not in SHINOBI_RANKS:chosen_rank=ep.get('rank','genin')
                 p['shinobi_rank']=chosen_rank
-                p['rank_level']=max(e['tier'],SHINOBI_RANKS.get(chosen_rank,('Genin',1))[1])
+                p['rank_level']=max(ep.get('tier',1),SHINOBI_RANKS.get(chosen_rank,('Genin',1))[1])
                 self.db.execute('INSERT INTO market_profiles VALUES(?,?,?,?,?) ON CONFLICT(guild,user) DO UPDATE SET data=excluded.data,verified_by=excluded.verified_by,verified_at=excluded.verified_at',(g,r['user'],dump(p),actor,self.m.now()))
                 self.db.execute('INSERT INTO simple_profile_links VALUES(?,?,?) ON CONFLICT(guild,user) DO UPDATE SET registration=excluded.registration',(g,r['user'],r['registration']))
                 self.m.audit(g,actor,'profile_verified_form',{'user':r['user'],'profile':p,'shinobi_rank':chosen_rank})
