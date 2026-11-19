@@ -1,0 +1,101 @@
+{
+  "timezone": "America/Bogota",
+  "village_cap": 50,
+  "villages": {
+    "konoha": "Ember / Konohagakure",
+    "dunes": "Dunes / Sunagakure",
+    "nimbus": "Nimbus / Kumogakure",
+    "haze": "Haze / Kirigakure",
+    "obelisk": "Obelisk / Iwagakure",
+    "tempest": "Tempest / Amegakure",
+    "iron": "Vinland / Tetsu no Kuni (País del Hierro)"
+  },
+  "spin_cost": 500000,
+  "spin_cooldown_seconds": 8,
+  "prizes": [
+    {
+      "id": "cash100",
+      "label": "100.000 Ryo",
+      "kind": "money",
+      "amount": 100000,
+      "weight": 4000
+    },
+    {
+      "id": "cash250",
+      "label": "250.000 Ryo",
+      "kind": "money",
+      "amount": 250000,
+      "weight": 3500
+    },
+    {
+      "id": "cash500",
+      "label": "500.000 Ryo",
+      "kind": "money",
+      "amount": 500000,
+      "weight": 1800
+    },
+    {
+      "id": "cash1000",
+      "label": "1.000.000 Ryo",
+      "kind": "money",
+      "amount": 1000000,
+      "weight": 500
+    },
+    {
+      "id": "cash2000",
+      "label": "2.000.000 Ryo",
+      "kind": "money",
+      "amount": 2000000,
+      "weight": 140
+    },
+    {
+      "id": "reroll1",
+      "label": "1 reroll",
+      "kind": "reroll",
+      "amount": 1,
+      "weight": 50
+    },
+    {
+      "id": "reroll5",
+      "label": "5 rerolls",
+      "kind": "reroll",
+      "amount": 5,
+      "weight": 10
+    }
+  ],
+  "daily_money": [
+    25000,
+    40000,
+    55000,
+    70000,
+    85000,
+    100000,
+    0
+  ],
+  "permit_days": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "permit_rank_weights": {
+    "D": 45,
+    "C": 30,
+    "B": 18,
+    "A": 6,
+    "S": 1
+  },
+  "permit_categories": [
+    "subjutsu",
+    "taijutsu",
+    "sub_modes"
+  ],
+  "permit_fallback_money": 100000,
+  "reset_on_missed_day": false,
+  "icons": {
+    "ryo_url": "https://static.wikia.nocookie.net/shinobi-life-2-reel/images/0/08/Ryo.png/revision/latest",
+    "logo_url": "https://static.wikia.nocookie.net/shinobi-life-2-reel/images/e/e6/Site-logo.png/revision/latest"
+  },
+  "notes": "Tempest/Amegakure y Vinland/Tetsu no Kuni son equivalencias de rol World X editables. Los permisos requieren perfil vigente y todos los requisitos verificados; sin candidatos se entregan 100.000 Ryo. El ciclo avanza por días de actividad, no pierde progreso al faltar."
+}

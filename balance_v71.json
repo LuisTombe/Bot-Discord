@@ -1,0 +1,838 @@
+{
+  "version": 5,
+  "spins": 3,
+  "element_draws": 4,
+  "bloodline_slots": 4,
+  "main": {
+    "jokei": {
+      "label": "Jokei (Hyuga)",
+      "percent": 2.5,
+      "requires": {
+        "wind": 1
+      },
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "akuma": {
+      "label": "Akuma (Uchiha)",
+      "percent": 2.5,
+      "requires": {
+        "fire": 1
+      },
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "dokei": {
+      "label": "Dokei",
+      "percent": 2.5,
+      "requires": {
+        "water": 1
+      },
+      "family": null
+    },
+    "kokotsu": {
+      "label": "Kokotsu",
+      "percent": 5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "senko": {
+      "label": "Senko (Namikaze)",
+      "percent": 2.5,
+      "requires": {
+        "lightning": 1,
+        "wind": 1
+      },
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "kaijin": {
+      "label": "Kaijin (Sarutobi)",
+      "percent": 5,
+      "requires": {
+        "fire": 1
+      },
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "minakami": {
+      "label": "Minakami",
+      "percent": 5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "dunes"
+      ]
+    },
+    "shizen": {
+      "label": "Shizen (Senju)",
+      "percent": 2.5,
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "azarashi": {
+      "label": "Azarashi",
+      "percent": 5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha",
+        "obelisk"
+      ]
+    },
+    "shadow": {
+      "label": "Shadow (Nara)",
+      "percent": 5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "kerada": {
+      "label": "Kerada (Akimichi)",
+      "percent": 4.0,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "wanziame": {
+      "label": "Wanziame",
+      "percent": 5,
+      "requires": {
+        "water": 2
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "nectar": {
+      "label": "Nectar",
+      "percent": 5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "obelisk"
+      ]
+    },
+    "glacier": {
+      "label": "Glacier",
+      "percent": 4.0,
+      "requires": {
+        "water": 1,
+        "wind": 1
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "okami": {
+      "label": "Okami",
+      "percent": 5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "koncho": {
+      "label": "Koncho",
+      "percent": 2.5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "saberu": {
+      "label": "Saberu (Hatake)",
+      "percent": 3.5,
+      "requires": {
+        "earth": 1
+      },
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "kenichi": {
+      "label": "Kenichi (Lee)",
+      "percent": 1.5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "dangan": {
+      "label": "Dangan",
+      "percent": 2.5,
+      "requires": {
+        "water": 2
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "seishin": {
+      "label": "Seishin",
+      "percent": 2.5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "iron-sand": {
+      "label": "Iron Sand",
+      "percent": 4.0,
+      "requires": {
+        "earth": 1,
+        "lightning": 1
+      },
+      "family": "sand",
+      "villages": [
+        "dunes"
+      ]
+    },
+    "sand": {
+      "label": "Sand",
+      "percent": 2.5,
+      "requires": {
+        "earth": 1,
+        "wind": 1
+      },
+      "family": "sand",
+      "villages": [
+        "dunes"
+      ]
+    },
+    "storm": {
+      "label": "Storm",
+      "percent": 5,
+      "requires": {
+        "water": 1,
+        "lightning": 1
+      },
+      "family": "storm",
+      "villages": [
+        "nimbus"
+      ]
+    },
+    "ashen-storm": {
+      "label": "Ashen Storm",
+      "percent": 0.05,
+      "requires": {
+        "lightning": 3
+      },
+      "family": "storm",
+      "villages": [
+        "nimbus"
+      ]
+    },
+    "black-storm": {
+      "label": "Black Storm",
+      "percent": 2.5,
+      "requires": {
+        "lightning": 1
+      },
+      "family": "storm",
+      "villages": [
+        "nimbus"
+      ]
+    },
+    "bubble": {
+      "label": "Bubble",
+      "percent": 2.5,
+      "requires": {
+        "water": 2
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "ink": {
+      "label": "Ink",
+      "percent": 2.5,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "cobra": {
+      "label": "Cobra",
+      "percent": 0.08,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "jayramaki": {
+      "label": "Jayramaki",
+      "percent": 0.07,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "rinnegan": {
+      "label": "Rinnegan",
+      "percent": 0.05,
+      "requires": {},
+      "family": null
+    },
+    "tengoku": {
+      "label": "Tengoku",
+      "percent": 0.05,
+      "requires": {},
+      "family": null
+    },
+    "sengoku": {
+      "label": "Sengoku",
+      "percent": 0.05,
+      "requires": {},
+      "family": null
+    },
+    "ryuji-kenichi": {
+      "label": "Ryuji Kenichi (Gai)",
+      "percent": 0.1,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    }
+  },
+  "secondary": {
+    "boil": {
+      "label": "Boil",
+      "percent": 14,
+      "requires": {
+        "water": 1,
+        "fire": 1
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "crystal": {
+      "label": "Crystal",
+      "percent": 3,
+      "requires": {
+        "earth": 1,
+        "wind": 1
+      },
+      "family": null,
+      "villages": [
+        "obelisk"
+      ]
+    },
+    "dust": {
+      "label": "Dust",
+      "percent": 0.75,
+      "requires": {
+        "earth": 1,
+        "wind": 1,
+        "lightning": 1
+      },
+      "family": null,
+      "villages": [
+        "obelisk"
+      ]
+    },
+    "explosion": {
+      "label": "Explosion",
+      "percent": 3,
+      "requires": {
+        "fire": 1,
+        "lightning": 1
+      },
+      "family": null,
+      "villages": [
+        "dunes"
+      ]
+    },
+    "gold-sand": {
+      "label": "Gold Sand",
+      "percent": 3,
+      "requires": {
+        "earth": 1,
+        "wind": 1
+      },
+      "family": null,
+      "villages": [
+        "dunes"
+      ]
+    },
+    "ice": {
+      "label": "Ice",
+      "percent": 8,
+      "requires": {
+        "water": 1,
+        "wind": 1
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "lava": {
+      "label": "Lava",
+      "percent": 8,
+      "requires": {
+        "earth": 1,
+        "fire": 1
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "mud": {
+      "label": "Mud",
+      "percent": 4,
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "family": null,
+      "villages": [
+        "obelisk"
+      ]
+    },
+    "scorch": {
+      "label": "Scorch",
+      "percent": 4,
+      "requires": {
+        "wind": 1,
+        "fire": 1
+      },
+      "family": null,
+      "villages": [
+        "dunes"
+      ]
+    },
+    "wood": {
+      "label": "Wood",
+      "percent": 4,
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "bolt": {
+      "label": "Bolt",
+      "percent": 8,
+      "requires": {
+        "lightning": 1,
+        "wind": 1
+      },
+      "family": null,
+      "villages": [
+        "nimbus"
+      ]
+    },
+    "sound": {
+      "label": "Sound",
+      "percent": 7,
+      "requires": {
+        "wind": 2
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "frost": {
+      "label": "Frost",
+      "percent": 4,
+      "requires": {
+        "water": 1,
+        "wind": 1
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "inferno": {
+      "label": "Inferno",
+      "percent": 1.5,
+      "requires": {
+        "fire": 2
+      },
+      "family": null,
+      "main_required": "akuma",
+      "villages": [
+        "konoha"
+      ]
+    },
+    "emerald": {
+      "label": "Emerald",
+      "percent": 0.05,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "obelisk"
+      ]
+    },
+    "typhoon": {
+      "label": "Typhoon",
+      "percent": 1.5,
+      "requires": {
+        "wind": 3
+      },
+      "family": null,
+      "villages": [
+        "dunes"
+      ]
+    },
+    "aidens-son-mud": {
+      "label": "Aidens Son Mud",
+      "percent": 0.75,
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "family": null,
+      "villages": [
+        "obelisk"
+      ]
+    },
+    "blood": {
+      "label": "Blood",
+      "percent": 1.5,
+      "requires": {
+        "water": 1
+      },
+      "family": null,
+      "percent_with_main": {
+        "dokei": 0.1
+      },
+      "villages": [
+        "haze"
+      ]
+    },
+    "tsunami": {
+      "label": "Tsunami",
+      "percent": 1.5,
+      "requires": {
+        "water": 2
+      },
+      "family": null,
+      "villages": [
+        "haze"
+      ]
+    },
+    "smoke": {
+      "label": "Smoke",
+      "percent": 1.5,
+      "requires": {
+        "wind": 1,
+        "fire": 1
+      },
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "web": {
+      "label": "Web",
+      "percent": 1.5,
+      "requires": {},
+      "family": null
+    },
+    "menza": {
+      "label": "Menza",
+      "percent": 0.05,
+      "requires": {},
+      "family": null,
+      "villages": [
+        "konoha"
+      ]
+    },
+    "magma": {
+      "label": "Magma",
+      "percent": 0.05,
+      "requires": {
+        "earth": 1,
+        "fire": 1
+      },
+      "family": null,
+      "villages": [
+        "obelisk"
+      ]
+    },
+    "fume": {
+      "label": "Fume",
+      "percent": 0.05,
+      "requires": {
+        "water": 1,
+        "fire": 1
+      },
+      "family": null,
+      "event_only": true,
+      "villages": [
+        "obelisk"
+      ]
+    },
+    "fizz": {
+      "label": "Fizz",
+      "percent": 0.05,
+      "requires": {
+        "water": 2
+      },
+      "family": null,
+      "event_only": true,
+      "villages": [
+        "haze"
+      ]
+    },
+    "black-lightning": {
+      "label": "Black Lightning",
+      "percent": 1.5,
+      "requires": {
+        "lightning": 2
+      },
+      "family": null
+    }
+  },
+  "elements": {
+    "earth": {
+      "label": "Earth · Tierra",
+      "weight": 20,
+      "requires": {},
+      "affinity": "earth"
+    },
+    "water": {
+      "label": "Water · Agua",
+      "weight": 20,
+      "requires": {},
+      "affinity": "water"
+    },
+    "fire": {
+      "label": "Fire · Fuego",
+      "weight": 20,
+      "requires": {},
+      "affinity": "fire"
+    },
+    "wind": {
+      "label": "Wind · Viento",
+      "weight": 20,
+      "requires": {},
+      "affinity": "wind"
+    },
+    "lightning": {
+      "label": "Lightning · Rayo",
+      "weight": 20,
+      "requires": {},
+      "affinity": "lightning"
+    },
+    "acid": {
+      "label": "Acid",
+      "weight": 0.09,
+      "requires": {},
+      "affinity": null
+    },
+    "cement": {
+      "label": "Cement",
+      "weight": 0.1,
+      "requires": {
+        "earth": 1
+      },
+      "affinity": "earth"
+    },
+    "shiver": {
+      "label": "Shiver",
+      "weight": 0.05,
+      "requires": {
+        "lightning": 2
+      },
+      "affinity": "lightning"
+    },
+    "gale": {
+      "label": "Gale",
+      "weight": 0.05,
+      "requires": {
+        "wind": 2
+      },
+      "affinity": "wind"
+    },
+    "combustion": {
+      "label": "Combustion",
+      "weight": 0,
+      "requires": {
+        "fire": 2
+      },
+      "affinity": "fire",
+      "event_only": true
+    }
+  },
+  "notes": [
+    "v5.3: comunes ponderados entre compatibles; raros con porcentaje fijo por giro/slot.",
+    "Consultar balanced: percent de cada entrada queda solo como referencia para el algoritmo antiguo.",
+    "Dos elementos predominan; repetición conservada al 5% entre nacimientos multielemento.",
+    "v5.6: ajustes relativos solicitados; los comunes siguen normalizados entre candidatos compatibles, sin modificar requisitos.",
+    "v5.7: Akuma/Jokei/Seishin peso /3; Azarashi/Minakami/Nectar/Okami/Kerada/Shadow peso /2, sin reducciones duplicadas."
+  ],
+  "family_requirements": {
+    "storm": {
+      "water": 1,
+      "lightning": 2
+    }
+  },
+  "provisional": {
+    "ryuji-kenichi": "0.1% propuesto: no tenía porcentaje. No aplica restricción Lee.",
+    "black-lightning": "Secundario; 1.5% tras balance v5.1.",
+    "emerald": "Sin requisito propuesto: no se indicó combinación.",
+    "black-storm": "Lightning x1 para salir solo; familia Storm requiere Water x1 + Lightning x2."
+  },
+  "balance_revision": "7.1 · Orígenes",
+  "element_count_weights": {
+    "1": 15,
+    "2": 60,
+    "3": 22,
+    "4": 3
+  },
+  "element_repeat_birth_percent": 5,
+  "element_extra_repeat_percent": 5,
+  "balanced": {
+    "main_none_percent": 40,
+    "family_percent": 8,
+    "main_fixed": {
+      "senko": 0.04,
+      "shizen": 0.04,
+      "kenichi": 0.04,
+      "ashen-storm": 0.02,
+      "ink": 0.04,
+      "cobra": 0.04,
+      "jayramaki": 0.04,
+      "rinnegan": 0.02,
+      "tengoku": 0.02,
+      "sengoku": 0.02,
+      "ryuji-kenichi": 0.04
+    },
+    "main_weights": {
+      "kerada": 4,
+      "shadow": 4,
+      "okami": 4,
+      "minakami": 4,
+      "seishin": 2,
+      "jokei": 2,
+      "kaijin": 2,
+      "nectar": 2,
+      "storm": 6,
+      "black-storm": 2,
+      "akuma": 0.65,
+      "azarashi": 0.65,
+      "koncho": 0.65,
+      "saberu": 0.65,
+      "bubble": 0.65,
+      "wanziame": 0.65,
+      "glacier": 0.65,
+      "dangan": 0.65,
+      "kokotsu": 0.65,
+      "sand": 0.65,
+      "iron-sand": 0.65,
+      "dokei": 0.65
+    },
+    "secondary_percent_with_main": [
+      100,
+      12,
+      6,
+      4
+    ],
+    "secondary_percent_without_main": [
+      100,
+      12,
+      6,
+      4
+    ],
+    "secondary_fixed": {
+      "crystal": 0.04,
+      "dust": 0.04,
+      "gold-sand": 0.04,
+      "wood": 0.04,
+      "inferno": 0.04,
+      "emerald": 0.04,
+      "blood": 0.3,
+      "web": 0.1,
+      "menza": 0.04,
+      "magma": 0.04,
+      "fume": 0,
+      "fizz": 0
+    },
+    "secondary_weights": {
+      "boil": 6,
+      "smoke": 3,
+      "bolt": 3,
+      "lava": 3,
+      "ice": 3,
+      "frost": 3,
+      "mud": 3,
+      "tsunami": 1.2,
+      "sound": 1.2,
+      "explosion": 1.2,
+      "scorch": 1.2,
+      "typhoon": 1.2,
+      "black-lightning": 1.2,
+      "aidens-son-mud": 1.2
+    },
+    "taijutsu_mains": [
+      "kenichi",
+      "ryuji-kenichi"
+    ],
+    "none_requires_secondary_common": false
+  },
+  "birth_policy": {
+    "version": 1,
+    "types": {
+      "main_only": 36,
+      "both": 24,
+      "secondary_only": 16,
+      "neither": 24
+    },
+    "village_multiplier": 1.2,
+    "villages": {
+      "konoha": "Konoha / Ember",
+      "nimbus": "Nimbus",
+      "haze": "Haze",
+      "obelisk": "Obelisk",
+      "dunes": "Dunes",
+      "tempest": "Tempest",
+      "vinland": "Vinland",
+      "iron": "País del Hierro"
+    }
+  }
+}

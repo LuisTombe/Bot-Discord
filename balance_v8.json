@@ -1,0 +1,1082 @@
+{
+  "version": 5,
+  "spins": 3,
+  "element_draws": 4,
+  "bloodline_slots": 4,
+  "balance_revision": "8.0 · Combinaciones y cupos",
+  "elements": {
+    "earth": {
+      "label": "Earth · Tierra",
+      "weight": 20,
+      "requires": {},
+      "affinity": "earth"
+    },
+    "water": {
+      "label": "Water · Agua",
+      "weight": 20,
+      "requires": {},
+      "affinity": "water"
+    },
+    "fire": {
+      "label": "Fire · Fuego",
+      "weight": 20,
+      "requires": {},
+      "affinity": "fire"
+    },
+    "wind": {
+      "label": "Wind · Viento",
+      "weight": 20,
+      "requires": {},
+      "affinity": "wind"
+    },
+    "lightning": {
+      "label": "Lightning · Rayo",
+      "weight": 20,
+      "requires": {},
+      "affinity": "lightning"
+    },
+    "acid": {
+      "label": "Acid",
+      "weight": 0.09,
+      "requires": {},
+      "affinity": null
+    }
+  },
+  "main": {
+    "jokei": {
+      "label": "Jokei",
+      "requires": {
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "konoha": 5
+      },
+      "has_mode": true
+    },
+    "akuma": {
+      "label": "Akuma",
+      "requires": {
+        "fire": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "konoha": 2
+      },
+      "has_mode": true,
+      "mandatory_secondary": [
+        "inferno"
+      ],
+      "akuma": true
+    },
+    "dokei": {
+      "label": "Dokei",
+      "requires": {
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "haze": 4
+      },
+      "has_mode": true
+    },
+    "bankai-akuma": {
+      "label": "Bankai Akuma",
+      "requires": {
+        "fire": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "family": "akuma",
+      "akuma": true
+    },
+    "shiver-akuma": {
+      "label": "Shiver Akuma",
+      "requires": {
+        "fire": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "family": "akuma",
+      "akuma": true
+    },
+    "raion-akuma": {
+      "label": "Raion Akuma",
+      "requires": {
+        "fire": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "family": "akuma",
+      "akuma": true
+    },
+    "riser-akuma": {
+      "label": "Riser Akuma",
+      "requires": {
+        "fire": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "family": "akuma",
+      "akuma": true
+    },
+    "satori-akuma": {
+      "label": "Satori Akuma",
+      "requires": {
+        "fire": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "family": "akuma",
+      "akuma": true
+    },
+    "arahaki-jokei": {
+      "label": "Arahaki Jokei",
+      "requires": {
+        "wind": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "tengoku": {
+      "label": "Tengoku",
+      "requires": {
+        "wind": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.05,
+      "cap": 1,
+      "mandatory_main": [
+        "jokei"
+      ]
+    },
+    "rengoku": {
+      "label": "Rengoku",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "quota": true
+    },
+    "sengoku": {
+      "label": "Sengoku",
+      "requires": {
+        "lightning": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "quota": true
+    },
+    "raion-rengoku": {
+      "label": "Raion Rengoku",
+      "requires": {
+        "fire": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "mandatory_main": [
+        "raion-akuma"
+      ],
+      "akuma": true
+    },
+    "kokotsu": {
+      "label": "Kokotsu",
+      "requires": {},
+      "weight": 1,
+      "village_weights": {
+        "haze": 2
+      },
+      "has_mode": true
+    },
+    "senko": {
+      "label": "Senko",
+      "requires": {
+        "lightning": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "konoha": 3
+      },
+      "has_mode": true
+    },
+    "kaijin": {
+      "label": "Kaijin",
+      "requires": {
+        "fire": 1,
+        "earth": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "konoha": 5
+      },
+      "has_mode": true
+    },
+    "minakami": {
+      "label": "Minakami",
+      "requires": {},
+      "weight": 2,
+      "village_weights": {
+        "dunes": 10
+      },
+      "has_mode": true,
+      "optional_elements": {
+        "acid": 25,
+        "fire": 50
+      }
+    },
+    "azarashi": {
+      "label": "Azarashi",
+      "requires": {
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "konoha": 4,
+        "obelisk": 2
+      },
+      "has_mode": true
+    },
+    "shadow": {
+      "label": "Shadow",
+      "requires": {},
+      "weight": 1,
+      "village_weights": {
+        "konoha": 5
+      },
+      "has_mode": true
+    },
+    "kerada": {
+      "label": "Kerada",
+      "requires": {},
+      "weight": 1,
+      "village_weights": {
+        "konoha": 5
+      },
+      "has_mode": true
+    },
+    "wanziame": {
+      "label": "Wanziame",
+      "requires": {
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "haze": 4
+      },
+      "has_mode": true
+    },
+    "nectar": {
+      "label": "Nectar",
+      "requires": {},
+      "weight": 2,
+      "village_weights": {
+        "obelisk": 4,
+        "konoha": 3
+      },
+      "has_mode": true
+    },
+    "shizen": {
+      "label": "Shizen",
+      "requires": {
+        "water": 1,
+        "earth": 1
+      },
+      "weight": 0,
+      "village_weights": {
+        "konoha": 2
+      },
+      "has_mode": true
+    },
+    "glacier": {
+      "label": "Glacier",
+      "requires": {
+        "wind": 1,
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "haze": 3
+      },
+      "has_mode": true
+    },
+    "okami": {
+      "label": "Okami",
+      "requires": {},
+      "weight": 1,
+      "village_weights": {
+        "konoha": 5
+      },
+      "has_mode": true
+    },
+    "koncho": {
+      "label": "Koncho",
+      "requires": {},
+      "weight": 1,
+      "village_weights": {
+        "konoha": 4
+      },
+      "has_mode": true
+    },
+    "saberu": {
+      "label": "Saberu",
+      "requires": {
+        "earth": 1,
+        "lightning": 1
+      },
+      "weight": 0,
+      "village_weights": {
+        "obelisk": 1,
+        "konoha": 2
+      },
+      "has_mode": true
+    },
+    "dangan": {
+      "label": "Dangan",
+      "requires": {
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "haze": 2
+      },
+      "has_mode": true
+    },
+    "seishin": {
+      "label": "Seishin",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {
+        "obelisk": 1,
+        "konoha": 4
+      },
+      "has_mode": true
+    },
+    "jayramaki": {
+      "label": "Jayramaki",
+      "requires": {
+        "wind": 1,
+        "fire": 1,
+        "earth": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "konoha": 2
+      },
+      "has_mode": true
+    },
+    "apollo-sand": {
+      "label": "Apollo Sand",
+      "requires": {
+        "earth": 1,
+        "lightning": 1,
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "dunes": 4
+      },
+      "has_mode": true,
+      "family": "sand"
+    },
+    "sand": {
+      "label": "Sand",
+      "requires": {
+        "earth": 1,
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "dunes": 2
+      },
+      "has_mode": true,
+      "family": "sand"
+    },
+    "storm": {
+      "label": "Storm",
+      "requires": {
+        "water": 1,
+        "lightning": 1
+      },
+      "weight": 2,
+      "village_weights": {
+        "nimbus": 5
+      },
+      "has_mode": true,
+      "family": "storm"
+    },
+    "black-lightning": {
+      "label": "Black Lightning",
+      "requires": {
+        "lightning": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "nimbus": 2
+      },
+      "has_mode": true,
+      "family": "storm"
+    },
+    "clay": {
+      "label": "Clay",
+      "requires": {
+        "earth": 1,
+        "fire": 1
+      },
+      "weight": 0,
+      "village_weights": {
+        "obelisk": 2
+      },
+      "has_mode": true
+    },
+    "paper": {
+      "label": "Paper",
+      "requires": {
+        "water": 1,
+        "earth": 1
+      },
+      "weight": 2,
+      "village_weights": {
+        "obelisk": 2.5
+      },
+      "has_mode": true,
+      "requires_any": [
+        {
+          "water": 1,
+          "earth": 1
+        },
+        {
+          "water": 1,
+          "fire": 1
+        }
+      ]
+    },
+    "bubble": {
+      "label": "Bubble",
+      "requires": {
+        "water": 1,
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {
+        "haze": 4,
+        "obelisk": 2
+      },
+      "has_mode": true
+    },
+    "ink": {
+      "label": "Ink",
+      "requires": {
+        "water": 1
+      },
+      "weight": 2,
+      "village_weights": {},
+      "has_mode": true
+    },
+    "rykan-shizen": {
+      "label": "Rykan Shizen",
+      "requires": {
+        "water": 1,
+        "earth": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "dio-senko": {
+      "label": "Dio Senko",
+      "requires": {
+        "lightning": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "azim-senko": {
+      "label": "Azim Senko",
+      "requires": {
+        "lightning": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "odin-saberu": {
+      "label": "Odin Saberu",
+      "requires": {
+        "lightning": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "giovanni-shizen": {
+      "label": "Giovanni Shizen",
+      "requires": {
+        "water": 1,
+        "earth": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "jotaro-shizen": {
+      "label": "Jotaro Shizen",
+      "requires": {
+        "water": 1,
+        "earth": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "kabu-cobra": {
+      "label": "Kabu Cobra",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "all_elements": true
+    },
+    "narumaki": {
+      "label": "Narumaki",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "all_elements": true,
+      "secondary_access": "all_ordinary_no_mode",
+      "cap_group": "narumaki-family"
+    },
+    "yang-narumaki": {
+      "label": "Yang Narumaki",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "all_elements": true,
+      "secondary_access": "all_ordinary_no_mode",
+      "cap_group": "narumaki-family"
+    },
+    "borumaki": {
+      "label": "Borumaki",
+      "requires": {
+        "wind": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "doom-shadow": {
+      "label": "Doom Shadow",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "tetsuo-kaijin": {
+      "label": "Tetsuo Kaijin",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "all_elements": true,
+      "secondary_access": "all_ordinary_no_mode"
+    },
+    "rune-koncho": {
+      "label": "Rune Koncho",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "shiro-glacier": {
+      "label": "Shiro Glacier",
+      "requires": {
+        "wind": 1,
+        "water": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "hair": {
+      "label": "Hair",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "all_elements": true
+    },
+    "eternal": {
+      "label": "Eternal",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "mecha-spirit": {
+      "label": "Mecha Spirit",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "special": "mecha",
+      "mandatory_secondary": [
+        "menza"
+      ]
+    },
+    "vine": {
+      "label": "Vine",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "ashen-storm": {
+      "label": "Ashen Storm",
+      "requires": {
+        "lightning": 1,
+        "wind": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "family": "storm"
+    },
+    "ryuji-kenichi": {
+      "label": "Ryuji Kenichi",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 1,
+      "special": "taijutsu"
+    },
+    "cobra": {
+      "label": "Cobra",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "fixed_percent": 0.5,
+      "cap": 2,
+      "min_elements": 4
+    },
+    "kenichi": {
+      "label": "Kenichi",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": true,
+      "special": "taijutsu"
+    }
+  },
+  "secondary": {
+    "boil": {
+      "label": "Boil",
+      "requires": {
+        "water": 1,
+        "fire": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "crystal": {
+      "label": "Crystal",
+      "requires": {
+        "earth": 1,
+        "lightning": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "dust": {
+      "label": "Dust",
+      "requires": {
+        "earth": 1,
+        "lightning": 1,
+        "wind": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "fixed_percent": 0.5
+    },
+    "explosion": {
+      "label": "Explosion",
+      "requires": {
+        "fire": 1,
+        "lightning": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "gold-sand": {
+      "label": "Gold Sand",
+      "requires": {
+        "earth": 1,
+        "lightning": 1,
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false,
+      "family": "sand"
+    },
+    "ice": {
+      "label": "Ice",
+      "requires": {
+        "wind": 1,
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "lava": {
+      "label": "Lava",
+      "requires": {
+        "fire": 1,
+        "earth": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "mud": {
+      "label": "Mud",
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "scorch": {
+      "label": "Scorch",
+      "requires": {
+        "fire": 1,
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "wood": {
+      "label": "Wood",
+      "requires": {
+        "water": 1,
+        "earth": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "bolt": {
+      "label": "Bolt",
+      "requires": {
+        "lightning": 1,
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "sound": {
+      "label": "Sound",
+      "requires": {
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "frost": {
+      "label": "Frost",
+      "requires": {
+        "wind": 1,
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "inferno": {
+      "label": "Inferno",
+      "requires": {
+        "fire": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "akuma_only": true
+    },
+    "emerald": {
+      "label": "Emerald",
+      "requires": {
+        "earth": 1,
+        "lightning": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "typhoon": {
+      "label": "Typhoon",
+      "requires": {
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "aidens-son-mud": {
+      "label": "Aidens Son Mud",
+      "requires": {
+        "water": 1,
+        "earth": 1
+      },
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "fixed_percent": 0.5,
+      "cap": 1
+    },
+    "blood": {
+      "label": "Blood",
+      "requires": {
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "tsunami": {
+      "label": "Tsunami",
+      "requires": {
+        "water": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "smoke": {
+      "label": "Smoke",
+      "requires": {
+        "fire": 1,
+        "wind": 1
+      },
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false,
+      "requires_any": [
+        {
+          "fire": 1,
+          "wind": 1
+        },
+        {
+          "fire": 1,
+          "earth": 1
+        }
+      ]
+    },
+    "web": {
+      "label": "Web",
+      "requires": {},
+      "weight": 1,
+      "village_weights": {},
+      "has_mode": false
+    },
+    "menza": {
+      "label": "Menza",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "mecha_only": true
+    },
+    "surge": {
+      "label": "Surge",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "event_only": true
+    },
+    "magma": {
+      "label": "Magma",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "event_only": true
+    },
+    "apol-sand": {
+      "label": "Apol Sand",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "event_only": true
+    },
+    "fume": {
+      "label": "Fume",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "event_only": true
+    },
+    "fizz": {
+      "label": "Fizz",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "event_only": true
+    },
+    "powder": {
+      "label": "Powder",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "event_only": true
+    },
+    "octo-ink": {
+      "label": "Octo Ink",
+      "requires": {},
+      "weight": 0,
+      "village_weights": {},
+      "has_mode": false,
+      "event_only": true
+    }
+  },
+  "birth_policy": {
+    "version": 3,
+    "villages": {
+      "konoha": "Konoha / Ember",
+      "nimbus": "Nimbus",
+      "haze": "Haze",
+      "obelisk": "Obelisk",
+      "dunes": "Dunes",
+      "tempest": "Tempest",
+      "vinland": "Vinland",
+      "iron": "País del Hierro"
+    }
+  },
+  "birth_v8": {
+    "element_counts": {
+      "0": 5,
+      "1": 10,
+      "2": 55,
+      "3": 25,
+      "4": 5
+    },
+    "repeat_percent": 15,
+    "main_percent": 26,
+    "secondary_with_main": [
+      30,
+      12,
+      4
+    ],
+    "secondary_without_main": [
+      20,
+      15,
+      6,
+      2
+    ],
+    "family_extra_percent": 15,
+    "affinity_multiplier": 1.25,
+    "inferno_variant_percent": 50,
+    "rare_caps_per_block": 3,
+    "quota_block": 100,
+    "quota_lineages": [
+      "rengoku",
+      "sengoku"
+    ],
+    "population_targets": {
+      "main_including_rare": 60,
+      "secondary_only": 20,
+      "kenjutsu_eligible_only": 15,
+      "taijutsu": 5
+    },
+    "aliases": {
+      "shado": "shadow",
+      "doom-shado": "doom-shadow",
+      "ryugi-kenichi": "ryuji-kenichi",
+      "atomic": "dust",
+      "typhon": "typhoon",
+      "black-storm": "black-lightning",
+      "aizens-mud": "aidens-son-mud",
+      "gold-narumaki": "yang-narumaki"
+    }
+  }
+}

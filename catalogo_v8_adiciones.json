@@ -1,0 +1,307 @@
+{
+  "main": {
+    "jokei": {
+      "label": "Jokei (Hyuga)"
+    },
+    "akuma": {
+      "label": "Akuma (Uchiha)"
+    },
+    "dokei": {
+      "label": "Dokei"
+    },
+    "bankai-akuma": {
+      "label": "Bankai Akuma",
+      "role_id": 0
+    },
+    "shiver-akuma": {
+      "label": "Shiver Akuma",
+      "role_id": 0
+    },
+    "raion-akuma": {
+      "label": "Raion Akuma",
+      "role_id": 0
+    },
+    "riser-akuma": {
+      "label": "Riser Akuma",
+      "role_id": 0
+    },
+    "satori-akuma": {
+      "label": "Satori Akuma",
+      "role_id": 0
+    },
+    "arahaki-jokei": {
+      "label": "Arahaki Jokei",
+      "role_id": 0
+    },
+    "tengoku": {
+      "label": "Tengoku"
+    },
+    "rengoku": {
+      "label": "Rengoku",
+      "role_id": 0
+    },
+    "sengoku": {
+      "label": "Sengoku"
+    },
+    "raion-rengoku": {
+      "label": "Raion Rengoku",
+      "role_id": 0
+    },
+    "kokotsu": {
+      "label": "Kokotsu"
+    },
+    "senko": {
+      "label": "Senko (Namikaze)"
+    },
+    "kaijin": {
+      "label": "Kaijin (Sarutobi)"
+    },
+    "minakami": {
+      "label": "Minakami"
+    },
+    "azarashi": {
+      "label": "Azarashi"
+    },
+    "shadow": {
+      "label": "Shadow (Nara)"
+    },
+    "kerada": {
+      "label": "Kerada (Akimichi)"
+    },
+    "wanziame": {
+      "label": "Wanziame"
+    },
+    "nectar": {
+      "label": "Nectar"
+    },
+    "shizen": {
+      "label": "Shizen (Senju)"
+    },
+    "glacier": {
+      "label": "Glacier"
+    },
+    "okami": {
+      "label": "Okami"
+    },
+    "koncho": {
+      "label": "Koncho"
+    },
+    "saberu": {
+      "label": "Saberu (Hatake)"
+    },
+    "dangan": {
+      "label": "Dangan"
+    },
+    "seishin": {
+      "label": "Seishin"
+    },
+    "jayramaki": {
+      "label": "Jayramaki"
+    },
+    "apollo-sand": {
+      "label": "Apollo Sand",
+      "role_id": 0
+    },
+    "sand": {
+      "label": "Sand"
+    },
+    "storm": {
+      "label": "Storm"
+    },
+    "black-lightning": {
+      "label": "Black Lightning",
+      "role_id": 0
+    },
+    "clay": {
+      "label": "Clay",
+      "role_id": 0
+    },
+    "paper": {
+      "label": "Paper",
+      "role_id": 0
+    },
+    "bubble": {
+      "label": "Bubble"
+    },
+    "ink": {
+      "label": "Ink"
+    },
+    "rykan-shizen": {
+      "label": "Rykan Shizen",
+      "role_id": 0
+    },
+    "dio-senko": {
+      "label": "Dio Senko",
+      "role_id": 0
+    },
+    "azim-senko": {
+      "label": "Azim Senko",
+      "role_id": 0
+    },
+    "odin-saberu": {
+      "label": "Odin Saberu",
+      "role_id": 0
+    },
+    "giovanni-shizen": {
+      "label": "Giovanni Shizen",
+      "role_id": 0
+    },
+    "jotaro-shizen": {
+      "label": "Jotaro Shizen",
+      "role_id": 0
+    },
+    "kabu-cobra": {
+      "label": "Kabu Cobra",
+      "role_id": 0
+    },
+    "narumaki": {
+      "label": "Narumaki",
+      "role_id": 0
+    },
+    "yang-narumaki": {
+      "label": "Yang Narumaki",
+      "role_id": 0
+    },
+    "borumaki": {
+      "label": "Borumaki",
+      "role_id": 0
+    },
+    "doom-shadow": {
+      "label": "Doom Shadow",
+      "role_id": 0
+    },
+    "tetsuo-kaijin": {
+      "label": "Tetsuo Kaijin",
+      "role_id": 0
+    },
+    "rune-koncho": {
+      "label": "Rune Koncho",
+      "role_id": 0
+    },
+    "shiro-glacier": {
+      "label": "Shiro Glacier",
+      "role_id": 0
+    },
+    "hair": {
+      "label": "Hair",
+      "role_id": 0
+    },
+    "eternal": {
+      "label": "Eternal",
+      "role_id": 0
+    },
+    "mecha-spirit": {
+      "label": "Mecha Spirit",
+      "role_id": 0
+    },
+    "vine": {
+      "label": "Vine",
+      "role_id": 0
+    },
+    "ashen-storm": {
+      "label": "Ashen Storm"
+    },
+    "ryuji-kenichi": {
+      "label": "Ryuji Kenichi (Gai)"
+    },
+    "cobra": {
+      "label": "Cobra"
+    },
+    "kenichi": {
+      "label": "Kenichi (Lee)"
+    }
+  },
+  "secondary": {
+    "boil": {
+      "label": "Boil"
+    },
+    "crystal": {
+      "label": "Crystal"
+    },
+    "dust": {
+      "label": "Dust"
+    },
+    "explosion": {
+      "label": "Explosion"
+    },
+    "gold-sand": {
+      "label": "Gold Sand"
+    },
+    "ice": {
+      "label": "Ice"
+    },
+    "lava": {
+      "label": "Lava"
+    },
+    "mud": {
+      "label": "Mud"
+    },
+    "scorch": {
+      "label": "Scorch"
+    },
+    "wood": {
+      "label": "Wood"
+    },
+    "bolt": {
+      "label": "Bolt"
+    },
+    "sound": {
+      "label": "Sound"
+    },
+    "frost": {
+      "label": "Frost"
+    },
+    "inferno": {
+      "label": "Inferno"
+    },
+    "emerald": {
+      "label": "Emerald"
+    },
+    "typhoon": {
+      "label": "Typhoon"
+    },
+    "aidens-son-mud": {
+      "label": "Aidens Son Mud"
+    },
+    "blood": {
+      "label": "Blood"
+    },
+    "tsunami": {
+      "label": "Tsunami"
+    },
+    "smoke": {
+      "label": "Smoke"
+    },
+    "web": {
+      "label": "Web"
+    },
+    "menza": {
+      "label": "Menza"
+    },
+    "surge": {
+      "label": "Surge",
+      "role_id": 0
+    },
+    "magma": {
+      "label": "Magma"
+    },
+    "apol-sand": {
+      "label": "Apol Sand",
+      "role_id": 0
+    },
+    "fume": {
+      "label": "Fume"
+    },
+    "fizz": {
+      "label": "Fizz"
+    },
+    "powder": {
+      "label": "Powder",
+      "role_id": 0
+    },
+    "octo-ink": {
+      "label": "Octo Ink",
+      "role_id": 0
+    }
+  }
+}

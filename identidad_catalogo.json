@@ -1,0 +1,3861 @@
+{
+  "version": 1,
+  "names": {
+    "aika": {
+      "name": "Aika",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "aiko": {
+      "name": "Aiko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "airi": {
+      "name": "Airi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "akane": {
+      "name": "Akane",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "akari": {
+      "name": "Akari",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "akihiro": {
+      "name": "Akihiro",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "akira": {
+      "name": "Akira",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "amane": {
+      "name": "Amane",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "aoi": {
+      "name": "Aoi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "arata": {
+      "name": "Arata",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "asahi": {
+      "name": "Asahi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "atsushi": {
+      "name": "Atsushi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "aya": {
+      "name": "Aya",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ayame": {
+      "name": "Ayame",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ayato": {
+      "name": "Ayato",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ayumi": {
+      "name": "Ayumi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "chihiro": {
+      "name": "Chihiro",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "chika": {
+      "name": "Chika",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "chinatsu": {
+      "name": "Chinatsu",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "chisato": {
+      "name": "Chisato",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "daichi": {
+      "name": "Daichi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "daigo": {
+      "name": "Daigo",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "daiki": {
+      "name": "Daiki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "daisuke": {
+      "name": "Daisuke",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "eiji": {
+      "name": "Eiji",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "eiko": {
+      "name": "Eiko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "emi": {
+      "name": "Emi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "emiko": {
+      "name": "Emiko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ena": {
+      "name": "Ena",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "eri": {
+      "name": "Eri",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "fumiko": {
+      "name": "Fumiko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "fumiya": {
+      "name": "Fumiya",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "fuyuki": {
+      "name": "Fuyuki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "gaku": {
+      "name": "Gaku",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "gen": {
+      "name": "Gen",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "genji": {
+      "name": "Genji",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "genta": {
+      "name": "Genta",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hajime": {
+      "name": "Hajime",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hana": {
+      "name": "Hana",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "haru": {
+      "name": "Haru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "haruka": {
+      "name": "Haruka",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "haruki": {
+      "name": "Haruki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "haruto": {
+      "name": "Haruto",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hayato": {
+      "name": "Hayato",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hibiki": {
+      "name": "Hibiki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hideki": {
+      "name": "Hideki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hikari": {
+      "name": "Hikari",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hikaru": {
+      "name": "Hikaru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hiro": {
+      "name": "Hiro",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hiroki": {
+      "name": "Hiroki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hiromi": {
+      "name": "Hiromi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hiroto": {
+      "name": "Hiroto",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "hotaru": {
+      "name": "Hotaru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ichika": {
+      "name": "Ichika",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ichiro": {
+      "name": "Ichiro",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "itsuki": {
+      "name": "Itsuki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "izumi": {
+      "name": "Izumi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "jin": {
+      "name": "Jin",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "jiro": {
+      "name": "Jiro",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "jun": {
+      "name": "Jun",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "junpei": {
+      "name": "Junpei",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kaede": {
+      "name": "Kaede",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kaho": {
+      "name": "Kaho",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kai": {
+      "name": "Kai",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kaito": {
+      "name": "Kaito",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kaname": {
+      "name": "Kaname",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kanata": {
+      "name": "Kanata",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kaori": {
+      "name": "Kaori",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kaoru": {
+      "name": "Kaoru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kasumi": {
+      "name": "Kasumi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "katsuya": {
+      "name": "Katsuya",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kazuki": {
+      "name": "Kazuki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kazuma": {
+      "name": "Kazuma",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kei": {
+      "name": "Kei",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "keiko": {
+      "name": "Keiko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "keisuke": {
+      "name": "Keisuke",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ken": {
+      "name": "Ken",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kenji": {
+      "name": "Kenji",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kenta": {
+      "name": "Kenta",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kiyomi": {
+      "name": "Kiyomi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "koharu": {
+      "name": "Koharu",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kohei": {
+      "name": "Kohei",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "koji": {
+      "name": "Koji",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "kotone": {
+      "name": "Kotone",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "madoka": {
+      "name": "Madoka",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "maki": {
+      "name": "Maki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "makoto": {
+      "name": "Makoto",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "mana": {
+      "name": "Mana",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "manami": {
+      "name": "Manami",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "mao": {
+      "name": "Mao",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "mari": {
+      "name": "Mari",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "masaki": {
+      "name": "Masaki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "masaru": {
+      "name": "Masaru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "masato": {
+      "name": "Masato",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "mayu": {
+      "name": "Mayu",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "michi": {
+      "name": "Michi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "michiko": {
+      "name": "Michiko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "midori": {
+      "name": "Midori",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "mika": {
+      "name": "Mika",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "miki": {
+      "name": "Miki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "minori": {
+      "name": "Minori",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "mio": {
+      "name": "Mio",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "misaki": {
+      "name": "Misaki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "mitsuru": {
+      "name": "Mitsuru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "miyako": {
+      "name": "Miyako",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "miyu": {
+      "name": "Miyu",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "mizuki": {
+      "name": "Mizuki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "momoka": {
+      "name": "Momoka",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "nagi": {
+      "name": "Nagi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "nao": {
+      "name": "Nao",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "naoki": {
+      "name": "Naoki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "naomi": {
+      "name": "Naomi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "natsuki": {
+      "name": "Natsuki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "natsumi": {
+      "name": "Natsumi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "nozomi": {
+      "name": "Nozomi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "rei": {
+      "name": "Rei",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "reika": {
+      "name": "Reika",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "reina": {
+      "name": "Reina",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ren": {
+      "name": "Ren",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "renji": {
+      "name": "Renji",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "rika": {
+      "name": "Rika",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "riku": {
+      "name": "Riku",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "rina": {
+      "name": "Rina",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "rio": {
+      "name": "Rio",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ritsu": {
+      "name": "Ritsu",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ryo": {
+      "name": "Ryo",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ryohei": {
+      "name": "Ryohei",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ryoma": {
+      "name": "Ryoma",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ryosuke": {
+      "name": "Ryosuke",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ryu": {
+      "name": "Ryu",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ryuji": {
+      "name": "Ryuji",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sachi": {
+      "name": "Sachi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sachiko": {
+      "name": "Sachiko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "saki": {
+      "name": "Saki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "saku": {
+      "name": "Saku",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sana": {
+      "name": "Sana",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "saori": {
+      "name": "Saori",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "satoshi": {
+      "name": "Satoshi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "saya": {
+      "name": "Saya",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sayuri": {
+      "name": "Sayuri",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sena": {
+      "name": "Sena",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "shin": {
+      "name": "Shin",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "shinji": {
+      "name": "Shinji",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "shiori": {
+      "name": "Shiori",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sho": {
+      "name": "Sho",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "shota": {
+      "name": "Shota",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "shun": {
+      "name": "Shun",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sora": {
+      "name": "Sora",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sota": {
+      "name": "Sota",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "subaru": {
+      "name": "Subaru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "sumire": {
+      "name": "Sumire",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "suzu": {
+      "name": "Suzu",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "suzume": {
+      "name": "Suzume",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "taichi": {
+      "name": "Taichi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "taiga": {
+      "name": "Taiga",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "taiki": {
+      "name": "Taiki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "takashi": {
+      "name": "Takashi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "takeo": {
+      "name": "Takeo",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "takumi": {
+      "name": "Takumi",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tamaki": {
+      "name": "Tamaki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tatsuki": {
+      "name": "Tatsuki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tatsuya": {
+      "name": "Tatsuya",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "teru": {
+      "name": "Teru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tomo": {
+      "name": "Tomo",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tomoe": {
+      "name": "Tomoe",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tomoki": {
+      "name": "Tomoki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "toru": {
+      "name": "Toru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tsubaki": {
+      "name": "Tsubaki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tsubasa": {
+      "name": "Tsubasa",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "tsukasa": {
+      "name": "Tsukasa",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "ume": {
+      "name": "Ume",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "umeko": {
+      "name": "Umeko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "wakana": {
+      "name": "Wakana",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "wataru": {
+      "name": "Wataru",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yori": {
+      "name": "Yori",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yohei": {
+      "name": "Yohei",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yui": {
+      "name": "Yui",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yuika": {
+      "name": "Yuika",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yuka": {
+      "name": "Yuka",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yukari": {
+      "name": "Yukari",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yuki": {
+      "name": "Yuki",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yukiko": {
+      "name": "Yukiko",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yuma": {
+      "name": "Yuma",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yuna": {
+      "name": "Yuna",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yuri": {
+      "name": "Yuri",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yusei": {
+      "name": "Yusei",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yuta": {
+      "name": "Yuta",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "yuto": {
+      "name": "Yuto",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "zen": {
+      "name": "Zen",
+      "categories": [
+        "Japoneses"
+      ],
+      "active": true
+    },
+    "anko": {
+      "name": "Anko",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "asuma": {
+      "name": "Asuma",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "chiyo": {
+      "name": "Chiyo",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "choji": {
+      "name": "Chōji",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "chocho": {
+      "name": "Chōchō",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "dan": {
+      "name": "Dan",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "darui": {
+      "name": "Darui",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "deidara": {
+      "name": "Deidara",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "fugaku": {
+      "name": "Fugaku",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "fu": {
+      "name": "Fū",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "gaara": {
+      "name": "Gaara",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "genma": {
+      "name": "Genma",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "haku": {
+      "name": "Haku",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "hanabi": {
+      "name": "Hanabi",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "hashirama": {
+      "name": "Hashirama",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "hayate": {
+      "name": "Hayate",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "hidan": {
+      "name": "Hidan",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "hinata": {
+      "name": "Hinata",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "hiruzen": {
+      "name": "Hiruzen",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "ino": {
+      "name": "Ino",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "inojin": {
+      "name": "Inojin",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "iruka": {
+      "name": "Iruka",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "itachi": {
+      "name": "Itachi",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "izuna": {
+      "name": "Izuna",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "jiraiya": {
+      "name": "Jiraiya",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "jugo": {
+      "name": "Jūgo",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kabuto": {
+      "name": "Kabuto",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kakashi": {
+      "name": "Kakashi",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kankuro": {
+      "name": "Kankurō",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "karin": {
+      "name": "Karin",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kawaki": {
+      "name": "Kawaki",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kiba": {
+      "name": "Kiba",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kimimaro": {
+      "name": "Kimimaro",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kisame": {
+      "name": "Kisame",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "konan": {
+      "name": "Konan",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "konohamaru": {
+      "name": "Konohamaru",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kushina": {
+      "name": "Kushina",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "madara": {
+      "name": "Madara",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "mei": {
+      "name": "Mei",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "mikoto": {
+      "name": "Mikoto",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "minato": {
+      "name": "Minato",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "mitsuki": {
+      "name": "Mitsuki",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "nagato": {
+      "name": "Nagato",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "naruto": {
+      "name": "Naruto",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "neji": {
+      "name": "Neji",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "obito": {
+      "name": "Obito",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "orochimaru": {
+      "name": "Orochimaru",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "rin": {
+      "name": "Rin",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "rock": {
+      "name": "Rock",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "sai": {
+      "name": "Sai",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "sakura": {
+      "name": "Sakura",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "sarada": {
+      "name": "Sarada",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "sasori": {
+      "name": "Sasori",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "sasuke": {
+      "name": "Sasuke",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "shikadai": {
+      "name": "Shikadai",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "shikamaru": {
+      "name": "Shikamaru",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "shino": {
+      "name": "Shino",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "shisui": {
+      "name": "Shisui",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "suigetsu": {
+      "name": "Suigetsu",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "temari": {
+      "name": "Temari",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "tenten": {
+      "name": "Tenten",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "tobirama": {
+      "name": "Tobirama",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "tsunade": {
+      "name": "Tsunade",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "yahiko": {
+      "name": "Yahiko",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "yamato": {
+      "name": "Yamato",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "yugito": {
+      "name": "Yugito",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "zabuza": {
+      "name": "Zabuza",
+      "categories": [
+        "Naruto"
+      ],
+      "active": true
+    },
+    "kire": {
+      "name": "Kire",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "kira": {
+      "name": "Kira",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "auren": {
+      "name": "Auren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "azen": {
+      "name": "Azen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "daoren": {
+      "name": "Daoren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "dairu": {
+      "name": "Dairu",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "eiren": {
+      "name": "Eiren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "enrai": {
+      "name": "Enrai",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "garei": {
+      "name": "Garei",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "garen": {
+      "name": "Garen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "kaizen": {
+      "name": "Kaizen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "kairen": {
+      "name": "Kairen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "kairu": {
+      "name": "Kairu",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "kiren": {
+      "name": "Kiren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "kiro": {
+      "name": "Kiro",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "kuren": {
+      "name": "Kuren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "mairei": {
+      "name": "Mairei",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "miren": {
+      "name": "Miren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "naire": {
+      "name": "Naire",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "nairu": {
+      "name": "Nairu",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "naren": {
+      "name": "Naren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "raiken": {
+      "name": "Raiken",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "rairen": {
+      "name": "Rairen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "rasen": {
+      "name": "Rasen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "reizan": {
+      "name": "Reizan",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "rukari": {
+      "name": "Rukari",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "sairen": {
+      "name": "Sairen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "seiran": {
+      "name": "Seiran",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "shairu": {
+      "name": "Shairu",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "shiren": {
+      "name": "Shiren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "tairen": {
+      "name": "Tairen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "teiren": {
+      "name": "Teiren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "torai": {
+      "name": "Torai",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "varen": {
+      "name": "Varen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "veyra": {
+      "name": "Veyra",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "yairen": {
+      "name": "Yairen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "yarei": {
+      "name": "Yarei",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "zairen": {
+      "name": "Zairen",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "zairu": {
+      "name": "Zairu",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "zaren": {
+      "name": "Zaren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "zeiren": {
+      "name": "Zeiren",
+      "categories": [
+        "Originales World X"
+      ],
+      "active": true
+    },
+    "siul": {
+      "name": "Siul",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "ruisu": {
+      "name": "Ruisu",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "luiren": {
+      "name": "Luiren",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "gaboru": {
+      "name": "Gaboru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "gaburo": {
+      "name": "Gaburo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "garo": {
+      "name": "Garo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "gaburen": {
+      "name": "Gaburen",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "gaburi": {
+      "name": "Gaburi",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "gairen": {
+      "name": "Gairen",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "yamito": {
+      "name": "Yamito",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "yami": {
+      "name": "Yami",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "timay": {
+      "name": "Timay",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "juwan": {
+      "name": "Juwan",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "juano": {
+      "name": "Juano",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "nauj": {
+      "name": "Nauj",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "davin": {
+      "name": "Davin",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "daido": {
+      "name": "Daido",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "divad": {
+      "name": "Divad",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "danrei": {
+      "name": "Danrei",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "daniru": {
+      "name": "Daniru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "leinad": {
+      "name": "Leinad",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "deigo": {
+      "name": "Deigo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "dieko": {
+      "name": "Dieko",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "ogeid": {
+      "name": "Ogeid",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "andaru": {
+      "name": "Andaru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "andrei": {
+      "name": "Andrei",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "serdan": {
+      "name": "Serdan",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "arenjo": {
+      "name": "Arenjo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "aleko": {
+      "name": "Aleko",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "jandro": {
+      "name": "Jandro",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "areku": {
+      "name": "Areku",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "xela": {
+      "name": "Xela",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "aleki": {
+      "name": "Aleki",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "karosu": {
+      "name": "Karosu",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "karuo": {
+      "name": "Karuo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sorak": {
+      "name": "Sorak",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kamiro": {
+      "name": "Kamiro",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kaimo": {
+      "name": "Kaimo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "olimak": {
+      "name": "Olimak",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kirian": {
+      "name": "Kirian",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kurian": {
+      "name": "Kurian",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kirisu": {
+      "name": "Kirisu",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "etsuban": {
+      "name": "Etsuban",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "teban": {
+      "name": "Teban",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "estaru": {
+      "name": "Estaru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "feripe": {
+      "name": "Feripe",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "feru": {
+      "name": "Feru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "epipe": {
+      "name": "Epipe",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "ferando": {
+      "name": "Ferando",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "nando": {
+      "name": "Nando",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "ferun": {
+      "name": "Ferun",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "furanko": {
+      "name": "Furanko",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "furan": {
+      "name": "Furan",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "shiko": {
+      "name": "Shiko",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "jorai": {
+      "name": "Jorai",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "jorugo": {
+      "name": "Jorugo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "gejor": {
+      "name": "Gejor",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "josei": {
+      "name": "Josei",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "jozen": {
+      "name": "Jozen",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sejo": {
+      "name": "Sejo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "jurian": {
+      "name": "Jurian",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "juren": {
+      "name": "Juren",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "naiju": {
+      "name": "Naiju",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kevan": {
+      "name": "Kevan",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "keviro": {
+      "name": "Keviro",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "viken": {
+      "name": "Viken",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "leoru": {
+      "name": "Leoru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "leoren": {
+      "name": "Leoren",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "doren": {
+      "name": "Doren",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "maneru": {
+      "name": "Maneru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "manro": {
+      "name": "Manro",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "neruma": {
+      "name": "Neruma",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "marutin": {
+      "name": "Marutin",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "maren": {
+      "name": "Maren",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "tinmar": {
+      "name": "Tinmar",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "matei": {
+      "name": "Matei",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "mato": {
+      "name": "Matō",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "teoma": {
+      "name": "Teoma",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "migeru": {
+      "name": "Migeru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "migure": {
+      "name": "Migure",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "geiru": {
+      "name": "Geiru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "nikoru": {
+      "name": "Nikoru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "nikaro": {
+      "name": "Nikaro",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kolan": {
+      "name": "Kolan",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "oskai": {
+      "name": "Oskai",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "okaru": {
+      "name": "Okaru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "karos": {
+      "name": "Karos",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "paburo": {
+      "name": "Paburo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "pabren": {
+      "name": "Pabren",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "obal": {
+      "name": "Obal",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "pedaru": {
+      "name": "Pedaru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "pedoro": {
+      "name": "Pedoro",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "raferu": {
+      "name": "Raferu",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "rafen": {
+      "name": "Rafen",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "rael": {
+      "name": "Rael",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "rikado": {
+      "name": "Rikado",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "rikaru": {
+      "name": "Rikaru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "dariko": {
+      "name": "Dariko",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sameru": {
+      "name": "Sameru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "samuro": {
+      "name": "Samuro",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sael": {
+      "name": "Sael",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sango": {
+      "name": "Sango",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "santaro": {
+      "name": "Santaro",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "tiago": {
+      "name": "Tiago",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sebaru": {
+      "name": "Sebaru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "seban": {
+      "name": "Seban",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "setian": {
+      "name": "Setian",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "serugo": {
+      "name": "Serugo",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "serio": {
+      "name": "Serio",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "giose": {
+      "name": "Giose",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "tomaru": {
+      "name": "Tomaru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "toma": {
+      "name": "Toma",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "samot": {
+      "name": "Samot",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "varena": {
+      "name": "Varena",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "valen": {
+      "name": "Valen",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "natina": {
+      "name": "Natina",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "vareya": {
+      "name": "Vareya",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "varia": {
+      "name": "Varia",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "riela": {
+      "name": "Riela",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "pauru": {
+      "name": "Pauru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "paora": {
+      "name": "Paora",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "arula": {
+      "name": "Arula",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "marai": {
+      "name": "Marai",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "mairi": {
+      "name": "Mairi",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "ariam": {
+      "name": "Ariam",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "marika": {
+      "name": "Marika",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "marian": {
+      "name": "Marian",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "narima": {
+      "name": "Narima",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sofira": {
+      "name": "Sofira",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sofi": {
+      "name": "Sōfi",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "fiosa": {
+      "name": "Fiosa",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "danira": {
+      "name": "Danira",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "daneka": {
+      "name": "Daneka",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "niela": {
+      "name": "Niela",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "gabira": {
+      "name": "Gabira",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "gabria": {
+      "name": "Gabria",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kamira": {
+      "name": "Kamira",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "kamia": {
+      "name": "Kamia",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "miraka": {
+      "name": "Miraka",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "karona": {
+      "name": "Karona",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "karina": {
+      "name": "Karina",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "rolika": {
+      "name": "Rolika",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "jurina": {
+      "name": "Jurina",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "julai": {
+      "name": "Julai",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "anira": {
+      "name": "Anira",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "natari": {
+      "name": "Natari",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "nalia": {
+      "name": "Nalia",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "tarina": {
+      "name": "Tarina",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "andara": {
+      "name": "Andara",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "andera": {
+      "name": "Andera",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "drea": {
+      "name": "Drea",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "rauru": {
+      "name": "Rauru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "lauri": {
+      "name": "Lauri",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "rushia": {
+      "name": "Rushia",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "lusia": {
+      "name": "Lusia",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "ciala": {
+      "name": "Ciala",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "sarai": {
+      "name": "Sarai",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "saru": {
+      "name": "Saru",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "aras": {
+      "name": "Aras",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "isara": {
+      "name": "Isara",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "isera": {
+      "name": "Isera",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "belisa": {
+      "name": "Belisa",
+      "categories": [
+        "Adaptaciones"
+      ],
+      "active": true
+    },
+    "adam": {
+      "name": "Adam",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "adrian": {
+      "name": "Adrian",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "alan": {
+      "name": "Alan",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "alden": {
+      "name": "Alden",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "alec": {
+      "name": "Alec",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "alina": {
+      "name": "Alina",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "alric": {
+      "name": "Alric",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "anya": {
+      "name": "Anya",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "armin": {
+      "name": "Armin",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "arno": {
+      "name": "Arno",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "arwin": {
+      "name": "Arwin",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "axel": {
+      "name": "Axel",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "bran": {
+      "name": "Bran",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "bruno": {
+      "name": "Bruno",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "cain": {
+      "name": "Cain",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "cedric": {
+      "name": "Cedric",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "ciel": {
+      "name": "Ciel",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "dorian": {
+      "name": "Dorian",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "eira": {
+      "name": "Eira",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "elian": {
+      "name": "Elian",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "elias": {
+      "name": "Elias",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "elric": {
+      "name": "Elric",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "emil": {
+      "name": "Emil",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "emilia": {
+      "name": "Emilia",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "erik": {
+      "name": "Erik",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "ezra": {
+      "name": "Ezra",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "felix": {
+      "name": "Felix",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "finn": {
+      "name": "Finn",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "freya": {
+      "name": "Freya",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "gareth": {
+      "name": "Gareth",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "hugo": {
+      "name": "Hugo",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "ian": {
+      "name": "Ian",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "ilan": {
+      "name": "Ilan",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "iris": {
+      "name": "Iris",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "ivan": {
+      "name": "Ivan",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "johan": {
+      "name": "Johan",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "jonas": {
+      "name": "Jonas",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "kael": {
+      "name": "Kael",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "klaus": {
+      "name": "Klaus",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "leon": {
+      "name": "Leon",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "levi": {
+      "name": "Levi",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "liam": {
+      "name": "Liam",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "lina": {
+      "name": "Lina",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "luca": {
+      "name": "Luca",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "luka": {
+      "name": "Luka",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "luna": {
+      "name": "Luna",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "mael": {
+      "name": "Mael",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "mira": {
+      "name": "Mira",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "noel": {
+      "name": "Noel",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "nora": {
+      "name": "Nora",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "odin": {
+      "name": "Odin",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "orion": {
+      "name": "Orion",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "oscar": {
+      "name": "Oscar",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "otto": {
+      "name": "Otto",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "raven": {
+      "name": "Raven",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "rem": {
+      "name": "Rem",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "riven": {
+      "name": "Riven",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "robin": {
+      "name": "Robin",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "roland": {
+      "name": "Roland",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "ronan": {
+      "name": "Ronan",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "runa": {
+      "name": "Runa",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "rune": {
+      "name": "Rune",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "silas": {
+      "name": "Silas",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "theo": {
+      "name": "Theo",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "tristan": {
+      "name": "Tristan",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "ulric": {
+      "name": "Ulric",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "vera": {
+      "name": "Vera",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "viktor": {
+      "name": "Viktor",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "wilhelm": {
+      "name": "Wilhelm",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "yona": {
+      "name": "Yona",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "yuno": {
+      "name": "Yuno",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    },
+    "zeno": {
+      "name": "Zeno",
+      "categories": [
+        "Internacionales y anime"
+      ],
+      "active": true
+    }
+  },
+  "main": {
+    "jokei": "Hyuga",
+    "akuma": "Uchiha",
+    "dokei": "Chinoike",
+    "kokotsu": "Kaguya",
+    "senko": "Namikaze",
+    "kaijin": "Sarutobi",
+    "minakami": "Shirogane",
+    "shizen": "Senju",
+    "azarashi": "Uzumaki",
+    "shadow": "Nara",
+    "kerada": "Akimichi",
+    "wanziame": "Hoshigaki",
+    "nectar": "Kamizuru",
+    "glacier": "Yuki",
+    "okami": "Inuzuka",
+    "koncho": "Aburame",
+    "saberu": "Hatake",
+    "kenichi": "Lee",
+    "ryuji-kenichi": "Lee",
+    "dangan": "Hozuki",
+    "seishin": "Yamanaka",
+    "sand": "Sunahara",
+    "iron-sand": "Sunahara",
+    "storm": "Arashiro",
+    "black-storm": "Arashiro",
+    "ashen-storm": "Arashiro",
+    "bubble": "Mizuhara",
+    "ink": "Sumihara",
+    "cobra": "Hebizaki",
+    "jayramaki": "Ogata",
+    "rinnegan": "Amatsuki",
+    "tengoku": "Amatsuki",
+    "sengoku": "Uchiha",
+    "bankai-akuma": "Uchiha",
+    "shiver-akuma": "Uchiha",
+    "raion-akuma": "Uchiha",
+    "riser-akuma": "Uchiha",
+    "satori-akuma": "Uchiha",
+    "arahaki-jokei": "Hyuga",
+    "rengoku": "Amatsuki",
+    "raion-rengoku": "RaionRengoku",
+    "apollo-sand": "Sunahara",
+    "black-lightning": "Arashiro",
+    "clay": "Clay",
+    "paper": "Paper",
+    "rykan-shizen": "Senju",
+    "dio-senko": "Namikaze",
+    "azim-senko": "Namikaze",
+    "odin-saberu": "Hatake",
+    "giovanni-shizen": "Senju",
+    "jotaro-shizen": "Senju",
+    "kabu-cobra": "Hebizaki",
+    "narumaki": "Uzumaki",
+    "yang-narumaki": "Uzumaki",
+    "borumaki": "Borumaki",
+    "doom-shadow": "Nara",
+    "tetsuo-kaijin": "Sarutobi",
+    "rune-koncho": "Aburame",
+    "shiro-glacier": "Yuki",
+    "hair": "Hair",
+    "eternal": "Eternal",
+    "mecha-spirit": "MechaSpirit",
+    "vine": "Vine"
+  },
+  "secondary": {
+    "boil": "Yukemori",
+    "crystal": "Akishiro",
+    "dust": "Chirihara",
+    "explosion": "Hibana",
+    "gold-sand": "Sunahara",
+    "ice": "Yuki",
+    "lava": "Iwakura",
+    "mud": "Tsuchihara",
+    "scorch": "Kagero",
+    "wood": "Morikawa",
+    "bolt": "Raikawa",
+    "sound": "Otonari",
+    "frost": "Yuki",
+    "inferno": "Uchiha",
+    "emerald": "Akishiro",
+    "typhoon": "Kazehara",
+    "aidens-son-mud": "Tsuchihara",
+    "blood": "Chinoike",
+    "tsunami": "Mizuhara",
+    "smoke": "Iburi",
+    "web": "Amihara",
+    "menza": "Ayatsuri",
+    "magma": "Iwakura",
+    "fume": "Yukemori",
+    "fizz": "Mizuhara",
+    "black-lightning": "Raikawa",
+    "surge": "Surge",
+    "apol-sand": "Sunahara",
+    "powder": "Powder",
+    "octo-ink": "OctoInk"
+  },
+  "civil": [
+    "Akiyama",
+    "Aoki",
+    "Endo",
+    "Fujita",
+    "Hasegawa",
+    "Hayashi",
+    "Ishida",
+    "Ishikawa",
+    "Ito",
+    "Kaneko",
+    "Kato",
+    "Kawamura",
+    "Kobayashi",
+    "Kondo",
+    "Matsuda",
+    "Matsumoto",
+    "Miura",
+    "Mori",
+    "Morita",
+    "Nakagawa",
+    "Nakajima",
+    "Nakamura",
+    "Nishimura",
+    "Ogawa",
+    "Okada",
+    "Ono",
+    "Saito",
+    "Sakurai",
+    "Sato",
+    "Shimizu",
+    "Sugiyama",
+    "Suzuki",
+    "Takahashi",
+    "Takeda",
+    "Tanaka",
+    "Ueda",
+    "Watanabe",
+    "Yamada",
+    "Yamaguchi",
+    "Yamamoto"
+  ]
+}

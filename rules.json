@@ -1,0 +1,676 @@
+{
+  "version": 2,
+  "elements": {
+    "water": "Agua",
+    "earth": "Tierra",
+    "fire": "Fuego",
+    "wind": "Aire",
+    "lightning": "Rayo"
+  },
+  "probabilities": {
+    "element_third": 0.005,
+    "element_fourth": 0.001,
+    "bloodline_second": 0.01,
+    "bloodline_third": 0.005,
+    "bloodline_fourth": 0.001
+  },
+  "rare_probabilities": {
+    "cobra": 0.005,
+    "eterno": 0.001,
+    "hair": 0.001,
+    "rinnegan": 0.0001
+  },
+  "clans": {
+    "senju": {
+      "label": "Senju",
+      "requires": [
+        "water",
+        "earth"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "uchiha": {
+      "label": "Uchiha",
+      "requires": [
+        "fire"
+      ],
+      "role_id": 0,
+      "linked": "inferno",
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "hyuga": {
+      "label": "Hyuga",
+      "requires": [
+        "wind"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "nara": {
+      "label": "Nara",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "akimichi": {
+      "label": "Akimichi",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "yamanaka": {
+      "label": "Yamanaka",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "haruno": {
+      "label": "Haruno",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "lee": {
+      "label": "Lee",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": true,
+      "reference_village": "Konoha"
+    },
+    "hatake": {
+      "label": "Hatake",
+      "requires": [
+        "lightning"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "sarutobi": {
+      "label": "Sarutobi",
+      "requires": [
+        "fire",
+        "earth"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "aburame": {
+      "label": "Aburame",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "uzumaki": {
+      "label": "Uzumaki",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha / Iwagakure"
+    },
+    "okami": {
+      "label": "Okami",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "cobra": {
+      "label": "Cobra / Orochimaru",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Konoha"
+    },
+    "sand": {
+      "label": "Magnetismo: Sand",
+      "requires": [
+        "wind"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Sunagakure"
+    },
+    "puppets": {
+      "label": "Puppets / Minakami",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Sunagakure"
+    },
+    "chinoike": {
+      "label": "Chinoike",
+      "requires": [
+        "water"
+      ],
+      "role_id": 0,
+      "linked": "blood",
+      "no_elements": false,
+      "reference_village": "Kirigakure"
+    },
+    "hoshigaki": {
+      "label": "Hoshigaki / Wanziame",
+      "requires": [
+        "water"
+      ],
+      "role_id": 0,
+      "linked": "tsunami",
+      "no_elements": false,
+      "reference_village": "Kirigakure"
+    },
+    "yuki": {
+      "label": "Yuuki / Glacier",
+      "requires": [
+        "water",
+        "wind"
+      ],
+      "role_id": 0,
+      "linked": "ice",
+      "no_elements": false,
+      "reference_village": "Kirigakure"
+    },
+    "bubble": {
+      "label": "Bubble / Utakata",
+      "requires": [
+        "water",
+        "wind"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Kirigakure"
+    },
+    "dangan": {
+      "label": "Dangan",
+      "requires": [
+        "water"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Kirigakure"
+    },
+    "kaguya": {
+      "label": "Kaguya",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Kirigakure"
+    },
+    "storm": {
+      "label": "Storm",
+      "requires": [
+        "lightning",
+        "water",
+        "wind"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Kumogakure"
+    },
+    "black_storm": {
+      "label": "Black Storm",
+      "requires": [
+        "lightning",
+        "water",
+        "wind"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Kumogakure"
+    },
+    "paper": {
+      "label": "Paper",
+      "requires": [
+        "water",
+        "earth"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Iwagakure"
+    },
+    "clay": {
+      "label": "Clay",
+      "requires": [
+        "fire",
+        "earth",
+        "lightning"
+      ],
+      "role_id": 0,
+      "linked": "explosion",
+      "no_elements": false,
+      "reference_village": "Iwagakure"
+    },
+    "namikaze": {
+      "label": "Namikaze",
+      "requires": [
+        "lightning"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Iwagakure"
+    },
+    "nectar": {
+      "label": "Nectar",
+      "requires": [
+        "water"
+      ],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Iwagakure"
+    },
+    "eterno": {
+      "label": "Eterno / Yaishin",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Iwagakure"
+    },
+    "hair": {
+      "label": "Hair",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Iwagakure"
+    },
+    "rinnegan": {
+      "label": "Rinnegan (linaje especial)",
+      "requires": [],
+      "role_id": 0,
+      "linked": null,
+      "no_elements": false,
+      "reference_village": "Global"
+    }
+  },
+  "main": {
+    "senju": {
+      "label": "Senju",
+      "clans": [
+        "senju"
+      ],
+      "requires": [
+        "water",
+        "earth"
+      ]
+    },
+    "uchiha": {
+      "label": "Sharingan",
+      "clans": [
+        "uchiha"
+      ],
+      "requires": [
+        "fire"
+      ]
+    },
+    "hyuga": {
+      "label": "Jokei / Byakugan",
+      "clans": [
+        "hyuga"
+      ],
+      "requires": [
+        "wind"
+      ]
+    },
+    "nara": {
+      "label": "Shadow Control",
+      "clans": [
+        "nara"
+      ],
+      "requires": []
+    },
+    "akimichi": {
+      "label": "Akimichi",
+      "clans": [
+        "akimichi"
+      ],
+      "requires": []
+    },
+    "yamanaka": {
+      "label": "Yamanaka",
+      "clans": [
+        "yamanaka"
+      ],
+      "requires": []
+    },
+    "haruno": {
+      "label": "Sakura",
+      "clans": [
+        "haruno"
+      ],
+      "requires": []
+    },
+    "lee": {
+      "label": "Kenichi",
+      "clans": [
+        "lee"
+      ],
+      "requires": []
+    },
+    "hatake": {
+      "label": "Hatake",
+      "clans": [
+        "hatake"
+      ],
+      "requires": [
+        "lightning"
+      ]
+    },
+    "sarutobi": {
+      "label": "Sarutobi",
+      "clans": [
+        "sarutobi"
+      ],
+      "requires": [
+        "fire",
+        "earth"
+      ]
+    },
+    "aburame": {
+      "label": "Aburame",
+      "clans": [
+        "aburame"
+      ],
+      "requires": []
+    },
+    "uzumaki": {
+      "label": "Uzumaki",
+      "clans": [
+        "uzumaki"
+      ],
+      "requires": []
+    },
+    "okami": {
+      "label": "Okami",
+      "clans": [
+        "okami"
+      ],
+      "requires": []
+    },
+    "cobra": {
+      "label": "Cobra",
+      "clans": [
+        "cobra"
+      ],
+      "requires": []
+    },
+    "sand": {
+      "label": "Sand",
+      "clans": [
+        "sand"
+      ],
+      "requires": [
+        "wind"
+      ]
+    },
+    "puppets": {
+      "label": "Minakami",
+      "clans": [
+        "puppets"
+      ],
+      "requires": []
+    },
+    "chinoike": {
+      "label": "Dokei",
+      "clans": [
+        "chinoike"
+      ],
+      "requires": [
+        "water"
+      ]
+    },
+    "hoshigaki": {
+      "label": "Wanziame",
+      "clans": [
+        "hoshigaki"
+      ],
+      "requires": [
+        "water"
+      ]
+    },
+    "yuki": {
+      "label": "Glacier",
+      "clans": [
+        "yuki"
+      ],
+      "requires": [
+        "water",
+        "wind"
+      ]
+    },
+    "bubble": {
+      "label": "Bubble",
+      "clans": [
+        "bubble"
+      ],
+      "requires": [
+        "water",
+        "wind"
+      ]
+    },
+    "dangan": {
+      "label": "Dangan",
+      "clans": [
+        "dangan"
+      ],
+      "requires": [
+        "water"
+      ]
+    },
+    "kaguya": {
+      "label": "Kokotsu",
+      "clans": [
+        "kaguya"
+      ],
+      "requires": []
+    },
+    "storm": {
+      "label": "Storm",
+      "clans": [
+        "storm"
+      ],
+      "requires": [
+        "lightning",
+        "water",
+        "wind"
+      ]
+    },
+    "black_storm": {
+      "label": "Black Storm",
+      "clans": [
+        "black_storm"
+      ],
+      "requires": [
+        "lightning",
+        "water",
+        "wind"
+      ]
+    },
+    "paper": {
+      "label": "Paper",
+      "clans": [
+        "paper"
+      ],
+      "requires": [
+        "water",
+        "earth"
+      ]
+    },
+    "clay": {
+      "label": "Clay",
+      "clans": [
+        "clay"
+      ],
+      "requires": [
+        "fire",
+        "earth",
+        "lightning"
+      ]
+    },
+    "namikaze": {
+      "label": "Namikaze",
+      "clans": [
+        "namikaze"
+      ],
+      "requires": [
+        "lightning"
+      ]
+    },
+    "nectar": {
+      "label": "Nectar",
+      "clans": [
+        "nectar"
+      ],
+      "requires": [
+        "water"
+      ]
+    },
+    "eterno": {
+      "label": "Yaishin",
+      "clans": [
+        "eterno"
+      ],
+      "requires": []
+    },
+    "hair": {
+      "label": "Hair",
+      "clans": [
+        "hair"
+      ],
+      "requires": []
+    },
+    "rinnegan": {
+      "label": "Rinnegan",
+      "clans": [
+        "rinnegan"
+      ],
+      "requires": []
+    }
+  },
+  "secondary": {
+    "wood": {
+      "label": "Wood",
+      "requires": [
+        "water",
+        "earth"
+      ]
+    },
+    "mud": {
+      "label": "Mud",
+      "requires": [
+        "water",
+        "earth"
+      ]
+    },
+    "inferno": {
+      "label": "Inferno",
+      "requires": [
+        "fire"
+      ],
+      "clans": [
+        "uchiha"
+      ]
+    },
+    "explosion": {
+      "label": "Explosión",
+      "requires": [
+        "fire",
+        "lightning"
+      ]
+    },
+    "scorch": {
+      "label": "Scorch",
+      "requires": [
+        "fire",
+        "wind"
+      ]
+    },
+    "blood": {
+      "label": "Blood",
+      "requires": [
+        "water"
+      ],
+      "clans": [
+        "chinoike"
+      ]
+    },
+    "tsunami": {
+      "label": "Tsunami",
+      "requires": [
+        "water"
+      ],
+      "clans": [
+        "hoshigaki"
+      ]
+    },
+    "ice": {
+      "label": "Ice",
+      "requires": [
+        "water",
+        "wind"
+      ],
+      "clans": [
+        "yuki"
+      ]
+    },
+    "steam": {
+      "label": "Vapor / Steam",
+      "requires": [
+        "water",
+        "fire"
+      ]
+    },
+    "lava": {
+      "label": "Lava",
+      "requires": [
+        "water",
+        "earth"
+      ]
+    },
+    "sound": {
+      "label": "Sound",
+      "requires": [
+        "wind"
+      ]
+    },
+    "bolt": {
+      "label": "Bolt",
+      "requires": [
+        "lightning",
+        "wind"
+      ]
+    }
+  }
+}

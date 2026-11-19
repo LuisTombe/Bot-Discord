@@ -1,0 +1,83 @@
+{
+  "version": "flujo-sencillo-2026-11-15",
+  "base": "Proyecto Completo Bot.gz",
+  "kind": "patch",
+  "tests": "92 passed; startup and command serialization checked offline",
+  "files": [
+    {
+      "path": "simple_flow_domain.py",
+      "sha256": "c815aa9c3b471fb0b790ba32e915e10f4f40bd86b408dda16459a626cc8b8bf9",
+      "previous_sha256": null
+    },
+    {
+      "path": "simple_market_ui.py",
+      "sha256": "9f719c00657fc67e7ee7d292186b5e6443ef711df14de4d47bbee636ff6e864a",
+      "previous_sha256": null
+    },
+    {
+      "path": "bot.py",
+      "sha256": "b85e4647f29abdb643dfc7ebc32c745e089da624b70060656ffb9a5ce26481df",
+      "previous_sha256": "02a1ce2339dda90a503d2cb61c1962e108c6d4017d856c35a3d09370b604742a"
+    },
+    {
+      "path": "missions_domain.py",
+      "sha256": "a276b5112460f3d9d215b2e800178b27dc5c4e7fc83387f6ad221df86bc434d0",
+      "previous_sha256": "b5509b5c6d045288360b6ab013b5826cd54dcc9a3bcfb7ee99895c19850146e6"
+    },
+    {
+      "path": "v7_missions.py",
+      "sha256": "a9692abcacffdad98a283a1c510e52b1c716c1d9b8caaf3dce726206f6a2ef92",
+      "previous_sha256": "ec78c62c991b174de88396135e8ee04e2bbcd4902faed4f3b45c9201a2eabb77"
+    },
+    {
+      "path": "simple_flow_ui.py",
+      "sha256": "520b64b46858cccf6bb6f462a265b9a97fcecf37f0e90e9169225736ae1fdc3b",
+      "previous_sha256": null
+    },
+    {
+      "path": "economy_domain.py",
+      "sha256": "4bcd2679709576642a665c27dc5b7da8c96871bfafa778de56ed983d38b4cf3c",
+      "previous_sha256": "c2b12ea35e806b2d800a9247873a369b0e5a572c74422d1a75ea329ed392da68"
+    },
+    {
+      "path": "simple_transactions.py",
+      "sha256": "1f2b84c103a9a79fddaa776448e6357a48453607ce443ac01ea20750080c0757",
+      "previous_sha256": null
+    },
+    {
+      "path": "missions.py",
+      "sha256": "e9f6d1c876d31a75779392b0d9ccd2839353621b6d821648bbf893fd613ee237",
+      "previous_sha256": "6d3e909e334c3ac7f1de4fb61d07d7e55e4b5aa476f32d5568226e1606e0964e"
+    },
+    {
+      "path": "ACTUALIZACION_FLUJO_SENCILLO.md",
+      "sha256": "3ddf8790ada6e3de54960023cb599abe9d1e77769f936cf211921b93b3642ea1",
+      "previous_sha256": null
+    },
+    {
+      "path": "mission_evidence_policy.py",
+      "sha256": "a59df64ad7c086d6cedb28a5b90a4b4e662f775fa323daa7c3b30db9887971ad",
+      "previous_sha256": "2fa67541d5ed8794caa829cd25c78121361034078944d9d97c338a1404812b8d"
+    },
+    {
+      "path": "payment_evidence.py",
+      "sha256": "cbe7c27a4caf902800f0deca834760333fa6f3cd02be51b59d61f192c6bff8de",
+      "previous_sha256": "edc6642b40078fa3b92127d743375b29e8b26dc5937475a7f65c5854c5e38618"
+    },
+    {
+      "path": "wx_market/domain.py",
+      "sha256": "208e3ce04005a299093e3fa0e8458810df68828c46bf6b9f363b5259e19bd914",
+      "previous_sha256": "417b99d3a977afccb1b0b6bd25ad7e0e894ab38137bd4b51f8dc14e5968070a6"
+    },
+    {
+      "path": "wx_market/ui.py",
+      "sha256": "5d1b931cf442cc26fba44dd7ff63a34649d02b85f9235fb24cf161dcf895f807",
+      "previous_sha256": "4884fbfdbf86ca1129f8579b4fb51be43606d170ad335080c88c732aab3b69ed"
+    },
+    {
+      "path": "tests/test_simple_flow.py",
+      "sha256": "3604c4c5f462aa76425e7bbabf3dc1fd72da09895ededad298dd71440950a934",
+      "previous_sha256": null
+    }
+  ]
+}

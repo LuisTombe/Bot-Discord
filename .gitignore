@@ -1,0 +1,28 @@
+# Secrets and Environment
+.env
+.env.*
+!.env.market.example
+!.env.misiones.example
+
+# Live Database and Player Data (NEVER COMMIT TO PUBLIC REPO)
+data/
+respaldos/
+backups/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Hosting / Archive / Local Environment
+bot world x
+*.rar
+*.zip
+*.tar
+*.gz
+*.tmp
+.cache/
+.local/
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/

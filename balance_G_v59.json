@@ -1,0 +1,655 @@
+{
+  "version": 5,
+  "spins": 3,
+  "element_draws": 4,
+  "bloodline_slots": 4,
+  "main": {
+    "jokei": {
+      "label": "Jokei (Hyuga)",
+      "percent": 2.5,
+      "requires": {
+        "wind": 1
+      },
+      "family": null
+    },
+    "akuma": {
+      "label": "Akuma (Uchiha)",
+      "percent": 2.5,
+      "requires": {
+        "fire": 1
+      },
+      "family": null
+    },
+    "dokei": {
+      "label": "Dokei",
+      "percent": 2.5,
+      "requires": {
+        "water": 1
+      },
+      "family": null
+    },
+    "kokotsu": {
+      "label": "Kokotsu",
+      "percent": 5,
+      "requires": {},
+      "family": null
+    },
+    "senko": {
+      "label": "Senko (Namikaze)",
+      "percent": 2.5,
+      "requires": {
+        "lightning": 1,
+        "wind": 1
+      },
+      "family": null
+    },
+    "kaijin": {
+      "label": "Kaijin (Sarutobi)",
+      "percent": 5,
+      "requires": {
+        "fire": 1
+      },
+      "family": null
+    },
+    "minakami": {
+      "label": "Minakami",
+      "percent": 5,
+      "requires": {},
+      "family": null
+    },
+    "shizen": {
+      "label": "Shizen (Senju)",
+      "percent": 2.5,
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "family": null
+    },
+    "azarashi": {
+      "label": "Azarashi",
+      "percent": 5,
+      "requires": {},
+      "family": null
+    },
+    "shadow": {
+      "label": "Shadow (Nara)",
+      "percent": 5,
+      "requires": {},
+      "family": null
+    },
+    "kerada": {
+      "label": "Kerada (Akimichi)",
+      "percent": 4.0,
+      "requires": {},
+      "family": null
+    },
+    "wanziame": {
+      "label": "Wanziame",
+      "percent": 5,
+      "requires": {
+        "water": 1
+      },
+      "family": null
+    },
+    "nectar": {
+      "label": "Nectar",
+      "percent": 5,
+      "requires": {},
+      "family": null
+    },
+    "glacier": {
+      "label": "Glacier",
+      "percent": 4.0,
+      "requires": {
+        "water": 1,
+        "wind": 1
+      },
+      "family": null
+    },
+    "okami": {
+      "label": "Okami",
+      "percent": 5,
+      "requires": {},
+      "family": null
+    },
+    "koncho": {
+      "label": "Koncho",
+      "percent": 2.5,
+      "requires": {},
+      "family": null
+    },
+    "saberu": {
+      "label": "Saberu (Hatake)",
+      "percent": 3.5,
+      "requires": {
+        "earth": 1
+      },
+      "family": null
+    },
+    "kenichi": {
+      "label": "Kenichi (Lee)",
+      "percent": 1.5,
+      "requires": {},
+      "family": null
+    },
+    "dangan": {
+      "label": "Dangan",
+      "percent": 2.5,
+      "requires": {
+        "water": 1
+      },
+      "family": null
+    },
+    "seishin": {
+      "label": "Seishin",
+      "percent": 2.5,
+      "requires": {},
+      "family": null
+    },
+    "iron-sand": {
+      "label": "Iron Sand",
+      "percent": 4.0,
+      "requires": {
+        "earth": 1,
+        "lightning": 1
+      },
+      "family": "sand"
+    },
+    "sand": {
+      "label": "Sand",
+      "percent": 2.5,
+      "requires": {
+        "earth": 1,
+        "wind": 1
+      },
+      "family": "sand"
+    },
+    "storm": {
+      "label": "Storm",
+      "percent": 5,
+      "requires": {
+        "water": 1,
+        "lightning": 1
+      },
+      "family": "storm"
+    },
+    "ashen-storm": {
+      "label": "Ashen Storm",
+      "percent": 0.05,
+      "requires": {
+        "lightning": 3
+      },
+      "family": "storm"
+    },
+    "black-storm": {
+      "label": "Black Storm",
+      "percent": 2.5,
+      "requires": {
+        "lightning": 1
+      },
+      "family": "storm"
+    },
+    "bubble": {
+      "label": "Bubble",
+      "percent": 2.5,
+      "requires": {
+        "water": 1
+      },
+      "family": null
+    },
+    "ink": {
+      "label": "Ink",
+      "percent": 2.5,
+      "requires": {},
+      "family": null
+    },
+    "cobra": {
+      "label": "Cobra",
+      "percent": 0.08,
+      "requires": {},
+      "family": null
+    },
+    "jayramaki": {
+      "label": "Jayramaki",
+      "percent": 0.07,
+      "requires": {},
+      "family": null
+    },
+    "rinnegan": {
+      "label": "Rinnegan",
+      "percent": 0.05,
+      "requires": {},
+      "family": null
+    },
+    "tengoku": {
+      "label": "Tengoku",
+      "percent": 0.05,
+      "requires": {},
+      "family": null
+    },
+    "sengoku": {
+      "label": "Sengoku",
+      "percent": 0.05,
+      "requires": {},
+      "family": null
+    },
+    "ryuji-kenichi": {
+      "label": "Ryuji Kenichi (Gai)",
+      "percent": 0.1,
+      "requires": {},
+      "family": null
+    }
+  },
+  "secondary": {
+    "boil": {
+      "label": "Boil",
+      "percent": 14,
+      "requires": {
+        "water": 1,
+        "fire": 1
+      },
+      "family": null
+    },
+    "crystal": {
+      "label": "Crystal",
+      "percent": 3,
+      "requires": {
+        "earth": 1,
+        "wind": 1
+      },
+      "family": null
+    },
+    "dust": {
+      "label": "Dust",
+      "percent": 0.75,
+      "requires": {
+        "earth": 1,
+        "wind": 1,
+        "lightning": 1
+      },
+      "family": null
+    },
+    "explosion": {
+      "label": "Explosion",
+      "percent": 3,
+      "requires": {
+        "fire": 1,
+        "lightning": 1
+      },
+      "family": null
+    },
+    "gold-sand": {
+      "label": "Gold Sand",
+      "percent": 3,
+      "requires": {
+        "earth": 1,
+        "wind": 1
+      },
+      "family": null
+    },
+    "ice": {
+      "label": "Ice",
+      "percent": 8,
+      "requires": {
+        "water": 1,
+        "wind": 1
+      },
+      "family": null
+    },
+    "lava": {
+      "label": "Lava",
+      "percent": 8,
+      "requires": {
+        "earth": 1,
+        "fire": 1
+      },
+      "family": null
+    },
+    "mud": {
+      "label": "Mud",
+      "percent": 4,
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "family": null
+    },
+    "scorch": {
+      "label": "Scorch",
+      "percent": 4,
+      "requires": {
+        "wind": 1,
+        "fire": 1
+      },
+      "family": null
+    },
+    "wood": {
+      "label": "Wood",
+      "percent": 4,
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "family": null
+    },
+    "bolt": {
+      "label": "Bolt",
+      "percent": 8,
+      "requires": {
+        "lightning": 1,
+        "wind": 1
+      },
+      "family": null
+    },
+    "sound": {
+      "label": "Sound",
+      "percent": 7,
+      "requires": {
+        "wind": 1
+      },
+      "family": null
+    },
+    "frost": {
+      "label": "Frost",
+      "percent": 4,
+      "requires": {
+        "water": 1,
+        "wind": 1
+      },
+      "family": null
+    },
+    "inferno": {
+      "label": "Inferno",
+      "percent": 1.5,
+      "requires": {
+        "fire": 2
+      },
+      "family": null,
+      "main_required": "akuma"
+    },
+    "emerald": {
+      "label": "Emerald",
+      "percent": 0.05,
+      "requires": {},
+      "family": null
+    },
+    "typhoon": {
+      "label": "Typhoon",
+      "percent": 1.5,
+      "requires": {
+        "wind": 3
+      },
+      "family": null
+    },
+    "aidens-son-mud": {
+      "label": "Aidens Son Mud",
+      "percent": 0.75,
+      "requires": {
+        "earth": 1,
+        "water": 1
+      },
+      "family": null
+    },
+    "blood": {
+      "label": "Blood",
+      "percent": 1.5,
+      "requires": {
+        "water": 1
+      },
+      "family": null,
+      "percent_with_main": {
+        "dokei": 0.3
+      }
+    },
+    "tsunami": {
+      "label": "Tsunami",
+      "percent": 1.5,
+      "requires": {
+        "water": 1
+      },
+      "family": null
+    },
+    "smoke": {
+      "label": "Smoke",
+      "percent": 1.5,
+      "requires": {
+        "wind": 1,
+        "fire": 1
+      },
+      "family": null
+    },
+    "web": {
+      "label": "Web",
+      "percent": 1.5,
+      "requires": {},
+      "family": null
+    },
+    "menza": {
+      "label": "Menza",
+      "percent": 0.05,
+      "requires": {},
+      "family": null
+    },
+    "magma": {
+      "label": "Magma",
+      "percent": 0.05,
+      "requires": {
+        "earth": 1,
+        "fire": 1
+      },
+      "family": null
+    },
+    "fume": {
+      "label": "Fume",
+      "percent": 0.05,
+      "requires": {
+        "water": 1,
+        "fire": 1
+      },
+      "family": null
+    },
+    "fizz": {
+      "label": "Fizz",
+      "percent": 0.05,
+      "requires": {
+        "water": 1
+      },
+      "family": null
+    },
+    "black-lightning": {
+      "label": "Black Lightning",
+      "percent": 1.5,
+      "requires": {
+        "lightning": 2
+      },
+      "family": null
+    }
+  },
+  "elements": {
+    "earth": {
+      "label": "Earth · Tierra",
+      "weight": 20,
+      "requires": {},
+      "affinity": "earth"
+    },
+    "water": {
+      "label": "Water · Agua",
+      "weight": 20,
+      "requires": {},
+      "affinity": "water"
+    },
+    "fire": {
+      "label": "Fire · Fuego",
+      "weight": 20,
+      "requires": {},
+      "affinity": "fire"
+    },
+    "wind": {
+      "label": "Wind · Viento",
+      "weight": 20,
+      "requires": {},
+      "affinity": "wind"
+    },
+    "lightning": {
+      "label": "Lightning · Rayo",
+      "weight": 20,
+      "requires": {},
+      "affinity": "lightning"
+    },
+    "acid": {
+      "label": "Acid",
+      "weight": 0.09,
+      "requires": {},
+      "affinity": null
+    },
+    "cement": {
+      "label": "Cement",
+      "weight": 0.1,
+      "requires": {
+        "earth": 1
+      },
+      "affinity": "earth"
+    },
+    "shiver": {
+      "label": "Shiver",
+      "weight": 0.05,
+      "requires": {
+        "lightning": 2
+      },
+      "affinity": "lightning"
+    },
+    "gale": {
+      "label": "Gale",
+      "weight": 0.05,
+      "requires": {
+        "wind": 2
+      },
+      "affinity": "wind"
+    },
+    "combustion": {
+      "label": "Combustion",
+      "weight": 0.05,
+      "requires": {
+        "fire": 2
+      },
+      "affinity": "fire"
+    }
+  },
+  "notes": [
+    "v5.3: comunes ponderados entre compatibles; raros con porcentaje fijo por giro/slot.",
+    "Consultar balanced: percent de cada entrada queda solo como referencia para el algoritmo antiguo.",
+    "Dos elementos predominan; repetición conservada al 5% entre nacimientos multielemento.",
+    "v5.6: ajustes relativos solicitados; los comunes siguen normalizados entre candidatos compatibles, sin modificar requisitos.",
+    "v5.7: Akuma/Jokei/Seishin peso /3; Azarashi/Minakami/Nectar/Okami/Kerada/Shadow peso /2, sin reducciones duplicadas."
+  ],
+  "family_requirements": {
+    "storm": {
+      "water": 1,
+      "lightning": 2
+    }
+  },
+  "provisional": {
+    "ryuji-kenichi": "0.1% propuesto: no tenía porcentaje. No aplica restricción Lee.",
+    "black-lightning": "Secundario; 1.5% tras balance v5.1.",
+    "emerald": "Sin requisito propuesto: no se indicó combinación.",
+    "black-storm": "Lightning x1 para salir solo; familia Storm requiere Water x1 + Lightning x2."
+  },
+  "balance_revision": "G · población compensada y raros afinados",
+  "element_count_weights": {
+    "1": 15,
+    "2": 60,
+    "3": 22,
+    "4": 3
+  },
+  "element_repeat_birth_percent": 5,
+  "element_extra_repeat_percent": 5,
+  "balanced": {
+    "main_none_percent": 70,
+    "family_percent": 8,
+    "main_fixed": {
+      "akuma": 0.3,
+      "dokei": 0.4,
+      "jokei": 0.3,
+      "koncho": 0.2,
+      "shizen": 0.3,
+      "seishin": 0.2,
+      "black-storm": 0.4,
+      "sand": 0.4,
+      "kenichi": 0.1,
+      "glacier": 0.5,
+      "rinnegan": 0.02,
+      "ryuji-kenichi": 0.02,
+      "sengoku": 0.01,
+      "tengoku": 0.015,
+      "ashen-storm": 0.01,
+      "jayramaki": 0.03,
+      "cobra": 0.025
+    },
+    "main_weights": {
+      "kokotsu": 0.285754,
+      "senko": 2.652649,
+      "kaijin": 0.603663,
+      "minakami": 0.29382,
+      "azarashi": 0.285468,
+      "shadow": 0.295425,
+      "kerada": 0.295019,
+      "wanziame": 1.040408,
+      "nectar": 0.292928,
+      "okami": 0.292681,
+      "saberu": 0.612161,
+      "dangan": 1.015095,
+      "iron-sand": 1.968394,
+      "storm": 4.686789,
+      "bubble": 1.08638,
+      "ink": 0.293367
+    },
+    "secondary_percent_with_main": [
+      42,
+      12,
+      6,
+      4
+    ],
+    "secondary_percent_without_main": [
+      100,
+      12,
+      6,
+      4
+    ],
+    "secondary_fixed": {
+      "dust": 0.05,
+      "aidens-son-mud": 0.05,
+      "emerald": 0.05,
+      "menza": 0.05,
+      "magma": 0.05,
+      "fume": 0.05,
+      "fizz": 0.05,
+      "inferno": 0.5,
+      "typhoon": 0.3,
+      "web": 0.5,
+      "blood": 0.5,
+      "black-lightning": 0.5
+    },
+    "secondary_weights": {
+      "boil": 0.382376,
+      "crystal": 1.567712,
+      "explosion": 0.154238,
+      "gold-sand": 1.593653,
+      "ice": 1.783053,
+      "lava": 0.189289,
+      "mud": 1.244464,
+      "scorch": 1.512177,
+      "wood": 1.233055,
+      "bolt": 0.656425,
+      "sound": 0.30065,
+      "frost": 1.80535,
+      "tsunami": 0.041893,
+      "smoke": 1.535663
+    },
+    "taijutsu_mains": [
+      "kenichi",
+      "ryuji-kenichi"
+    ],
+    "none_requires_secondary_common": true
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "version": "worldx-rewards-1.0",
+  "base": "WorldX-Misiones-Actualizacion + mercado",
+  "files": [
+    {
+      "path": "ACTUALIZACION_RECOMPENSAS.md",
+      "sha256": "009390a6bf402e748366b7045014aa1c373781013a601b4fc94a5afd49eedb60",
+      "previous_sha256": null
+    },
+    {
+      "path": "VERIFICACION_RECOMPENSAS.md",
+      "sha256": "15acf804dfef73005afcb1365df9819419a0284b3a57687d1b6fcedf9d0c82a1",
+      "previous_sha256": null
+    },
+    {
+      "path": "assets/REWARDS-SOURCES.md",
+      "sha256": "7c759ef43d040285e2192ab1e3e631abc4edafa402227873b64c018ad8789566",
+      "previous_sha256": null
+    },
+    {
+      "path": "assets/wiki-BodyReplacement.png",
+      "sha256": "3cd7dbf4c46cc76a3eaa39071f23605cc1dc825e91536551f540d3217e89375a",
+      "previous_sha256": null
+    },
+    {
+      "path": "assets/wiki-Ryo.png",
+      "sha256": "d645dca8e6b6ab6f21da2a8986294b8b3f66e320a48ec8265ba6af3752771c15",
+      "previous_sha256": null
+    },
+    {
+      "path": "assets/wiki-Site-logo.png",
+      "sha256": "9d4c6a8c51109eb17f3e1a37359459bd7532fb647bf22cff24bf004222473756",
+      "previous_sha256": null
+    },
+    {
+      "path": "assignment_domain.py",
+      "sha256": "83d7d6b14871fd20f49ee76d90217af6aecdf7914b07c6b2cbdc78a950858775",
+      "previous_sha256": "fdb2b8c94262b299caf43ec2bece32db99c6e6b29b71fd03ffb852309a244ac8"
+    },
+    {
+      "path": "balance_control.py",
+      "sha256": "6a758ea90db9c1a8465c3b0ee939e5ec97f79a3d6591b7a973bffafdd90de6d5",
+      "previous_sha256": "a15dadeec05b27168ace659a0351bd93565028de5cf121ce9513100d9d36c0f2"
+    },
+    {
+      "path": "bot.py",
+      "sha256": "02a1ce2339dda90a503d2cb61c1962e108c6d4017d856c35a3d09370b604742a",
+      "previous_sha256": "a88e3302bcc9f4f333a9f68c1ef8bd8b0d19516c4299d83fcd164b8d69e7a4cd"
+    },
+    {
+      "path": "config/reward_icons.json",
+      "sha256": "377ccab31cd4e753414c67cd52d77f155b164eb7d6ef421ec466b372e4e4885f",
+      "previous_sha256": null
+    },
+    {
+      "path": "config/rewards.json",
+      "sha256": "d313fb48c2bb4e1bd275b69c6c267f8516904823a01f033d7bca823301ddc3df",
+      "previous_sha256": null
+    },
+    {
+      "path": "domain.py",
+      "sha256": "36efc39c35d8a5b5909927a4115ba915efaf5a82e760b67837ff5ab11381872d",
+      "previous_sha256": "b4afc6dbb49c2daafe8060ce9d0487ba8ce9e8ed0b62e50467d9aa9d5497a6f5"
+    },
+    {
+      "path": "tests/test_rewards.py",
+      "sha256": "b6bc48efeb8b049e95fb3ea36d7a520732beb0fa408efcadcaf39181932da9bf",
+      "previous_sha256": null
+    },
+    {
+      "path": "wx_market/ui.py",
+      "sha256": "4884fbfdbf86ca1129f8579b4fb51be43606d170ad335080c88c732aab3b69ed",
+      "previous_sha256": "87c59c22589a5f41be8763131d037b23945768a9be8a4031f4a85d051f8711af"
+    },
+    {
+      "path": "wx_rewards/__init__.py",
+      "sha256": "6810465ca54b666ca3161138322bab6aea794afd5150aef8f277ee4237f66a64",
+      "previous_sha256": null
+    },
+    {
+      "path": "wx_rewards/domain.py",
+      "sha256": "ddaaa1221d152092c527666a884aee5aa2fb00ac4f1f5b0abfadd31576d17689",
+      "previous_sha256": null
+    },
+    {
+      "path": "wx_rewards/icons.py",
+      "sha256": "83d9c2cc0ef0db143968dc032880cdcc988f8b5533db83b5fac72e1b8dd5aa14",
+      "previous_sha256": null
+    },
+    {
+      "path": "wx_rewards/schema.sql",
+      "sha256": "526427798a9025e3992a05f39f38373e38052ab1895045744ee615f6858aaa0d",
+      "previous_sha256": null
+    },
+    {
+      "path": "wx_rewards/ui.py",
+      "sha256": "72d704d8332d4a577edd26517db6d6981f904f0c5788d37efe57e177a96af3c8",
+      "previous_sha256": null
+    },
+    {
+      "path": "wx_rewards/villages.py",
+      "sha256": "d3fe9484a163041b4bea69025b106da55a53120684dc4c6f6cfb7151b3f1745c",
+      "previous_sha256": null
+    },
+    {
+      "path": "wx_rewards/visuals.py",
+      "sha256": "4041a583579d8d562558a2adc3d762102b281b37dcb5fabe175455517035b451",
+      "previous_sha256": null
+    }
+  ],
+  "excludes": [
+    "data/",
+    ".env",
+    "respaldos/"
+  ],
+  "tested": 73
+}

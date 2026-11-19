@@ -1,0 +1,14 @@
+{
+  "rank_level": 2,
+  "level": 250,
+  "chi": 1500,
+  "tai": 1500,
+  "nin": 1500,
+  "hp": 1500,
+  "race": "humano",
+  "bloodlines": ["paper"],
+  "bloodline_levels": {"paper": 150},
+  "elements": ["water", "wind"],
+  "village": "konoha",
+  "tags": ["unlock:paper-paper-birds", "unlock:paper-shuriken-seeker"]
+}

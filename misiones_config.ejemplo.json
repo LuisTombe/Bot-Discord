@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "max_squad": 4,
+  "ranks": {
+    "academia": {
+      "label": "Estudiante de academia",
+      "min_level": 0,
+      "max_level": 100,
+      "max_stats": 1800,
+      "mission_rank": "D"
+    },
+    "genin": {
+      "label": "Genin",
+      "min_level": 101,
+      "max_level": 200,
+      "max_stats": 3600,
+      "mission_rank": "C"
+    },
+    "chunin": {
+      "label": "Chunin",
+      "min_level": 201,
+      "max_level": 300,
+      "max_stats": 5400,
+      "mission_rank": "B"
+    },
+    "medical": {
+      "label": "Medical Corps",
+      "min_level": 301,
+      "max_level": 350,
+      "max_stats": 6300,
+      "mission_rank": "B"
+    },
+    "police": {
+      "label": "Police Corps",
+      "min_level": 301,
+      "max_level": 350,
+      "max_stats": 6300,
+      "mission_rank": "B"
+    },
+    "jounin": {
+      "label": "Jounin",
+      "min_level": 301,
+      "max_level": 400,
+      "max_stats": 7200,
+      "mission_rank": "A"
+    },
+    "anbu": {
+      "label": "Anbu",
+      "min_level": 301,
+      "max_level": 450,
+      "max_stats": 8100,
+      "mission_rank": "A"
+    },
+    "sensei": {
+      "label": "Jounin Sensei",
+      "min_level": 301,
+      "max_level": 600,
+      "max_stats": 10800,
+      "mission_rank": "A"
+    },
+    "subkage": {
+      "label": "Subkage",
+      "min_level": 601,
+      "max_level": 800,
+      "max_stats": 14400,
+      "mission_rank": "S"
+    },
+    "sannin": {
+      "label": "Sannin",
+      "min_level": 601,
+      "max_level": 800,
+      "max_stats": 14400,
+      "mission_rank": "S"
+    },
+    "kage": {
+      "label": "Kage",
+      "min_level": 801,
+      "max_level": 1000,
+      "max_stats": 18000,
+      "mission_rank": "S"
+    },
+    "akatsuki": {
+      "label": "Akatsuki",
+      "min_level": 801,
+      "max_level": 1000,
+      "max_stats": 18000,
+      "mission_rank": "S"
+    }
+  },
+  "types": {
+    "recuperar_scroll": {
+      "label": "Recuperar un pergamino",
+      "base_rank": "D"
+    },
+    "robar_scroll": {
+      "label": "Robar un pergamino",
+      "base_rank": "C"
+    },
+    "proteger_carga": {
+      "label": "Proteger un cargamento",
+      "base_rank": "C"
+    },
+    "destruir_carga": {
+      "label": "Destruir un cargamento",
+      "base_rank": "C"
+    },
+    "ejecutar": {
+      "label": "Ejecutar un objetivo",
+      "base_rank": "B"
+    },
+    "proteger_persona": {
+      "label": "Proteger o escoltar a una persona",
+      "base_rank": "C"
+    },
+    "entregar": {
+      "label": "Recoger y entregar un paquete/cargamento",
+      "base_rank": "D"
+    },
+    "robar_carga": {
+      "label": "Robar un cargamento",
+      "base_rank": "C"
+    },
+    "capturar": {
+      "label": "Capturar a un objetivo",
+      "base_rank": "B"
+    },
+    "proteger_objetivo": {
+      "label": "Proteger un objetivo o posición",
+      "base_rank": "C"
+    }
+  }
+}

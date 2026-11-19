@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "shinobi_role_id": 0,
+  "max_evidence_disk_mb": 2048,
+  "min_free_disk_mb": 4,
+  "clock_tolerance_minutes": 5,
+  "missions": {
+    "recuperar_scroll": {
+      "label": "Recuperar un pergamino",
+      "base_rank": "D",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Pergamino localizado/recuperado y panel del objetivo visibles.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "robar_scroll": {
+      "label": "Robar un pergamino",
+      "base_rank": "C",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Pergamino sustraído y progreso/resultado del objetivo visibles.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "proteger_carga": {
+      "label": "Proteger un cargamento",
+      "base_rank": "C",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Cargamento protegido visible y panel de protección con progreso cercano al cierre o resultado.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "destruir_carga": {
+      "label": "Destruir un cargamento",
+      "base_rank": "C",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Cargamento visible a punto de destruirse, con vida/progreso y misión legibles.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "ejecutar": {
+      "label": "Ejecutar un objetivo",
+      "base_rank": "B",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 2,
+      "evidence": "Una captura con enemigo abatido en el suelo y jugador a punto de ejecutarlo; segunda captura del desenlace. La secuencia completa debe demostrar la ejecución.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "proteger_persona": {
+      "label": "Proteger o escoltar a una persona",
+      "base_rank": "C",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Persona escoltada/protegida visible y progreso o llegada al destino.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "entregar": {
+      "label": "Recoger y entregar un paquete/cargamento",
+      "base_rank": "D",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Paquete/carga y punto de entrega o confirmación de entrega visibles.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "robar_carga": {
+      "label": "Robar un cargamento",
+      "base_rank": "C",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Carga robada y progreso/resultado del objetivo visibles.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "capturar": {
+      "label": "Capturar a un objetivo",
+      "base_rank": "B",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Objetivo capturado y reconocible; mostrar entrega si el encargo la exige.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "proteger_objetivo": {
+      "label": "Proteger un objetivo o posición",
+      "base_rank": "C",
+      "worlds": [
+        "open_world",
+        "world_x"
+      ],
+      "min_images": 1,
+      "evidence": "Objetivo/posición defendido visible y progreso o resultado del encargo.",
+      "source": "Catálogo previo del servidor; rangos de rol, no lista oficial exhaustiva de RELL."
+    },
+    "azul_hierba": {
+      "label": "Arrancar hierba / pasto",
+      "base_rank": "D",
+      "worlds": [
+        "rpg"
+      ],
+      "min_images": 1,
+      "evidence": "Tarea civil seleccionada y progreso/resultado visibles en el panel; captura completa con fecha y hora.",
+      "source": "Regla World X: encargos civiles RPG D. Graffiti/limpieza general añadidos por solicitud del usuario; verificar nombre exacto del encargo en el juego."
+    },
+    "azul_gato": {
+      "label": "Recuperar gato",
+      "base_rank": "D",
+      "worlds": [
+        "rpg"
+      ],
+      "min_images": 1,
+      "evidence": "Tarea civil seleccionada y progreso/resultado visibles en el panel; captura completa con fecha y hora.",
+      "source": "Regla World X: encargos civiles RPG D. Graffiti/limpieza general añadidos por solicitud del usuario; verificar nombre exacto del encargo en el juego."
+    },
+    "azul_oficina": {
+      "label": "Limpiar oficina del Kage",
+      "base_rank": "D",
+      "worlds": [
+        "rpg"
+      ],
+      "min_images": 1,
+      "evidence": "Tarea civil seleccionada y progreso/resultado visibles en el panel; captura completa con fecha y hora.",
+      "source": "Regla World X: encargos civiles RPG D. Graffiti/limpieza general añadidos por solicitud del usuario; verificar nombre exacto del encargo en el juego."
+    },
+    "azul_compras": {
+      "label": "Compras, mercado o mandados",
+      "base_rank": "D",
+      "worlds": [
+        "rpg"
+      ],
+      "min_images": 1,
+      "evidence": "Tarea civil seleccionada y progreso/resultado visibles en el panel; captura completa con fecha y hora.",
+      "source": "Regla World X: encargos civiles RPG D. Graffiti/limpieza general añadidos por solicitud del usuario; verificar nombre exacto del encargo en el juego."
+    },
+    "azul_mensaje": {
+      "label": "Entregar carta / mensaje",
+      "base_rank": "D",
+      "worlds": [
+        "rpg"
+      ],
+      "min_images": 1,
+      "evidence": "Tarea civil seleccionada y progreso/resultado visibles en el panel; captura completa con fecha y hora.",
+      "source": "Regla World X: encargos civiles RPG D. Graffiti/limpieza general añadidos por solicitud del usuario; verificar nombre exacto del encargo en el juego."
+    },
+    "azul_grafiti": {
+      "label": "Quitar grafitis",
+      "base_rank": "D",
+      "worlds": [
+        "rpg"
+      ],
+      "min_images": 1,
+      "evidence": "Tarea civil seleccionada y progreso/resultado visibles en el panel; captura completa con fecha y hora.",
+      "source": "Regla World X: encargos civiles RPG D. Graffiti/limpieza general añadidos por solicitud del usuario; verificar nombre exacto del encargo en el juego."
+    },
+    "azul_limpieza": {
+      "label": "Limpieza de la aldea",
+      "base_rank": "D",
+      "worlds": [
+        "rpg"
+      ],
+      "min_images": 1,
+      "evidence": "Tarea civil seleccionada y progreso/resultado visibles en el panel; captura completa con fecha y hora.",
+      "source": "Regla World X: encargos civiles RPG D. Graffiti/limpieza general añadidos por solicitud del usuario; verificar nombre exacto del encargo en el juego."
+    }
+  },
+  "source_note": "No se ha verificado una lista exhaustiva actual de Open World/World X. Se conservan los tipos del servidor, compartidos entre ambos por instrucción del usuario. Los rangos son de rol, no recompensas oficiales.",
+  "sources": [
+    {
+      "url": "https://shindo-life-rell.fandom.com/wiki/Missions",
+      "scope": "Encargos civiles RPG; la wiki distingue misiones de estrellas azules y rojas. World X las agrupa como D."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=BSudimQH9ok",
+      "scope": "Presentación Open World de RELLGames; no proporciona un inventario textual exhaustivo de objetivos."
+    }
+  ]
+}

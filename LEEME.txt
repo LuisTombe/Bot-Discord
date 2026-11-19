@@ -1,0 +1,42 @@
+WORLD X — COMPRA CON REVISIÓN DIRECTA
+
+Aplicar sobre la actualización Flujo Sencillo. Parche de código, no base de datos.
+
+1. Detén el bot en Bot-Hosting y respalda los cinco archivos que se reemplazan.
+2. Extrae este ZIP en la carpeta principal del bot, conservando wx_market/.
+   Reemplaza bot.py, simple_flow_ui.py, simple_market_ui.py,
+   wx_market/domain.py y wx_market/ui.py. No pongas todo en una subcarpeta nueva.
+3. No reemplaces .env, configuraciones JSON, capturas ni bases SQLite.
+4. Inicia el bot y abre /panel abrir de nuevo. Descarta las tarjetas antiguas.
+
+FLUJO PARA EL JUGADOR
+Con su perfil verificado, abre Tienda y el artículo. La comprobación del
+HTML ahora dice que el staff la revisa al comprar. No debe escribir códigos
+unlock ni volver a verificar un perfil válido para cada técnica.
+Pulsa Adjuntar rango y solicitar compra. Adjunta rango Discord y capturas
+del juego con desbloqueo y nivel del elemento, además de los requisitos.
+El dinero se reserva; todavía no se cobra. Consulta Mis compras.
+
+FLUJO PARA EL STAFF
+En el canal de compras revisa la solicitud y las capturas. Comprueba el nivel
+del elemento: el nivel del personaje NO demuestra el nivel de Wind, etc.
+Pulsa Aprobar y escribe CONFIRMO en el motivo después de verificar las pruebas.
+Sin esa confirmación no se aprueba un desbloqueo pendiente de revisión.
+Si falta evidencia, usa Pedir corrección. Si rechazas, se libera el dinero.
+Aprobar cobra y entrega el permiso en una transacción, con registro del revisor.
+
+ALCANCE
+Se difiere exclusivamente la etiqueta unlock del propio artículo y el nivel
+elemental importado como nivel de personaje. Se mantienen perfil verificado,
+afinidad, stats, saldo, precio x3, límites, consentimiento y prohibición de
+aprobar operaciones propias. Tradeos/enseñanza conservan su validación estricta.
+No se cambian precios ni probabilidades ni se migran datos.
+Incluye la corrección de botones caducados, soporte de foro y la etiqueta de
+46 caracteres del formulario de autorización de misiones.
+
+VALIDACIÓN
+101 pruebas locales correctas; HTTP simulado para el ciclo de vida del panel.
+Incluye compra sin unlock, bloqueo por afinidad, evidencia y confirmación
+obligatorias, rechazo/liberación, aprobación sin duplicados y etiquetas de
+formularios de hasta 45 caracteres. Sin conexión al Discord de producción.
+Si falla, enviar traceback de la consola y botón pulsado, nunca el token.

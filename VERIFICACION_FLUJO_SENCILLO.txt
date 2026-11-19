@@ -1,0 +1,5 @@
+92 pruebas automatizadas aprobadas.
+Incluye pruebas de: rollback de dinero y contador, doble pago, evidencia obligatoria, autorrevisión, sesiones diarias, squad, pagos normales fijos, perfil sin JSON y cambios de ficha.
+Inicio completo del bot, serialización de comandos/componentes y restauración de vistas comprobados con discord.py 2.7.1 en base temporal.
+No se realizó conexión ni prueba real en el servidor Discord del usuario.
+No se modificaron las bases de datos ni las capturas del archivo recibido.

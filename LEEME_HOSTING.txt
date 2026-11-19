@@ -1,0 +1,24 @@
+WORLD X — PAQUETE PARA BOT-HOSTING
+
+Sube este ZIP mediante «Desde un archivo comprimido» y elige Python.
+El archivo principal es bot.py y ya está en la raíz.
+Instalación de dependencias: python -m pip install -r requirements.txt
+Inicio: python bot.py
+Usa Python 3.12 como punto de partida, versión usada en las pruebas previas del proyecto.
+
+ANTES DE INICIAR:
+Configura las variables del .env ORIGINAL de tu computador en el panel privado del alojamiento.
+Este paquete NO incluye el token ni el .env. VARIABLES_HOSTING.txt enumera los nombres detectados;
+no sustituye los valores originales. Conserva especialmente los IDs y REGISTRATION_TEST_MODE.
+No publiques el token ni lo envíes por capturas.
+Apaga la instancia local antes de iniciar el bot en el servidor.
+
+DATOS:
+Se incluyen la base de datos y las capturas existentes en el ZIP que entregaste, sin cambios.
+Si hubo actividad de jugadores después de crear ese ZIP, copia los datos más recientes
+con el bot detenido antes de hacer la migración definitiva.
+Guarda una copia propia de seguridad. Este ZIP contiene información de jugadores: no lo publiques.
+
+No se ejecutó ni conectó el bot a Discord durante la preparación.
+Se verificaron las importaciones locales, la sintaxis, la integridad SQLite y el ZIP.
+Las dependencias se conservan tal como estaban; su instalación en el hosting debe comprobarse allí.

@@ -1,0 +1,1390 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "paper-paper-birds",
+      "name": "Paper · Paper Birds",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "C",
+      "price": 25000,
+      "price_x3": 75000,
+      "requirements": [
+        {
+          "label": "Paper registrado",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "paper"
+            ]
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 1
+          }
+        },
+        {
+          "label": "Nivel BL de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodline_levels.paper",
+            "op": "gte",
+            "value": 50
+          }
+        },
+        {
+          "label": "CHI de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 650
+          }
+        },
+        {
+          "label": "Desbloqueo nativo Paper nivel 60",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "unlock:paper-paper-birds"
+            ]
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": true,
+      "unique": true,
+      "tradable": false,
+      "teachable": true,
+      "filters": {
+        "bloodline": [
+          "paper"
+        ]
+      },
+      "source": "Lámina Paper World X aprobada: propuesta de rol",
+      "native": {
+        "level": 60,
+        "chi": 500,
+        "ryo": 25000
+      },
+      "teaching_fee": 25000
+    },
+    {
+      "id": "paper-shuriken-seeker",
+      "name": "Paper · Shuriken Seeker",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "B",
+      "price": 200000,
+      "price_x3": 600000,
+      "requirements": [
+        {
+          "label": "Paper registrado",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "paper"
+            ]
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 2
+          }
+        },
+        {
+          "label": "Nivel BL de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodline_levels.paper",
+            "op": "gte",
+            "value": 150
+          }
+        },
+        {
+          "label": "CHI de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 1500
+          }
+        },
+        {
+          "label": "Desbloqueo nativo Paper nivel 370",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "unlock:paper-shuriken-seeker"
+            ]
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": true,
+      "unique": true,
+      "tradable": false,
+      "teachable": true,
+      "filters": {
+        "bloodline": [
+          "paper"
+        ]
+      },
+      "source": "Lámina Paper World X aprobada: propuesta de rol",
+      "native": {
+        "level": 370,
+        "chi": 1600,
+        "ryo": 55000
+      },
+      "teaching_fee": 200000
+    },
+    {
+      "id": "paper-paper-vortex",
+      "name": "Paper · Paper Vortex",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "A",
+      "price": 650000,
+      "price_x3": 1950000,
+      "requirements": [
+        {
+          "label": "Paper registrado",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "paper"
+            ]
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 3
+          }
+        },
+        {
+          "label": "Nivel BL de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodline_levels.paper",
+            "op": "gte",
+            "value": 300
+          }
+        },
+        {
+          "label": "CHI de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 2300
+          }
+        },
+        {
+          "label": "Desbloqueo nativo Paper nivel 480",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "unlock:paper-paper-vortex"
+            ]
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": true,
+      "unique": true,
+      "tradable": false,
+      "teachable": true,
+      "filters": {
+        "bloodline": [
+          "paper"
+        ]
+      },
+      "source": "Lámina Paper World X aprobada: propuesta de rol",
+      "native": {
+        "level": 480,
+        "chi": 2300,
+        "ryo": 120000
+      },
+      "teaching_fee": 650000
+    },
+    {
+      "id": "paper-modo-z",
+      "name": "Paper · Modo Z",
+      "category": "modes",
+      "type": "permission",
+      "rank": "A",
+      "price": 550000,
+      "price_x3": 1650000,
+      "requirements": [
+        {
+          "label": "Paper registrado",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "paper"
+            ]
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 3
+          }
+        },
+        {
+          "label": "Nivel BL de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodline_levels.paper",
+            "op": "gte",
+            "value": 300
+          }
+        },
+        {
+          "label": "CHI de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 2300
+          }
+        },
+        {
+          "label": "Desbloqueo nativo Paper nivel 550",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "unlock:paper-modo-z"
+            ]
+          }
+        },
+        {
+          "label": "TAI de rol",
+          "policy": "hard",
+          "condition": {
+            "field": "tai",
+            "op": "gte",
+            "value": 2300
+          }
+        }
+      ],
+      "emoji": "✨",
+      "image_url": null,
+      "enabled": true,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "paper"
+        ]
+      },
+      "source": "Lámina Paper World X aprobada: propuesta de rol",
+      "native": {
+        "level": 550,
+        "chi": null,
+        "ryo": null
+      },
+      "teaching_fee": 550000
+    },
+    {
+      "id": "race-humano",
+      "name": "Permiso de raza · humano",
+      "category": "race_permits",
+      "type": "permission",
+      "rank": "D",
+      "price": 0,
+      "price_x3": 0,
+      "requirements": [
+        {
+          "label": "Raza aprobada por staff",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "race-approved:humano"
+            ]
+          }
+        }
+      ],
+      "emoji": "🎭",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "race": [
+          "humano"
+        ],
+        "bloodline": []
+      },
+      "source": "PROPUESTA: permiso racial; no hay precio confirmado en HTML",
+      "grants_race": "humano"
+    },
+    {
+      "id": "race-shark",
+      "name": "Permiso de raza · shark",
+      "category": "race_permits",
+      "type": "permission",
+      "rank": "S",
+      "price": 1500000,
+      "price_x3": 4500000,
+      "requirements": [
+        {
+          "label": "Raza aprobada por staff",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "race-approved:shark"
+            ]
+          }
+        },
+        {
+          "label": "Linaje compatible",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "wanziame",
+              "hoshigaki"
+            ]
+          }
+        },
+        {
+          "label": "Nivel de progresión",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 650
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Boss racial derrotado y misión validada",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:race:shark"
+            ]
+          }
+        },
+        {
+          "label": "Rango base Jounin Sensei",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🎭",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "race": [
+          "shark"
+        ],
+        "bloodline": [
+          "wanziame",
+          "hoshigaki"
+        ]
+      },
+      "source": "PROPUESTA: permiso racial; no hay precio confirmado en HTML",
+      "grants_race": "shark"
+    },
+    {
+      "id": "race-snake",
+      "name": "Permiso de raza · snake",
+      "category": "race_permits",
+      "type": "permission",
+      "rank": "S",
+      "price": 1500000,
+      "price_x3": 4500000,
+      "requirements": [
+        {
+          "label": "Raza aprobada por staff",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "race-approved:snake"
+            ]
+          }
+        },
+        {
+          "label": "Linaje compatible",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "cobra"
+            ]
+          }
+        },
+        {
+          "label": "Nivel de progresión",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 650
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Boss racial derrotado y misión validada",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:race:snake"
+            ]
+          }
+        },
+        {
+          "label": "Rango base Jounin Sensei",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🎭",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "race": [
+          "snake"
+        ],
+        "bloodline": [
+          "cobra"
+        ]
+      },
+      "source": "PROPUESTA: permiso racial; no hay precio confirmado en HTML",
+      "grants_race": "snake"
+    },
+    {
+      "id": "race-puppet",
+      "name": "Permiso de raza · puppet",
+      "category": "race_permits",
+      "type": "permission",
+      "rank": "S",
+      "price": 1500000,
+      "price_x3": 4500000,
+      "requirements": [
+        {
+          "label": "Raza aprobada por staff",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "race-approved:puppet"
+            ]
+          }
+        },
+        {
+          "label": "Linaje compatible",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "minakami"
+            ]
+          }
+        },
+        {
+          "label": "Nivel de progresión",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 650
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Boss racial derrotado y misión validada",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:race:puppet"
+            ]
+          }
+        },
+        {
+          "label": "Rango base Jounin Sensei",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🎭",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "race": [
+          "puppet"
+        ],
+        "bloodline": [
+          "minakami"
+        ]
+      },
+      "source": "PROPUESTA: permiso racial; no hay precio confirmado en HTML",
+      "grants_race": "puppet"
+    },
+    {
+      "id": "jinch-bloodline-su",
+      "name": "Jinchuuriki Gen 1 · afinidad sand",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:su",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "sand"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:su",
+              "leader:jinch:su"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "sand"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    },
+    {
+      "id": "jinch-bloodline-mao",
+      "name": "Jinchuuriki Gen 1 · afinidad scorch",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:mao",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "scorch"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:mao",
+              "leader:jinch:mao"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "scorch"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    },
+    {
+      "id": "jinch-bloodline-isu",
+      "name": "Jinchuuriki Gen 1 · afinidad coral",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:isu",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "coral"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:isu",
+              "leader:jinch:isu"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "coral"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    },
+    {
+      "id": "jinch-bloodline-sun",
+      "name": "Jinchuuriki Gen 1 · afinidad lava",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:sun",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "lava"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:sun",
+              "leader:jinch:sun"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "lava"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    },
+    {
+      "id": "jinch-bloodline-ku",
+      "name": "Jinchuuriki Gen 1 · afinidad boil",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:ku",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "boil"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:ku",
+              "leader:jinch:ku"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "boil"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    },
+    {
+      "id": "jinch-bloodline-sei",
+      "name": "Jinchuuriki Gen 1 · afinidad bubble",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:sei",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "bubble"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:sei",
+              "leader:jinch:sei"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "bubble"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    },
+    {
+      "id": "jinch-bloodline-chu",
+      "name": "Jinchuuriki Gen 1 · afinidad insect",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:chu",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "insect"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:chu",
+              "leader:jinch:chu"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "insect"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    },
+    {
+      "id": "jinch-bloodline-gai",
+      "name": "Jinchuuriki Gen 1 · afinidad ink",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:gai",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "ink"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:gai",
+              "leader:jinch:gai"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "ink"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    },
+    {
+      "id": "jinch-bloodline-kor",
+      "name": "Jinchuuriki Gen 1 · afinidad chakra",
+      "category": "bloodline_jutsu",
+      "type": "permission",
+      "rank": "S",
+      "price": 1300000,
+      "price_x3": 3900000,
+      "requirements": [
+        {
+          "label": "Designación exacta del bijuu",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "jinchuuriki:kor",
+              "jinchuuriki:designado"
+            ]
+          }
+        },
+        {
+          "label": "Linaje/afinidad asignado en ficha",
+          "policy": "hard",
+          "condition": {
+            "field": "bloodlines",
+            "op": "any",
+            "value": [
+              "chakra"
+            ]
+          }
+        },
+        {
+          "label": "Autorización del líder y del boss",
+          "policy": "hard",
+          "condition": {
+            "field": "tags",
+            "op": "all",
+            "value": [
+              "boss:jinch:kor",
+              "leader:jinch:kor"
+            ]
+          }
+        },
+        {
+          "label": "Nivel mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "level",
+            "op": "gte",
+            "value": 600
+          }
+        },
+        {
+          "label": "CHI mínimo",
+          "policy": "hard",
+          "condition": {
+            "field": "chi",
+            "op": "gte",
+            "value": 3000
+          }
+        },
+        {
+          "label": "Rango base",
+          "policy": "x3",
+          "condition": {
+            "field": "rank_level",
+            "op": "gte",
+            "value": 4
+          }
+        }
+      ],
+      "emoji": "🧬",
+      "image_url": null,
+      "enabled": false,
+      "unique": true,
+      "tradable": false,
+      "teachable": false,
+      "filters": {
+        "bloodline": [
+          "chakra"
+        ]
+      },
+      "source": "PROPUESTA DE ROL: afinidad del jinchuuriki; no afirma equivalencia oficial de bloodline"
+    }
+  ]
+}

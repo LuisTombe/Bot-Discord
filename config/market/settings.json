@@ -1,0 +1,10 @@
+{
+  "profile_ttl_days": 30,
+  "request_ttl_hours": 72,
+  "max_pending_per_user": 5,
+  "page_size": 8,
+  "review_role_ids": [],
+  "admin_role_ids": [],
+  "channels": {"purchase": 0, "trade": 0, "teaching": 0, "loan": 0, "audit": 0},
+  "catalog_files": ["catalog_html.json", "catalog_additions.json"]
+}
