@@ -12,12 +12,12 @@ def text(value,limit=180):
 def data_for(registrations,economy,missions,guild,user,discord_username):
     # No new identities or balances: one Discord ID joins the existing three systems.
     registration=registrations.find(guild,user)
-    if not registration or registration['state']!='approved':
-        raise ValueError(t('Tu tarjeta ninja requiere una ficha aprobada. Usa /mi_ficha para revisar tu registro.'))
-    d=registration['data'];totals=missions.totals(guild,user)
+    d=registration['data'] if (registration and registration['state']=='approved') else {}
+    totals=missions.totals(guild,user)
     return {
-        'registration':registration['id'], 'user':user,
-        'name':d.get('character_name') or d.get('display_name') or d.get('roblox_name'),
+        'registration':registration['id'] if (registration and registration['state']=='approved') else 0,
+        'user':user,
+        'name':d.get('character_name') or d.get('display_name') or d.get('roblox_name') or discord_username,
         'roblox_username':d.get('roblox_name'),
         'discord_username':discord_username,
         'displayname':d.get('display_name'),
@@ -41,10 +41,11 @@ def card(data):
     e.set_footer(text=''.join([format_fragment(t('Ficha #'), '', -1), format_fragment(data['registration'], '', -1), format_fragment(t(' · Datos actuales al consultar · Pulsa Actualizar para recargar'), '', -1)]))
     return e
 
-async def show(economy,interaction,replace=False):
+async def show(economy,interaction,replace=False,target=None):
     economy.guild(interaction)
+    subject=target or interaction.user
     payload=data_for(economy.ctx['STORE'],economy.store,economy.ctx['MISSIONS'].store,
-                     interaction.guild_id,interaction.user.id,interaction.user.name)
+                     interaction.guild_id,subject.id,subject.name)
     actor=interaction.user.id
     class Controls(economy.ctx['SafeView']):
         def __init__(self):super().__init__(timeout=900)
@@ -56,7 +57,7 @@ async def show(economy,interaction,replace=False):
         async def refresh(self,i,b):
             # Also enforce ownership here for direct callback entry points.
             if i.user.id!=actor:raise ValueError(t('Abre tu propia tarjeta con /tarjeta_ninja.'))
-            await show(economy,i,replace=True)
+            await show(economy,i,replace=True,target=subject)
     embed=card(payload)
     if replace:await interaction.response.edit_message(embed=embed,view=Controls())
     else:await economy.reply(interaction,embed=embed,view=Controls())

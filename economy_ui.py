@@ -211,16 +211,21 @@ class EconomySystem:
         market=app_commands.Group(name='mercado',description='Intercambiar armas, lanzables y consumibles')
         teach=app_commands.Group(name='ensenanza',description='Aprender técnicas con otros shinobis')
 
-        @self.bot.tree.command(name='tarjeta_ninja',description='Ver tu identidad, cartera y misiones aprobadas por rango')
+        @self.bot.tree.command(name='tarjeta_ninja',description='Ver ficha shinobi, cartera y misiones (tuya o de otro jugador)')
         @app_commands.guild_only()
-        async def ninja_card(i:discord.Interaction):
+        async def ninja_card(i:discord.Interaction,usuario:discord.Member|None=None):
             from ninja_card import show
-            await show(self,i)
-        @self.bot.tree.command(name='cartera',description='Consultar tus Ryo y tu tarjeta de información ninja')
+            await show(self,i,target=usuario)
+        @self.bot.tree.command(name='cartera',description='Consultar cartera, Ryo y misiones (tuya o de otro jugador)')
         @app_commands.guild_only()
-        async def wallet(i:discord.Interaction):
+        async def wallet(i:discord.Interaction,usuario:discord.Member|None=None):
             from ninja_card import show
-            await show(self,i)
+            await show(self,i,target=usuario)
+        @self.bot.tree.command(name='ver_ficha',description='Ver ficha shinobi, cartera y registro de otro jugador')
+        @app_commands.guild_only()
+        async def view_shinobi(i:discord.Interaction,usuario:discord.Member):
+            from ninja_card import show
+            await show(self,i,target=usuario)
         @eco.command(name='panel',description='Publicar el panel de economía (administración)')
         async def panel(i:discord.Interaction,canal:discord.TextChannel):
             self.admin(i)
