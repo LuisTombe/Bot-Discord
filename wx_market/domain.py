@@ -249,6 +249,37 @@ class Market:
             q['item']=it;q['funding']=self.provenance(g,u)
             rid=self._new(g,'purchase',u,u,ident,None,q['price'],q,ref);self.hold(rid,g,u,q['price'])
         return rid
+    def purchase_x3_direct(self,g,u,ident,ref):
+        """Compra directa pagando ×3 sin exigir rango Shinobi ni revisión manual de rango."""
+        with self.transaction():
+            self.e.live(g)
+            it=self.item(ident)
+            self.check_unique(g,u,it)
+            price_x3=int(it.get('price_x3') or int(it['price'])*3)
+            avail=self.available(g,u)
+            if avail<price_x3:
+                raise ValueError(f'Saldo disponible insuficiente para compra ×3 (necesitas {price_x3:,} Ryo; tienes {avail:,} Ryo).')
+            self.provenance(g,u)
+            now=self.now()
+            cur=self.db.execute(
+                'INSERT INTO market_requests(guild,kind,actor,target,item,lot,price,state,snapshot,created,expires,reference,reason,dirty) VALUES(?,?,?,?,?,NULL,?,?,?,?,?,?,?,0)',
+                (g,'purchase',u,u,it['id'],price_x3,'approved',dump({'item':it,'x3_direct':True}),now,now,str(ref),'Compra directa ×3 sin rango')
+            )
+            rid=cur.lastrowid
+            tx=None
+            if price_x3>0:
+                tx=self.e._move(g,f'market:{rid}',u,f'Compra directa ×3 sin rango: {it["name"]}',[(f'u:{u}',-price_x3),('system',price_x3)])
+            self.db.execute(
+                'INSERT INTO market_inventory(guild,user,item,category,snapshot,origin,request,approved_at) VALUES(?,?,?,?,?,?,?,?)',
+                (g,u,it['id'],it['category'],dump(it),f'x3_direct:{rid}',rid,now)
+            )
+            if it.get('grants_race'):
+                row=self.one('SELECT data FROM market_profiles WHERE guild=? AND user=?',(g,u))
+                if row:
+                    p=json.loads(row['data']);p['race']=it['grants_race']
+                    self.db.execute('UPDATE market_profiles SET data=? WHERE guild=? AND user=?',(dump(p),g,u))
+            self.audit(g,u,'purchase_x3_direct',{'item':it['id'],'price':price_x3,'tx':tx,'ref':str(ref)})
+            return {'item':it,'price':price_x3,'tx':tx}
     def lot(self,g,u,lid):
         r=self.one("SELECT * FROM market_inventory WHERE guild=? AND user=? AND id=? AND state='owned'",(g,u,lid))
         if not r or r['locked_by']:raise ValueError('Objeto no disponible o reservado.')

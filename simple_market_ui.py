@@ -5,7 +5,7 @@ import discord
 from discord import app_commands
 from evidence import safe_path
 from wx_market.ui import SafeView, ryo
-from wx_market.domain import satisfies, dump, purchase_manual_requirement, stat_or_level_requirement, satisfies_rank_policy, rank_label
+from wx_market.domain import satisfies, dump, purchase_manual_requirement, stat_or_level_requirement, satisfies_rank_policy, rank_label, RANK_ALLOWED
 from simple_flow_ui import SafeModal, upload_files
 from simple_flow_domain import SHINOBI_RANKS
 from simple_transactions import atomic
@@ -132,17 +132,43 @@ class ProfileUI:
             try:q=self.m.quote(i.guild_id,i.user.id,it);self.m.check_unique(i.guild_id,i.user.id,it)
             except ValueError as e:error=str(e)
         available=self.m.available(i.guild_id,i.user.id)
+        price_x3=int(it.get('price_x3') or int(it['price'])*3)
+        detected_rank=self.ui.flow.detect_member_shinobi_rank(i.guild_id,i.user)
+        rank_ok=it['rank'] in RANK_ALLOWED.get(detected_rank,())
+        detected_label=SHINOBI_RANKS.get(detected_rank,(detected_rank.title(),1))[0]
+        req_label=it.get('rank_label') or rank_label(it['rank'])
         em.add_field(name='Dinero disponible',value=ryo(available));em.add_field(name='Reservado',value=ryo(self.m.reserved(i.guild_id,i.user.id)))
-        em.add_field(name='Precio',value=ryo(q['price'] if q else it['price'])+(' · recargo ×3 por rango' if q and q['x3'] else ''))
-        if q and available<q['price']:error='Saldo disponible insuficiente. No se puede solicitar la compra.'
-        if error:em.add_field(name='Antes de comprar',value=error[:1024],inline=False)
+        em.add_field(name='Precio normal / ×3',value=f'Normal: **{ryo(q["price"] if q else it["price"])}**\nSin rango (×3): **{ryo(price_x3)}**')
+        if not rank_ok:
+            em.add_field(
+                name='⚠️ Aviso de Rango Shinobi',
+                value=f'Tu rango actual en Discord (**{detected_label}**) no cumple con **{req_label}**.\nPuedes comprarlo sin rango pagando **×3 ({ryo(price_x3)})** con el botón **Comprar sin rango (×3)**.',
+                inline=False
+            )
+        if q and available<q['price']:error='Saldo disponible insuficiente. No se puede solicitar la compra normal.'
+        if error:em.add_field(name='Antes de comprar (normal)',value=error[:1024],inline=False)
         if it.get('image_url'):em.set_thumbnail(url=it['image_url'])
-        b=discord.ui.Button(label='Adjuntar rango y solicitar compra',style=discord.ButtonStyle.success,disabled=bool(error))
+        b=discord.ui.Button(label='Adjuntar rango y solicitar compra',style=discord.ButtonStyle.success,disabled=bool(error),row=0)
         async def buy(inter):
             if inter.user.id!=i.user.id:raise ValueError('Abre tu propia compra.')
             self.market.guild(inter);await inter.response.send_modal(PurchaseModal(self,ident,q['price']))
         b.callback=buy;view.add_item(b)
-        pbutton=discord.ui.Button(label='Ver / actualizar mi perfil')
+        already_owned=bool(it.get('unique') and self.m.owns(i.guild_id,i.user.id,it['id']))
+        bx3=discord.ui.Button(label=f'Comprar sin rango (×3 · {ryo(price_x3)})'[:80],emoji='💸',style=discord.ButtonStyle.primary,disabled=already_owned,row=0)
+        async def buy_x3(inter):
+            if inter.user.id!=i.user.id:raise ValueError('Abre tu propia compra.')
+            self.market.guild(inter)
+            await inter.response.defer(ephemeral=True)
+            res=self.m.purchase_x3_direct(inter.guild_id,inter.user.id,ident,str(inter.id))
+            await inter.followup.send(
+                f'✅ **Compra sin rango (×3) autorizada y entregada.**\n'
+                f'• Artículo: **{it["name"]}**\n'
+                f'• Pagado: **{ryo(res["price"])}**\n'
+                f'• Ya está disponible en tu **Inventario**.',
+                ephemeral=True
+            )
+        bx3.callback=buy_x3;view.add_item(bx3)
+        pbutton=discord.ui.Button(label='Ver / actualizar mi perfil',row=1)
         async def profile(inter):
             if inter.user.id!=i.user.id:raise ValueError('Abre tu propio perfil.')
             await self.show(inter)
