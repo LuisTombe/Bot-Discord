@@ -27,7 +27,18 @@ RANK_ALLOWED = {
     'subkage': ('D','C','B','A'),
     'sannin': ('D','C','B','A'),
     'kage': ('D','C','B','A','S'),
+    'akatsuki': ('D','C','B','A','S'),
 }
+RANK_DISPLAY = {
+    'D': 'Genin (D)',
+    'C': 'Genin - Chunin (C)',
+    'B': 'Chunin - Jounin (B)',
+    'A': 'ANBU - Subkage (A)',
+    'S': 'Kage (S)',
+}
+def rank_label(letter):
+    key = str(letter or '').upper()
+    return RANK_DISPLAY.get(key, key)
 TIER_DEFAULT_RANK = {0:'academia',1:'genin',2:'chunin',3:'jounin',4:'sannin',5:'kage'}
 
 def dump(x): return json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':'))

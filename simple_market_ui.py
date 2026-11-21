@@ -5,7 +5,7 @@ import discord
 from discord import app_commands
 from evidence import safe_path
 from wx_market.ui import SafeView, ryo
-from wx_market.domain import satisfies, dump, purchase_manual_requirement, stat_or_level_requirement, satisfies_rank_policy
+from wx_market.domain import satisfies, dump, purchase_manual_requirement, stat_or_level_requirement, satisfies_rank_policy, rank_label
 from simple_flow_ui import SafeModal, upload_files
 from simple_flow_domain import SHINOBI_RANKS
 from simple_transactions import atomic
@@ -123,7 +123,7 @@ class ProfileUI:
                 lines.append('📷 Desbloqueo de la técnica · staff revisa al comprar')
             elif r['policy']=='x3' and c.get('field')=='rank_level':
                 ok=satisfies_rank_policy(p,it,r) if p else False
-                lines.append(('✅ ' if ok else '⚠️ ')+f'Rango de tienda {it["rank"]} (según tu rango Shinobi Discord)'+('' if ok else ' · recargo ×3'))
+                lines.append(('✅ ' if ok else '⚠️ ')+f'Rango requerido: **{rank_label(it["rank"])}** (según tu rango Shinobi Discord)'+('' if ok else ' · recargo ×3'))
             else:
                 ok=satisfies(p,c) if p else False
                 lines.append(('✅ ' if ok else '❌ ')+r['label']+(' · obligatorio' if r['policy']=='hard' else ' · ×3 si falta'))

@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 import discord
 from discord import app_commands
-from .domain import Market, CATEGORIES, dump
+from .domain import Market, CATEGORIES, dump, rank_label
 log=logging.getLogger('worldx.market')
 LABELS=dict(zip(CATEGORIES,['Jutsus de elementos','Modos','Sub-modos','Subjutsus','Taijutsus','Jutsus de bloodline','Lanzables','Consumibles','Armas','Objetos','Permisos de razas']))
 def short(s,n=1000):return str(s)[:n]
@@ -88,7 +88,7 @@ class ShopView(SafeView):
         async def category(i):
             f=dict(self.filters);f['category']=None if cat.values[0]=='all' else cat.values[0];await system.shop(i,f)
         cat.callback=category;self.add_item(cat)
-        rank=discord.ui.Select(placeholder='Rango / tipo',options=[discord.SelectOption(label='Todos los rangos y tipos',value='all')]+[discord.SelectOption(label='Rango '+r,value='rank:'+r) for r in 'DCBAS']+[discord.SelectOption(label='Permisos',value='type:permission'),discord.SelectOption(label='Objetos físicos',value='type:physical')],row=1)
+        rank=discord.ui.Select(placeholder='Rango / tipo',options=[discord.SelectOption(label='Todos los rangos y tipos',value='all')]+[discord.SelectOption(label=rank_label(r),value='rank:'+r) for r in 'DCBAS']+[discord.SelectOption(label='Permisos',value='type:permission'),discord.SelectOption(label='Objetos físicos',value='type:physical')],row=1)
         async def rank_cb(i):
             f=dict(self.filters)
             if rank.values[0]=='all':f.pop('rank',None);f.pop('type',None)
@@ -96,7 +96,7 @@ class ShopView(SafeView):
             await system.shop(i,f)
         rank.callback=rank_cb;self.add_item(rank)
         if rows:
-            select=discord.ui.Select(placeholder='Ver artículo y solicitar compra',options=[discord.SelectOption(label=x['name'][:100],value=x['id'],description=(x['rank']+' · '+ryo(x['price']))[:100]) for x in rows],row=2)
+            select=discord.ui.Select(placeholder='Ver artículo y solicitar compra',options=[discord.SelectOption(label=x['name'][:100],value=x['id'],description=(rank_label(x['rank'])+' · '+ryo(x['price']))[:100]) for x in rows],row=2)
             async def selected(i):await system.detail(i,select.values[0])
             select.callback=selected;self.add_item(select)
         for label,delta in [('◀',-1),('▶',1)]:
@@ -231,7 +231,7 @@ class MarketSystem:
     async def shop(self,i,filters=None,page=1):
         self.guild(i);rows,total,page=self.store.search(filters,page)
         em=discord.Embed(title='World X | Hardcore · Tienda',description='Precio del permiso; costes del juego aparte. ×3 solo para requisitos marcados x3.',color=0xC4A76B)
-        for r in rows:em.add_field(name=short(r['emoji']+' '+r['name'],240),value=f"{LABELS[r['category']]} · {r['rank']}\nNormal: **{ryo(r['price'])}** · ×3: {ryo(r['price_x3'])}",inline=False)
+        for r in rows:em.add_field(name=short(r['emoji']+' '+r['name'],240),value=f"{LABELS[r['category']]} · {rank_label(r['rank'])}\nNormal: **{ryo(r['price'])}** · ×3: {ryo(r['price_x3'])}",inline=False)
         if not rows:em.description='No hay resultados para estos filtros.'
         em.set_footer(text=f'Página {page}/{max(1,(total+7)//8)} · {total} artículos · filtro de precio normal')
         view=ShopView(self,i.user.id,filters or {},page,rows,total)
