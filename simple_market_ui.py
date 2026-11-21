@@ -213,6 +213,21 @@ class ProfileUI:
         async def orders(i:discord.Interaction):await self.orders(i)
         @group.command(name='ver_perfil',description='Consultar o actualizar tu perfil mediante formulario')
         async def show(i:discord.Interaction):await self.show(i)
+        self.ui.bot.tree.remove_command('editar_perfil')
+        @self.ui.bot.tree.command(name='editar_perfil',description='Staff: asignar o corregir bloodlines, elementos o rango Shinobi de un perfil')
+        @app_commands.guild_only()
+        async def edit_profile_cmd(i:discord.Interaction,usuario:discord.Member,bloodlines:str|None=None,elementos:str|None=None,rango_shinobi:str|None=None):
+            self.market.staff(i)
+            p=self.ui.flow.admin_set_profile(i.guild_id,i.user.id,usuario.id,bloodlines=bloodlines,elements=elementos,shinobi_rank=rango_shinobi)
+            await self.market.reply(
+                i,
+                content=(
+                    f'✅ Perfil de <@{usuario.id}> actualizado:\n'
+                    f'• **Rango Shinobi:** `{p.get("shinobi_rank")}`\n'
+                    f'• **Bloodlines:** {", ".join(p.get("bloodlines",[])) or "Ninguno"}\n'
+                    f'• **Elementos:** {", ".join(p.get("elements",[])) or "Ninguno"}'
+                )
+            )
         # Agrega corrección al panel de staff existente; no cambia dinero ni caducidad.
         b=discord.ui.Button(label='Pedir corrección',custom_id='wx:simple:purchase:correct')
         async def correct(i):

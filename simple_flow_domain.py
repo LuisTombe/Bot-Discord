@@ -234,15 +234,32 @@ class SimpleFlow:
 
     def seed_profile(self,g,u):
         try:reg=self.ms.registered(g,u);d=reg['data']
-        except ValueError:d={}
+        except ValueError:
+            row=self.db.execute("SELECT data FROM registrations WHERE guild=? AND user=? AND state!='deleted' ORDER BY id DESC LIMIT 1",(g,u)).fetchone()
+            d=json.loads(row[0]) if row else {}
         try:e=self.e.player(g,u)
         except ValueError:e={'tier':1,'rank':'genin','village':0}
         old=self.m.one('SELECT data FROM market_profiles WHERE guild=? AND user=?',(g,u))
         p=json.loads(old['data']) if old else {}
-        # Valores de identidad aprobados, nunca añadidos por el comprador.
         mains=d.get('mains') or ([d['main']] if d.get('main') and d.get('main')!='none' else [])
-        vname=self.e.village(g,e['village'])['name'] if e.get('village') else 'Por verificar'
-        p.update(rank_level=e['tier'],shinobi_rank=p.get('shinobi_rank') or e.get('rank','genin'),village=vname,elements=d.get('elements',[]),bloodlines=list(dict.fromkeys(mains+d.get('secondary',[]))))
+        secs=list(d.get('secondary',[]))
+        elems=list(d.get('elements',[]))
+        # Si la asignación por ruleta/nacimiento existe en `assignments`, combinarla si falta en registrations.
+        arow=self.db.execute('SELECT state FROM assignments WHERE guild=? AND user=?',(g,u)).fetchone()
+        if arow:
+            try:
+                res=json.loads(arow[0]).get('results',{})
+                if not elems and res.get('elements'):elems=list(res['elements'])
+                amain=res.get('main') or []
+                if isinstance(amain,str):amain=[amain] if amain!='none' else []
+                if not mains and amain:mains=[x for x in amain if x and x!='none']
+                if not secs and res.get('secondary'):secs=list(res['secondary'])
+            except Exception:pass
+        bls=list(dict.fromkeys(mains+secs))
+        if not elems and p.get('elements'):elems=list(p['elements'])
+        if not bls and p.get('bloodlines'):bls=list(p['bloodlines'])
+        vname=self.e.village(g,e['village'])['name'] if e.get('village') else p.get('village','Por verificar')
+        p.update(rank_level=e['tier'],shinobi_rank=p.get('shinobi_rank') or e.get('rank','genin'),village=vname,elements=elems,bloodlines=bls)
         p.setdefault('race','humano')
         p.setdefault('level',200)
         for k in ('chi','nin','tai','hp'):p.setdefault(k,900)
@@ -251,6 +268,30 @@ class SimpleFlow:
         latest=self.db.execute("SELECT data FROM mission_reports WHERE guild=? AND owner=? AND kind='authorization' AND state='approved' ORDER BY granted DESC LIMIT 1",(g,u)).fetchone()
         if latest:
             a=json.loads(latest[0]);p['level']=int(a['level']);p.update(dict(zip(('chi','nin','tai','hp'),stats_values(a['stats']))))
+        return p
+
+    def admin_set_profile(self,g,actor,target,bloodlines=None,elements=None,shinobi_rank=None):
+        """Staff: asigna o corrige manualmente bloodlines, elementos o rango Shinobi en el perfil del jugador."""
+        alias_bl={'namikaze':'senko','uchiha':'akuma','hyuga':'jokei','senju':'shizen','uzumaki':'narumaki'}
+        alias_el={'rayo':'lightning','fuego':'fire','agua':'water','tierra':'earth','viento':'wind','acido':'acid'}
+        p=self.seed_profile(g,target)
+        if bloodlines is not None:
+            raw=[x.strip().lower() for x in str(bloodlines).split(',') if x.strip()]
+            p['bloodlines']=[alias_bl.get(x,x) for x in raw]
+        if elements is not None:
+            raw=[x.strip().lower() for x in str(elements).split(',') if x.strip()]
+            p['elements']=[alias_el.get(x,x) for x in raw]
+        if shinobi_rank is not None:
+            sr=str(shinobi_rank).strip().lower()
+            if sr in SHINOBI_RANKS:
+                p['shinobi_rank']=sr
+                p['rank_level']=max(int(p.get('rank_level',1)),SHINOBI_RANKS[sr][1])
+        with atomic(self.db):
+            self.db.execute(
+                'INSERT INTO market_profiles VALUES(?,?,?,?,?) ON CONFLICT(guild,user) DO UPDATE SET data=excluded.data,verified_by=excluded.verified_by,verified_at=excluded.verified_at',
+                (g,target,dump(p),actor,self.m.now())
+            )
+            self.m.audit(g,actor,'profile_manual_edit',{'user':target,'bloodlines':p['bloodlines'],'elements':p['elements'],'shinobi_rank':p.get('shinobi_rank')})
         return p
 
     def propose_profile(self,g,u,data,proof):
