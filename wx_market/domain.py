@@ -284,6 +284,34 @@ class Market:
         r=self.one("SELECT * FROM market_inventory WHERE guild=? AND user=? AND id=? AND state='owned'",(g,u,lid))
         if not r or r['locked_by']:raise ValueError('Objeto no disponible o reservado.')
         return r
+    def trade_direct(self,g,actor,target,lot_id,reason='Trade entre jugadores'):
+        """Transfiere directamente un objeto físico/arma/lanzable/consumible del usuario A al usuario B."""
+        if actor==target:raise ValueError('El destinatario debe ser otro jugador.')
+        if len(str(reason or '').strip())<2:raise ValueError('Indica un motivo breve para el trade.')
+        with self.transaction():
+            inv=self.lot(g,actor,lot_id)
+            snap=json.loads(inv['snapshot'])
+            physical={'weapons','throwables','consumables','objects'}
+            if inv['category'] not in physical and snap.get('type')!='physical' and not snap.get('tradable'):
+                raise ValueError('Solo puedes tradear objetos, armas, lanzables o consumibles.')
+            if snap.get('unique') and self.owns(g,target,inv['item']):
+                raise ValueError('El destinatario ya tiene este artículo único en su inventario.')
+            now=self.now()
+            self.db.execute(
+                'UPDATE market_inventory SET user=?,origin=?,approved_at=? WHERE id=? AND guild=? AND user=?',
+                (target,f'trade:{actor}->{target}',now,lot_id,g,actor)
+            )
+            self.audit(g,actor,'trade_direct',{'lot':lot_id,'item':inv['item'],'name':snap.get('name'),'to':target,'reason':str(reason)[:200]})
+            return {'lot':lot_id,'item':inv['item'],'name':snap.get('name',inv['item']),'category':inv['category']}
+    def revoke_inventory(self,g,staff,target,lot_id,reason='Eliminado por Staff'):
+        """Staff: elimina (revoca) un artículo o permiso del inventario de un jugador."""
+        with self.transaction():
+            inv=self.one("SELECT * FROM market_inventory WHERE id=? AND guild=? AND user=? AND state='owned'",(lot_id,g,target))
+            if not inv:raise ValueError('Ese artículo no está en el inventario del usuario.')
+            snap=json.loads(inv['snapshot'])
+            self.db.execute("UPDATE market_inventory SET state='revoked',locked_by=NULL WHERE id=?",(lot_id,))
+            self.audit(g,staff,'inventory_revoked',{'lot':lot_id,'user':target,'item':inv['item'],'name':snap.get('name'),'reason':str(reason)[:200]})
+            return {'lot':lot_id,'item':inv['item'],'name':snap.get('name',inv['item'])}
     def offer(self,g,u,target,kind,ref,lot=None,amount=0,days=7):
         if kind not in ('trade','teaching','loan') or u==target:raise ValueError('Oferta o destinatario inválido.')
         self.e.player(g,u);self.e.player(g,target)

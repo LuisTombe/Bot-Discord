@@ -260,12 +260,13 @@ class MarketSystem:
         b.callback=buy;v.add_item(b);await self.reply(i,embed=em,view=v)
     async def listing(self,i,kind,page=1,user=None):
         self.guild(i);u=user or i.user.id
-        if u!=i.user.id:self.staff(i)
+        if u!=i.user.id and kind!='inventory':self.staff(i)
         page=max(1,page);offset=(page-1)*8;g=i.guild_id
         if kind=='inventory':
             rows=self.store.rows("SELECT * FROM market_inventory WHERE guild=? AND user=? AND state='owned' ORDER BY id DESC LIMIT 8 OFFSET ?",(g,u,offset))
-            texts=[f"**#{r['id']} · {json.loads(r['snapshot'])['name']}**\n{LABELS[r['category']]} · {r['origin']} · <t:{r['approved_at']}:d>" for r in rows]
-            title='Inventario del mercado'
+            texts=[f"**#{r['id']} · {json.loads(r['snapshot'])['name']}**\n{LABELS.get(r['category'],r['category'])} · {r['origin']} · <t:{r['approved_at']}:d>" for r in rows]
+            member=i.guild.get_member(u) if i.guild else None
+            title=f'🎒 Inventario de {member.display_name}' if member and user else '🎒 Inventario del mercado'
         elif kind=='logs':
             self.staff(i);rows=self.store.rows('SELECT * FROM market_audit WHERE guild=? ORDER BY id DESC LIMIT 8 OFFSET ?',(g,offset));texts=[f"#{r['id']} · {r['action']} · <@{r['actor']}>\n{short(r['detail'],250)}" for r in rows];title='Auditoría'
         elif kind=='loans':
@@ -275,8 +276,17 @@ class MarketSystem:
         else:
             p=self.store.provenance(g,u,page);rows=p['entries'];texts=[f"TX #{r['id']} · {ryo(r['delta'])}\n{short(r['ref'],100)} · {short(r['reason'],160)}" for r in rows];title=f"Cartera {ryo(p['balance'])} · reservas {ryo(p['reserved'])}"
         em=discord.Embed(title=short(title,250),description='\n\n'.join(texts)[:3900] or 'Sin registros.',color=0xC4A76B);em.set_footer(text=f'Página {page}')
-        if kind=='inventory' and 'REWARDS' in self.ctx:
-            em.add_field(name='Rerolls completos',value=str(self.ctx['REWARDS'].store.credits(u))+' · /recompensas reroll')
+        if kind=='inventory':
+            em.add_field(name='💰 Dinero',value=ryo(self.store.e.balance(g,f'u:{u}')),inline=True)
+            if 'REWARDS' in self.ctx:
+                em.add_field(name='🎲 Rerolls',value=str(self.ctx['REWARDS'].store.credits(u)),inline=True)
+            if 'MISSIONS' in self.ctx:
+                totals=self.ctx['MISSIONS'].store.totals(g,u)
+                em.add_field(
+                    name='📚 Misiones completadas',
+                    value=' · '.join(f'**{r}:** {int(totals.get(r,0))}' for r in ('D','C','B','A','S'))+f' · **Total:** {sum(int(totals.get(r,0)) for r in ("D","C","B","A","S"))}',
+                    inline=False
+                )
         if kind=='history' and 'MISSIONS' in self.ctx:
             totals=self.ctx['MISSIONS'].store.totals(g,u)
             em.add_field(
@@ -390,3 +400,62 @@ class MarketSystem:
             legacy.name='mercado_anterior'
             self.bot.tree.add_command(legacy)
         self.bot.tree.add_command(group)
+
+        @self.bot.tree.command(name='inventario',description='Ver inventario, dinero y misiones completadas (tuyo o de otro jugador)')
+        @app_commands.guild_only()
+        async def public_inventory(i:discord.Interaction,usuario:discord.Member|None=None,pagina:app_commands.Range[int,1,100000]=1):
+            await self.listing(i,'inventory',pagina,usuario.id if usuario else None)
+
+        @self.bot.tree.command(name='trade',description='Tradear o prestar un objeto, arma, lanzable o consumible de tu inventario')
+        @app_commands.guild_only()
+        async def simple_trade(i:discord.Interaction,usuario:discord.Member,objeto:int,motivo:str='Trade / préstamo entre jugadores'):
+            self.guild(i)
+            if usuario.bot:raise ValueError('No puedes tradear con un bot.')
+            res=self.store.trade_direct(i.guild_id,i.user.id,usuario.id,objeto,motivo)
+            em=discord.Embed(
+                title='🤝 Trade completado',
+                description=f'**{res["name"]}** (`#{res["lot"]}`) fue transferido de <@{i.user.id}> a <@{usuario.id}>.\n**Motivo:** {motivo}',
+                color=0x388E63
+            )
+            await self.reply(i,embed=em)
+        @simple_trade.autocomplete('objeto')
+        async def simple_trade_ac(i:discord.Interaction,current:str):
+            rows=self.store.rows(
+                "SELECT id,item,category,snapshot FROM market_inventory WHERE guild=? AND user=? AND state='owned' AND locked_by IS NULL ORDER BY id DESC LIMIT 40",
+                (i.guild_id,i.user.id)
+            )
+            out=[]
+            for r in rows:
+                snap=json.loads(r['snapshot'])
+                if r['category'] not in ('weapons','throwables','consumables','objects') and snap.get('type')!='physical' and not snap.get('tradable'):
+                    continue
+                label=f"#{r['id']} · {snap.get('name',r['item'])} ({LABELS.get(r['category'],r['category'])})"
+                if not current or current.lower() in label.lower():
+                    out.append(app_commands.Choice(name=short(label,100),value=r['id']))
+                if len(out)>=25:break
+            return out
+
+        @self.bot.tree.command(name='quitar_inventario',description='Staff: eliminar un objeto o permiso del inventario de un jugador')
+        @app_commands.guild_only()
+        async def staff_revoke_inv(i:discord.Interaction,usuario:discord.Member,objeto:int,motivo:str='Eliminado por Staff'):
+            self.staff(i)
+            res=self.store.revoke_inventory(i.guild_id,i.user.id,usuario.id,objeto,motivo)
+            await self.reply(i,content=f'🗑️ Se eliminó **{res["name"]}** (`#{res["lot"]}`) del inventario de <@{usuario.id}>.\n**Motivo:** {motivo}')
+        @staff_revoke_inv.autocomplete('objeto')
+        async def staff_revoke_ac(i:discord.Interaction,current:str):
+            if not self.is_staff(i.user):return []
+            target=getattr(i.namespace,'usuario',None)
+            uid=target.id if hasattr(target,'id') else (int(target) if target else 0)
+            if not uid:return []
+            rows=self.store.rows(
+                "SELECT id,item,category,snapshot FROM market_inventory WHERE guild=? AND user=? AND state='owned' ORDER BY id DESC LIMIT 40",
+                (i.guild_id,uid)
+            )
+            out=[]
+            for r in rows:
+                snap=json.loads(r['snapshot'])
+                label=f"#{r['id']} · {snap.get('name',r['item'])} ({LABELS.get(r['category'],r['category'])})"
+                if not current or current.lower() in label.lower():
+                    out.append(app_commands.Choice(name=short(label,100),value=r['id']))
+                if len(out)>=25:break
+            return out
