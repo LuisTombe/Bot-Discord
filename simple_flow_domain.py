@@ -191,6 +191,10 @@ class SimpleFlow:
             else:
                 p['rank_level']=e['tier']
             p['village']=self.e.village(g,e['village'])['name'] if e.get('village') else p.get('village','Por verificar')
+            if not p.get('elements') or not p.get('bloodlines'):
+                seeded=self.seed_profile(g,u)
+                if not p.get('elements') and seeded.get('elements'):p['elements']=seeded['elements']
+                if not p.get('bloodlines') and seeded.get('bloodlines'):p['bloodlines']=seeded['bloodlines']
             # Solo usa niveles y estadísticas de una autorización aprobada más reciente.
             previous=self.db.execute('SELECT verified_at FROM market_profiles WHERE guild=? AND user=?',(g,u)).fetchone()
             if previous:
