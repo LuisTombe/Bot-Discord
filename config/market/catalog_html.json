@@ -38675,8 +38675,8 @@
       "category": "modes",
       "type": "permission",
       "rank": "B",
-      "price": 140000,
-      "price_x3": 420000,
+      "price": 500000,
+      "price_x3": 1500000,
       "requirements": [
         {
           "label": "Condiciones y desbloqueo del HTML verificados por staff",
