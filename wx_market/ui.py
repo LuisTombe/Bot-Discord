@@ -401,11 +401,13 @@ class MarketSystem:
             self.bot.tree.add_command(legacy)
         self.bot.tree.add_command(group)
 
+        self.bot.tree.remove_command('inventario')
         @self.bot.tree.command(name='inventario',description='Ver inventario, dinero y misiones completadas (tuyo o de otro jugador)')
         @app_commands.guild_only()
         async def public_inventory(i:discord.Interaction,usuario:discord.Member|None=None,pagina:app_commands.Range[int,1,100000]=1):
             await self.listing(i,'inventory',pagina,usuario.id if usuario else None)
 
+        self.bot.tree.remove_command('trade')
         @self.bot.tree.command(name='trade',description='Tradear o prestar un objeto, arma, lanzable o consumible de tu inventario')
         @app_commands.guild_only()
         async def simple_trade(i:discord.Interaction,usuario:discord.Member,objeto:int,motivo:str='Trade / préstamo entre jugadores'):
@@ -435,6 +437,7 @@ class MarketSystem:
                 if len(out)>=25:break
             return out
 
+        self.bot.tree.remove_command('quitar_inventario')
         @self.bot.tree.command(name='quitar_inventario',description='Staff: eliminar un objeto o permiso del inventario de un jugador')
         @app_commands.guild_only()
         async def staff_revoke_inv(i:discord.Interaction,usuario:discord.Member,objeto:int,motivo:str='Eliminado por Staff'):
