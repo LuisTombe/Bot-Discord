@@ -31407,7 +31407,7 @@
       "name": "Vanishing Clone Jutsu",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "B",
+      "rank": "D",
       "price": 140000,
       "price_x3": 420000,
       "requirements": [
@@ -31462,7 +31462,7 @@
       "source_values": {
         "group": "Subjutsus Clones",
         "name": "Vanishing Clone Jutsu",
-        "rank": "B",
+        "rank": "D",
         "base_rank": "Chunin",
         "level": "Nivel 400–680",
         "stats": "1.500 CHI",
@@ -31644,7 +31644,7 @@
       "name": "Clown Trap Halloween",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "B",
+      "rank": "C",
       "price": 450000,
       "price_x3": 1350000,
       "requirements": [
@@ -31699,7 +31699,7 @@
       "source_values": {
         "group": "Subjutsus Genjutsu",
         "name": "Clown Trap Halloween",
-        "rank": "B",
+        "rank": "C",
         "base_rank": "Jounin",
         "level": "Nivel 400–680",
         "stats": "2.000 CHI",
@@ -31719,7 +31719,7 @@
       "name": "Confusion Illusion Technique",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "B",
+      "rank": "C",
       "price": 280000,
       "price_x3": 840000,
       "requirements": [
@@ -31774,7 +31774,7 @@
       "source_values": {
         "group": "Subjutsus Genjutsu",
         "name": "Confusion Illusion Technique",
-        "rank": "B",
+        "rank": "C",
         "base_rank": "Chunin",
         "level": "Nivel 400–680",
         "stats": "1.500 CHI",
@@ -31880,7 +31880,7 @@
       "name": "Sleeping Technique",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "B",
+      "rank": "C",
       "price": 280000,
       "price_x3": 840000,
       "requirements": [
@@ -31935,7 +31935,7 @@
       "source_values": {
         "group": "Subjutsus Genjutsu",
         "name": "Sleeping Technique",
-        "rank": "B",
+        "rank": "C",
         "base_rank": "Chunin",
         "level": "Nivel 400–680",
         "stats": "1.500 CHI",
@@ -31955,7 +31955,7 @@
       "name": "Tree Illusion Technique",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "B",
+      "rank": "C",
       "price": 280000,
       "price_x3": 840000,
       "requirements": [
@@ -32010,7 +32010,7 @@
       "source_values": {
         "group": "Subjutsus Genjutsu",
         "name": "Tree Illusion Technique",
-        "rank": "B",
+        "rank": "C",
         "base_rank": "Chunin",
         "level": "Nivel 400–680",
         "stats": "1.500 CHI",
@@ -32030,7 +32030,7 @@
       "name": "Medical Mode-Transfer",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "B",
+      "rank": "C",
       "price": 280000,
       "price_x3": 840000,
       "requirements": [
@@ -32105,7 +32105,7 @@
       "source_values": {
         "group": "Subjutsus Ninjutsu médico",
         "name": "Medical Mode-Transfer",
-        "rank": "B",
+        "rank": "C",
         "base_rank": "Chunin",
         "level": "Nivel 400–680",
         "stats": "1.500 NIN / CHI",
@@ -32118,7 +32118,8 @@
       },
       "wiki_url": "https://shindo-life-rell.fandom.com/wiki/Medical_Mode-Transfer",
       "notes": "Requiere permiso de medicina; sanar no concede autorización para modos regenerativos.",
-      "teaching_fee": 280000
+      "teaching_fee": 280000,
+      "rank_label": "Medical Corps (C)"
     },
     {
       "id": "v3-demon-warp-cdc421c5",
@@ -33143,9 +33144,9 @@
       "name": "Multi-Vanishing Clones",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "A",
-      "price": 750000,
-      "price_x3": 2250000,
+      "rank": "B",
+      "price": 250000,
+      "price_x3": 750000,
       "requirements": [
         {
           "label": "Condiciones y desbloqueo del HTML verificados por staff",
@@ -33198,7 +33199,7 @@
       "source_values": {
         "group": "Subjutsus Clones",
         "name": "Multi-Vanishing Clones",
-        "rank": "A",
+        "rank": "B",
         "base_rank": "Jounin",
         "level": "Nivel 650–880",
         "stats": "2.300 CHI",
@@ -33454,7 +33455,7 @@
       "name": "Peekaboo Jutsu",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "A",
+      "rank": "D",
       "price": 880000,
       "price_x3": 2640000,
       "requirements": [
@@ -33509,7 +33510,7 @@
       "source_values": {
         "group": "Subjutsus Genjutsu",
         "name": "Peekaboo Jutsu",
-        "rank": "A",
+        "rank": "D",
         "base_rank": "Jounin Sensei",
         "level": "Nivel 650–880",
         "stats": "2.650 CHI",
@@ -33529,7 +33530,7 @@
       "name": "Medical Self-Heal",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "A",
+      "rank": "C",
       "price": 650000,
       "price_x3": 1950000,
       "requirements": [
@@ -33604,7 +33605,7 @@
       "source_values": {
         "group": "Subjutsus Ninjutsu médico",
         "name": "Medical Self-Heal",
-        "rank": "A",
+        "rank": "C",
         "base_rank": "Jounin",
         "level": "Nivel 650–880",
         "stats": "2.300 NIN / CHI",
@@ -33617,14 +33618,15 @@
       },
       "wiki_url": "https://shindo-life-rell.fandom.com/wiki/Medical_Self-Heal",
       "notes": "Requiere permiso de medicina; sanar no concede autorización para modos regenerativos.",
-      "teaching_fee": 650000
+      "teaching_fee": 650000,
+      "rank_label": "Medical Corps (C)"
     },
     {
       "id": "v3-medical-team-heal-cfc788b1",
       "name": "Medical Team-Heal",
       "category": "subjutsu",
       "type": "permission",
-      "rank": "A",
+      "rank": "C",
       "price": 650000,
       "price_x3": 1950000,
       "requirements": [
@@ -33699,7 +33701,7 @@
       "source_values": {
         "group": "Subjutsus Ninjutsu médico",
         "name": "Medical Team-Heal",
-        "rank": "A",
+        "rank": "C",
         "base_rank": "Jounin",
         "level": "Nivel 650–880",
         "stats": "2.300 NIN / CHI",
@@ -33712,7 +33714,8 @@
       },
       "wiki_url": "https://shindo-life-rell.fandom.com/wiki/Medical_Team-Heal",
       "notes": "Requiere permiso de medicina; sanar no concede autorización para modos regenerativos.",
-      "teaching_fee": 650000
+      "teaching_fee": 650000,
+      "rank_label": "Medical Corps (C)"
     },
     {
       "id": "v3-air-style-odama-spirit-bomb-075122f1",
@@ -42771,7 +42774,7 @@
       ],
       "emoji": "🌀",
       "image_url": null,
-      "enabled": true,
+      "enabled": false,
       "unique": true,
       "tradable": false,
       "teachable": false,
@@ -45231,8 +45234,8 @@
       "category": "sub_modes",
       "type": "permission",
       "rank": "S",
-      "price": 5000000,
-      "price_x3": 15000000,
+      "price": 10000000,
+      "price_x3": 30000000,
       "requirements": [
         {
           "label": "Condiciones y desbloqueo del HTML verificados por staff",
@@ -45554,8 +45557,8 @@
       "category": "sub_modes",
       "type": "permission",
       "rank": "S",
-      "price": 4500000,
-      "price_x3": 13500000,
+      "price": 7500000,
+      "price_x3": 22500000,
       "requirements": [
         {
           "label": "Condiciones y desbloqueo del HTML verificados por staff",
@@ -45637,8 +45640,8 @@
       "category": "sub_modes",
       "type": "permission",
       "rank": "S",
-      "price": 5000000,
-      "price_x3": 15000000,
+      "price": 10000000,
+      "price_x3": 30000000,
       "requirements": [
         {
           "label": "Condiciones y desbloqueo del HTML verificados por staff",

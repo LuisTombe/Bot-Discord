@@ -123,7 +123,7 @@ class ProfileUI:
                 lines.append('📷 Desbloqueo de la técnica · staff revisa al comprar')
             elif r['policy']=='x3' and c.get('field')=='rank_level':
                 ok=satisfies_rank_policy(p,it,r) if p else False
-                lines.append(('✅ ' if ok else '⚠️ ')+f'Rango requerido: **{rank_label(it["rank"])}** (según tu rango Shinobi Discord)'+('' if ok else ' · recargo ×3'))
+                lines.append(('✅ ' if ok else '⚠️ ')+f'Rango requerido: **{it.get("rank_label") or rank_label(it["rank"])}** (según tu rango Shinobi Discord)'+('' if ok else ' · recargo ×3'))
             else:
                 ok=satisfies(p,c) if p else False
                 lines.append(('✅ ' if ok else '❌ ')+r['label']+(' · obligatorio' if r['policy']=='hard' else ' · ×3 si falta'))
