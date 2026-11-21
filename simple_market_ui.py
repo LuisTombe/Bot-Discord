@@ -5,7 +5,7 @@ import discord
 from discord import app_commands
 from evidence import safe_path
 from wx_market.ui import SafeView, ryo
-from wx_market.domain import satisfies, dump, purchase_manual_requirement, stat_or_level_requirement, satisfies_rank_policy, rank_label, RANK_ALLOWED
+from wx_market.domain import satisfies, dump, purchase_manual_requirement, stat_or_level_requirement, satisfies_rank_policy, rank_label, RANK_ALLOWED, is_medical_item
 from simple_flow_ui import SafeModal, upload_files
 from simple_flow_domain import SHINOBI_RANKS
 from simple_transactions import atomic
@@ -110,6 +110,7 @@ class ProfileUI:
 
     async def detail(self,i,ident):
         self.market.guild(i);await i.response.defer(ephemeral=True);await self.market.refresh(i.guild_id,i.user.id)
+        detected_rank,has_med=self.ui.flow.sync_member_rank(i.guild_id,i.user)
         it=self.m.item(ident);view=SafeView(timeout=600)
         em=discord.Embed(title=(it['emoji']+' '+it['name'])[:250],description=it.get('notes',it['source'])[:2000],color=0xC4A76B)
         error=None;q=None
@@ -122,7 +123,7 @@ class ProfileUI:
             if c=={'field':'tags','op':'all','value':['unlock:'+it['id']]}:
                 lines.append('📷 Desbloqueo de la técnica · staff revisa al comprar')
             elif r['policy']=='x3' and c.get('field')=='rank_level':
-                ok=satisfies_rank_policy(p,it,r) if p else False
+                ok=satisfies_rank_policy(p,it,r) if p else (has_med if is_medical_item(it) else (it['rank'] in RANK_ALLOWED.get(detected_rank,())))
                 lines.append(('✅ ' if ok else '⚠️ ')+f'Rango requerido: **{it.get("rank_label") or rank_label(it["rank"])}** (según tu rango Shinobi Discord)'+('' if ok else ' · recargo ×3'))
             else:
                 ok=satisfies(p,c) if p else False
@@ -133,16 +134,16 @@ class ProfileUI:
             except ValueError as e:error=str(e)
         available=self.m.available(i.guild_id,i.user.id)
         price_x3=int(it.get('price_x3') or int(it['price'])*3)
-        detected_rank=self.ui.flow.detect_member_shinobi_rank(i.guild_id,i.user)
-        rank_ok=it['rank'] in RANK_ALLOWED.get(detected_rank,())
+        rank_ok=(has_med if is_medical_item(it) else (it['rank'] in RANK_ALLOWED.get(detected_rank,())))
         detected_label=SHINOBI_RANKS.get(detected_rank,(detected_rank.title(),1))[0]
         req_label=it.get('rank_label') or rank_label(it['rank'])
         em.add_field(name='Dinero disponible',value=ryo(available));em.add_field(name='Reservado',value=ryo(self.m.reserved(i.guild_id,i.user.id)))
         em.add_field(name='Precio normal / ×3',value=f'Normal: **{ryo(q["price"] if q else it["price"])}**\nSin rango (×3): **{ryo(price_x3)}**')
         if not rank_ok:
+            extra_msg='Requiere rol **Medical Corps**.' if is_medical_item(it) else f'Tu rango actual en Discord (**{detected_label}**) no cumple con **{req_label}**.'
             em.add_field(
                 name='⚠️ Aviso de Rango Shinobi',
-                value=f'Tu rango actual en Discord (**{detected_label}**) no cumple con **{req_label}**.\nPuedes comprarlo sin rango pagando **×3 ({ryo(price_x3)})** con el botón **Comprar sin rango (×3)**.',
+                value=f'{extra_msg}\nPuedes comprarlo sin rango pagando **×3 ({ryo(price_x3)})** con el botón **Comprar sin rango (×3)**.',
                 inline=False
             )
         if q and available<q['price']:error='Saldo disponible insuficiente. No se puede solicitar la compra normal.'

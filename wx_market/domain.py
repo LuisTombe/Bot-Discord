@@ -109,14 +109,20 @@ def purchase_manual_requirement(item, requirement):
                        and 'Lv' in item.get('source_values', {}).get('level', ''))
     return unlock or elemental_level or stat_or_level_requirement(requirement)
 
+def is_medical_item(item):
+    return (
+        item.get('rank_label') == 'Medical Corps (C)'
+        or (item.get('source_values') or {}).get('group') == 'Subjutsus Ninjutsu médico'
+        or str(item.get('id', '')).startswith('v3-medical-')
+    )
+
 def satisfies_rank_policy(profile, item, requirement, strict=False):
     """Clasificación por Rango Shinobi de Discord:
-    - Genin: D - C
-    - Chunin hasta Jounin (Chunin, Medical, Police, Jounin): D - B
-    - Anbu hasta Subkage (Anbu, Sensei, Subkage, Sannin): D - A
-    - Kage: D - S
-    Si el usuario tiene un rango explícito (shinobi_rank), aplica esta tabla; si no, usa el rank_level clásico.
+    - Cada rango puede comprar su rango y todos los inferiores.
+    - Excepción: habilidades Medical solo pueden comprarlas quienes tengan rol Medical Corps.
     """
+    if is_medical_item(item):
+        return bool(profile.get('has_medical') or profile.get('shinobi_rank') == 'medical')
     srank = profile.get('shinobi_rank')
     if srank and srank in RANK_ALLOWED:
         return item.get('rank', 'D') in RANK_ALLOWED[srank]

@@ -271,8 +271,25 @@ class SimpleFlow:
             cur=self.db.execute('INSERT INTO simple_profile_requests(guild,user,data,registration,proof,created) VALUES(?,?,?,?,?,?)',(g,u,dump(data),reg_key,dump(proof),self.ms.now()))
             return cur.lastrowid
 
+    def has_medical_role(self,g,member_or_roles):
+        role_ids=set();role_names=[]
+        if hasattr(member_or_roles,'roles'):
+            for r in member_or_roles.roles:
+                role_ids.add(r.id);role_names.append(r.name.lower().strip())
+        elif isinstance(member_or_roles,(list,set,tuple)):
+            for x in member_or_roles:
+                if isinstance(x,int):role_ids.add(x)
+                elif hasattr(x,'id'):role_ids.add(x.id);role_names.append(getattr(x,'name','').lower())
+                else:role_names.append(str(x).lower())
+        if any('medical' in rn for rn in role_names):return True
+        rank_rows=self.e.rows('SELECT key,role FROM eco_ranks WHERE guild=?',(g,))
+        return any(r['key']=='medical' and r['role'] in role_ids for r in rank_rows)
+
     def detect_member_shinobi_rank(self,g,member_or_roles):
-        """Lee los roles de Discord del jugador/enemigo (por ID de eco_ranks o por nombre de rol) y devuelve su rango shinobi."""
+        """Lee los roles de Discord (IDs en eco_ranks y nombres de rol) y devuelve el rango shinobi más alto."""
+        hierarchy=['academia','genin','chunin','medical','police','jounin','anbu','sensei','subkage','sannin','kage','akatsuki']
+        def score(k):
+            return hierarchy.index(k) if k in hierarchy else 1
         role_ids=set()
         role_names=[]
         if hasattr(member_or_roles,'roles'):
@@ -284,17 +301,49 @@ class SimpleFlow:
                 if isinstance(x,int):role_ids.add(x)
                 elif hasattr(x,'id'):role_ids.add(x.id);role_names.append(getattr(x,'name','').lower())
                 else:role_names.append(str(x).lower())
+        found=[]
         rank_rows=self.e.rows('SELECT key,role,monthly,tier FROM eco_ranks WHERE guild=?',(g,))
-        matched=[r for r in rank_rows if r['role'] in role_ids]
-        if matched:
-            best=max(matched,key=lambda x:(x['tier'],x['monthly']))
-            return best['key']
-        order=['akatsuki','kage','sannin','subkage','sub-kage','sensei','jounin-sensei','anbu','jounin','police','medical','chunin','chunnin','genin','estudiante','academia']
-        for candidate in order:
-            for rname in role_names:
-                if candidate in rname:
-                    return candidate.replace('chunnin','chunin').replace('sub-kage','subkage').replace('jounin-sensei','sensei').replace('estudiante','academia')
-        return 'genin'
+        for r in rank_rows:
+            if r['role'] in role_ids and r['key']:
+                found.append(r['key'].lower().replace('chunnin','chunin').replace('sub-kage','subkage').replace('jounin-sensei','sensei').replace('estudiante','academia'))
+        # Revisar subkage antes que kage para evitar que 'kage' coincida dentro de 'subkage'
+        patterns=[
+            ('akatsuki','akatsuki'),
+            ('sub-kage','subkage'),('subkage','subkage'),('sannin','sannin'),
+            ('hokage','kage'),('kazekage','kage'),('mizukage','kage'),('raikage','kage'),('tsuchikage','kage'),('kage','kage'),
+            ('jounin-sensei','sensei'),('sensei','sensei'),
+            ('anbu','anbu'),('jounin','jounin'),
+            ('police','police'),('medical','medical'),
+            ('chunnin','chunin'),('chunin','chunin'),
+            ('genin','genin'),('estudiante','academia'),('academia','academia'),
+        ]
+        for rname in role_names:
+            for pat,norm in patterns:
+                if pat in rname:
+                    found.append(norm)
+                    break
+        if not found:return 'genin'
+        return max(found,key=score)
+
+    def sync_member_rank(self,g,member):
+        """Sincroniza el rango Shinobi vivo de Discord y permiso Medical en market_profiles si ya existe."""
+        detected=self.detect_member_shinobi_rank(g,member)
+        has_med=self.has_medical_role(g,member)
+        hierarchy=['academia','genin','chunin','medical','police','jounin','anbu','sensei','subkage','sannin','kage','akatsuki']
+        row=self.m.one('SELECT data FROM market_profiles WHERE guild=? AND user=?',(g,member.id))
+        if row:
+            p=json.loads(row['data'])
+            cur=p.get('shinobi_rank','genin')
+            cur_idx=hierarchy.index(cur) if cur in hierarchy else 1
+            det_idx=hierarchy.index(detected) if detected in hierarchy else 1
+            best=detected if det_idx>=cur_idx else cur
+            if p.get('shinobi_rank')!=best or bool(p.get('has_medical'))!=has_med:
+                p['shinobi_rank']=best;p['has_medical']=has_med
+                p['rank_level']=max(int(p.get('rank_level',1)),SHINOBI_RANKS.get(best,('Genin',1))[1])
+                with atomic(self.db):
+                    self.db.execute('UPDATE market_profiles SET data=? WHERE guild=? AND user=?',(dump(p),g,member.id))
+            return best,has_med
+        return detected,has_med
 
     def calculate_difficulty(self,g,base_key_or_rank,enemy_members=()):
         """Calcula la dificultad final (Rango D, C, B, A o S) y el intervalo de pago [min, max] por misión."""
